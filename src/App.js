@@ -14,9 +14,12 @@ function App() {
         <div className="input">
           <span>Please Choose a password</span>
 
-          <input type="text" className='pwdinput'  /></div>
+          {/* <input type="text" className='pwdinput'  /> */}
+          <textarea className='pwdinput'></textarea>
 
         </div>
+
+      </div>
 
     </div>
   );
