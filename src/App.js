@@ -7,13 +7,16 @@ function App() {
       <div className="main">
 
         <div className="text">
-          * The Password Game
+          <h2>*</h2> 
+          The Password Game
         </div>
 
-        <span>Please Choose your password</span>
+        <div className="input">
+          <span>Please Choose a password</span>
 
-        <input type="text" />
-      </div>
+          <input type="text" className='pwdinput'  /></div>
+
+        </div>
 
     </div>
   );
