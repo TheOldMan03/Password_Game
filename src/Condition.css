@@ -5,8 +5,6 @@
 
     margin-right:25px;
     margin-top:50px;
-
-    
 }
 
 .upperhalf{
@@ -14,8 +12,12 @@
     height:40px;
 
     font-size:1.2rem;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+
+    border-top:3px solid rgb(255,199,199);
+    border-left:3px solid rgb(255,199,199);
+    border-right:3px solid rgb(255,199,199);
 }
 
 .lowerhalf{
@@ -23,8 +25,12 @@
     height:110px;
 
     font-size: 1.2rem;
-    border-bottom-left-radius:20px;
-    border-bottom-right-radius:20px;
+    border-bottom-left-radius:15px;
+    border-bottom-right-radius:15px;
+
+    border-left:3px solid rgb(255,199,199);
+    border-right:3px solid rgb(255,199,199);
+    border-bottom:3px solid rgb(255,199,199); 
 }
 
 /* true answer colour upperhalf:rgb(174,243,174)
