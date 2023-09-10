@@ -24,6 +24,16 @@ h2{
   margin-top:80px;
 }
 
+#text{
+  display: flex;
+  align-items: center;
+  margin-top:10px;
+}
+
+#wcount{
+  margin-left:15px;
+}
+
 span{
   font-size: 1.2rem;
   font-weight: 400;

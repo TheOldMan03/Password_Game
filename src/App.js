@@ -21,15 +21,21 @@ function App() {
         </div>
 
         <div className="input">
-          <span>Please Choose a password</span>
+          <div> 
+            <span>Please Choose a password</span>
+          </div>
+          
+          <div id="text">
+            <textarea 
+              className='pwdinput' 
+              value={password} 
+              onChange={(e)=>setPassword(e.target.value)}
+              onInput={ResizeArea}
+            ></textarea>
 
-          {/* <input type="text" className='pwdinput'  /> */}
-          <textarea 
-            className='pwdinput' 
-            value={password} 
-            onChange={(e)=>setPassword(e.target.value)}
-            onInput={ResizeArea}
-          ></textarea>
+            <span id="wcount">0</span>
+          </div>
+          
 
         </div>
 
