@@ -1,9 +1,11 @@
 import './App.css';
+import Condition from './Condition';
 import { useState } from 'react';
 
 function App() {
 
   const [password,setPassword]=useState('')
+  const [wordCount,setWordCount]=useState(0)
 
   function ResizeArea(e){
     e.target.style.height="1px"
@@ -33,11 +35,14 @@ function App() {
               onInput={ResizeArea}
             ></textarea>
 
-            <span id="wcount">0</span>
+            <span id="wcount">{wordCount}</span>
           </div>
           
 
         </div>
+
+        <Condition/>
+
 
       </div>
 

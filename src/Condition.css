@@ -1,0 +1,31 @@
+.rule{
+    min-width: 550px;
+    min-height:150px; 
+    /* this height is temporary */
+
+    margin-right:25px;
+    margin-top:50px;
+
+    
+}
+
+.upperhalf{
+    background-color: rgb(255,199,199);
+    height:40px;
+
+    font-size:1.2rem;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.lowerhalf{
+    background-color: rgb(255,236,236);
+    height:110px;
+
+    font-size: 1.2rem;
+    border-bottom-left-radius:20px;
+    border-bottom-right-radius:20px;
+}
+
+/* true answer colour upperhalf:rgb(174,243,174)
+true answer colour lowerhalf:rgb(227,255,227) */
