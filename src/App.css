@@ -37,6 +37,8 @@ span{
   border-radius: 12px;
   font-size: 2.2rem;
 
+  border-color: #bfbfbf;
+
   outline: none;
   resize: none;
 }
