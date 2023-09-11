@@ -10,7 +10,17 @@ function App() {
   function ResizeArea(e){
     e.target.style.height="1px"
     e.target.style.height=(e.target.scrollHeight)+"px"
-  } 
+  }
+
+  function PasswordLength(e){
+    setPassword(e.target.value);
+    WordSize(e)
+  }
+  
+  
+  function WordSize(e){
+    setWordCount(e.target.value.length)
+  }
 
   return (
     <div className="App">
@@ -31,7 +41,7 @@ function App() {
             <textarea 
               className='pwdinput' 
               value={password} 
-              onChange={(e)=>setPassword(e.target.value)}
+              onChange={PasswordLength}
               onInput={ResizeArea}
             ></textarea>
 
