@@ -1,7 +1,8 @@
 import React from 'react'
 import './Condition.css'
 
-const Condition = () => {
+const Condition = ({conditionCheck,isNext}) => {
+
   return (
     <div className='rule'>
       <div className="upperhalf">Rule 34</div>
