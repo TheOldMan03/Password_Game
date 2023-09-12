@@ -1,6 +1,6 @@
 .rule{
     min-width: 550px;
-    min-height:150px; 
+    min-height:100px; 
     /* this height is temporary */
 
     margin-right:25px;
@@ -9,28 +9,34 @@
 
 .upperhalf{
     background-color: rgb(255,199,199);
-    height:50px;
+    min-height:40px;
 
     font-size:1.2rem;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
 
-    border-top:3px solid rgb(255,199,199);
-    border-left:3px solid rgb(255,199,199);
-    border-right:3px solid rgb(255,199,199);
+    border-top:1px solid red;
+    border-left:1px solid red;
+    border-right:1px solid red;
+
+    padding-left:15px;
+    padding-top:10px;
 }
 
 .lowerhalf{
     background-color: rgb(255,236,236);
-    height:100px;
+    min-height:70px;
 
     font-size: 1.2rem;
     border-bottom-left-radius:15px;
     border-bottom-right-radius:15px;
 
-    border-left:3px solid rgb(255,199,199);
-    border-right:3px solid rgb(255,199,199);
-    border-bottom:3px solid rgb(255,199,199); 
+    border-left:1px solid red;
+    border-right:1px solid red;
+    border-bottom:1px solid red; 
+
+    padding-left:15px;
+    padding-top:10px;
 }
 
 /* true answer colour upperhalf:rgb(174,243,174)
