@@ -1,11 +1,7 @@
 import React from 'react'
 import './Condition.css'
 
-const data=[
-  {rule:"Rule 1",desc:"Your password must be at least 5 characters",curr:false,isNext:false,truth:false},
-  {rule:"Rule 2",desc:"Your password must contain a number",curr:false,isNext:false,truth:false},
-  {rule:"Rule 3",desc:"Your password must contain an uppercase letter",curr:false,isNext:false,truth:false},
-]
+
 //the above is a template
 
 //curr is a property which will display the component...only for the 1st Cbox curr will be activated based on some condition 
