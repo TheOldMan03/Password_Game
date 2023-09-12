@@ -1,14 +1,20 @@
 import './App.css';
 import Condition from './Condition';
 import { RuleInfo } from './Data';
-import { useState,useContext } from 'react';
+import { useState } from 'react';
 
 function App() {
 
   const [password,setPassword]=useState('')
   const [wordCount,setWordCount]=useState(0)
 
-  const DataContext=useContext(RuleInfo);
+  const [data,setData]=useState([
+    {rule:"Rule 1",desc:"Your password must be at least 5 characters",execute:"A function",curr:false,truth:false},
+    {rule:"Rule 2",desc:"Your password must contain a number",execute:"A function",curr:false,truth:false},
+    {rule:"Rule 3",desc:"Your password must contain an uppercase letter",execute:"A function",curr:false,truth:false},
+    {rule:"Rule 4",desc:"The digits in your password must add upto 5",execute:"A function",curr:false,truth:false},
+  ])
+
 
   function ResizeArea(e){
     e.target.style.height="1px"
@@ -26,7 +32,7 @@ function App() {
   }
 
   return (
-    <RuleInfo.Provider>
+    <RuleInfo.Provider value={{data,setData,password,setPassword}}>
       <div className="App">
         
         <div className="main">
