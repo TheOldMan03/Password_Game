@@ -2,7 +2,7 @@ import './App.css';
 import Condition from './Condition';
 import { RuleInfo } from './Data';
 import { useState } from 'react';
-import { CountCheck } from './PasswordCheck';
+import { CountCheck,NumberCheck,UpperCheck } from './PasswordCheck';
 
 function App() {
 
@@ -10,10 +10,10 @@ function App() {
   const [wordCount,setWordCount]=useState(0)
 
   const data=[
-    {id:1,rule:"Rule 1",desc:"Your password must be at least 5 characters",execute:()=>CountCheck(wordCount),curr:false,isNext:false,truth:false},
-    {id:2,rule:"Rule 2",desc:"Your password must contain a number",execute:"A function",curr:false,isNext:false,truth:false},
-    {id:3,rule:"Rule 3",desc:"Your password must contain an uppercase letter",execute:"A function",curr:false,isNext:false,truth:false},
-    {id:4,rule:"Rule 4",desc:"The digits in your password must add upto 5",execute:"A function",curr:false,isNext:false,truth:false},
+    {id:1,rule:"Rule 1",desc:"Your password must be at least 5 characters",execute:()=>CountCheck(wordCount),curr:false,isPrev:false,truth:false},
+    {id:2,rule:"Rule 2",desc:"Your password must contain a number",execute:()=>NumberCheck(password),curr:false,isPrev:false,truth:false},
+    {id:3,rule:"Rule 3",desc:"Your password must contain an uppercase letter",execute:()=>UpperCheck,curr:false,isPrev:false,truth:false}
+    // {id:4,rule:"Rule 4",desc:"The digits in your password must add upto 5",execute:"A function",curr:false,isPrev:false,truth:false},
   ]
 
 
@@ -69,9 +69,8 @@ function App() {
                 }
 
                 if(datax.execute()){
-                  console.log("Data is being passed");
                   datax.truth=true;
-                  datax.isNext=true;
+                  datax.isPrev=true;
                 }
 
                 if(!datax.execute){
@@ -84,6 +83,27 @@ function App() {
 
                 return null
                 
+              }
+
+              else{
+                if(data[index-1].isPrev){
+                  datax.curr=true;
+                }
+                
+                if(datax.execute()){
+                  datax.truth=true;
+                  datax.isPrev=true;
+                }
+
+                if(!datax.execute()){
+                  datax.truth=false
+                }
+
+                if(datax.curr){
+                  return(<Condition key={index} rulename={datax.rule} ruledesc={datax.desc} trueValue={datax.truth}/>)
+                }
+
+
               }
 
               

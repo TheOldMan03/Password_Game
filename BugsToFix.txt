@@ -1,0 +1,5 @@
+1.Rule 3 does not work properly as when I add a number rule 3 automatically becomes true where rule 3 is to check whether the password contains an uppercase character
+2.If a rule N is not true then N+1 dissappears provided rule N+1 had been true in the past
+
+Basically if a rule becomes true for the 1st time then the next rule should be displayed and if the same rule becomes false then it should not dissappear
+As of now it does not follow this....: |
