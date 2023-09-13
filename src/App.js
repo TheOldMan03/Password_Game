@@ -9,12 +9,12 @@ function App() {
   const [password,setPassword]=useState('')
   const [wordCount,setWordCount]=useState(0)
 
-  const [data,setData]=useState([
-    {id:1,rule:"Rule 1",desc:"Your password must be at least 5 characters",execute:CountCheck(wordCount),curr:false,isNext:false,truth:false},
+  const data=[
+    {id:1,rule:"Rule 1",desc:"Your password must be at least 5 characters",execute:()=>CountCheck(wordCount),curr:false,isNext:false,truth:false},
     {id:2,rule:"Rule 2",desc:"Your password must contain a number",execute:"A function",curr:false,isNext:false,truth:false},
     {id:3,rule:"Rule 3",desc:"Your password must contain an uppercase letter",execute:"A function",curr:false,isNext:false,truth:false},
     {id:4,rule:"Rule 4",desc:"The digits in your password must add upto 5",execute:"A function",curr:false,isNext:false,truth:false},
-  ])
+  ]
 
 
   function ResizeArea(e){
@@ -33,7 +33,7 @@ function App() {
   }
 
   return (
-    <RuleInfo.Provider value={{data,setData,password,setPassword}}>
+    <RuleInfo.Provider value={{data,password,setPassword}}>
       <div className="App">
         
         <div className="main">
@@ -68,22 +68,26 @@ function App() {
                   datax.curr=true
                 }
 
-                if(datax.execute){
+                if(datax.execute()){
+                  console.log("Data is being passed");
                   datax.truth=true;
                   datax.isNext=true;
                 }
 
                 if(!datax.execute){
-                  datax.truth=false;
+                  datax.truth=false
                 }
 
                 if(datax.curr){
-                  return(<Condition rulename={datax.rule} ruledesc={datax.desc} trueValue={datax.truth}/>)
+                  return(<Condition key={index} rulename={datax.rule} ruledesc={datax.desc} trueValue={datax.truth}/>)
                 }
 
-
-
+                return null
+                
               }
+
+              
+
             })
           }
 
