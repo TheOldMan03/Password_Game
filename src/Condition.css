@@ -4,39 +4,58 @@
     /* this height is temporary */
 
     margin-right:25px;
-    margin-top:50px;
+    margin-top:30px;
 }
 
-.upperhalf{
-    background-color: rgb(255,199,199);
+#upperhalf{
     min-height:40px;
 
     font-size:1.2rem;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
 
-    border-top:1px solid red;
-    border-left:1px solid red;
-    border-right:1px solid red;
-
     padding-left:15px;
     padding-top:10px;
 }
 
-.lowerhalf{
-    background-color: rgb(255,236,236);
+#lowerhalf{
     min-height:70px;
 
     font-size: 1.2rem;
     border-bottom-left-radius:15px;
     border-bottom-right-radius:15px;
 
+    padding-left:15px;
+    padding-top:10px;
+}
+
+.false-upper{
+    background-color: rgb(255,199,199);
+    border-top:1px solid red;
+    border-left:1px solid red;
+    border-right:1px solid red;
+}
+
+.false-lower{
+    background-color: rgb(255,236,236);
     border-left:1px solid red;
     border-right:1px solid red;
     border-bottom:1px solid red; 
+}
 
-    padding-left:15px;
-    padding-top:10px;
+.true-upper{
+    background-color:rgb(174,243,174);
+    border-top:1px solid green;
+    border-left:1px solid green;
+    border-right:1px solid green;
+}
+
+.true-lower{
+    background-color:rgb(227,255,227);
+    border-left:1px solid green;
+    border-right:1px solid green;
+    border-bottom:1px solid green; 
+
 }
 
 /* true answer colour upperhalf:rgb(174,243,174)

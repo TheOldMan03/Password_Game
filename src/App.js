@@ -2,6 +2,7 @@ import './App.css';
 import Condition from './Condition';
 import { RuleInfo } from './Data';
 import { useState } from 'react';
+import { CountCheck } from './PasswordCheck';
 
 function App() {
 
@@ -9,10 +10,10 @@ function App() {
   const [wordCount,setWordCount]=useState(0)
 
   const [data,setData]=useState([
-    {rule:"Rule 1",desc:"Your password must be at least 5 characters",execute:"A function",curr:false,truth:false},
-    {rule:"Rule 2",desc:"Your password must contain a number",execute:"A function",curr:false,truth:false},
-    {rule:"Rule 3",desc:"Your password must contain an uppercase letter",execute:"A function",curr:false,truth:false},
-    {rule:"Rule 4",desc:"The digits in your password must add upto 5",execute:"A function",curr:false,truth:false},
+    {id:1,rule:"Rule 1",desc:"Your password must be at least 5 characters",execute:CountCheck(wordCount),curr:false,isNext:false,truth:false},
+    {id:2,rule:"Rule 2",desc:"Your password must contain a number",execute:"A function",curr:false,isNext:false,truth:false},
+    {id:3,rule:"Rule 3",desc:"Your password must contain an uppercase letter",execute:"A function",curr:false,isNext:false,truth:false},
+    {id:4,rule:"Rule 4",desc:"The digits in your password must add upto 5",execute:"A function",curr:false,isNext:false,truth:false},
   ])
 
 
@@ -60,7 +61,31 @@ function App() {
             
           </div>
 
-          <Condition/>
+          {
+            data.map((datax,index)=>{
+              if(index===0){
+                if(wordCount>0){
+                  datax.curr=true
+                }
+
+                if(datax.execute){
+                  datax.truth=true;
+                  datax.isNext=true;
+                }
+
+                if(!datax.execute){
+                  datax.truth=false;
+                }
+
+                if(datax.curr){
+                  return(<Condition rulename={datax.rule} ruledesc={datax.desc} trueValue={datax.truth}/>)
+                }
+
+
+
+              }
+            })
+          }
 
         </div>
 

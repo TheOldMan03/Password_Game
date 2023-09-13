@@ -1,9 +1,9 @@
-function WordCount(s){
-    if(s>=5){
+export const CountCheck=(num)=>{
+    if(num>=5){
         return true;
     }
 
     else{
         return false;
     }
-}//rule 1
+}
