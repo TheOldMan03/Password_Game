@@ -1,7 +1,7 @@
 import './App.css';
 import Condition from './Condition';
 import { RuleInfo } from './Data';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CountCheck,NumberCheck,UpperCheck } from './PasswordCheck';
 
 function App() {
@@ -18,33 +18,35 @@ function App() {
 
   let UpdatedData=[];
 
-  UpdatedData=data.map((datax,index)=>{
-    const newDatax={...datax}
 
-    if(index===0){
-      if(wordCount>0){
-        newDatax.curr=true;
-      }
+  //only do this when the password changes
 
-      if(newDatax.execute()){
-        newDatax.isPrev=true;
-        newDatax.truth=true;
-      }
+  useEffect(()=>{
+    UpdatedData=data.map((datax,index)=>{
+      const newDatax={...datax}
+  
+      if(index===0){
+        if(wordCount>0){
+          newDatax.curr=true;
 
-      else{
-        newDatax.truth=false;
-      }
-
-      return newDatax
-
-    }
-
-  }
-
+          if(newDatax.execute()){
+            newDatax.isPrev=true;
+            newDatax.truth=true;
+          }
     
-  )
-
-  setData(UpdatedData)
+          else{
+            newDatax.truth=false;
+          }
+        }
+  
+        return newDatax
+  
+      }
+  
+    })
+    setData(UpdatedData)
+  }
+  ,[password])
 
   function ResizeArea(e){
     e.target.style.height="1px"
