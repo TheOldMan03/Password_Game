@@ -9,13 +9,40 @@ function App() {
   const [password,setPassword]=useState('')
   const [wordCount,setWordCount]=useState(0)
 
-  const data=[
+  const [data,setData]=useState([
     {id:1,rule:"Rule 1",desc:"Your password must be at least 5 characters",execute:()=>CountCheck(wordCount),curr:false,isPrev:false,truth:false},
     {id:2,rule:"Rule 2",desc:"Your password must contain a number",execute:()=>NumberCheck(password),curr:false,isPrev:false,truth:false},
-    {id:3,rule:"Rule 3",desc:"Your password must contain an uppercase letter",execute:()=>UpperCheck,curr:false,isPrev:false,truth:false}
+    {id:3,rule:"Rule 3",desc:"Your password must contain an uppercase letter",execute:()=>UpperCheck(password),curr:false,isPrev:false,truth:false}
     // {id:4,rule:"Rule 4",desc:"The digits in your password must add upto 5",execute:"A function",curr:false,isPrev:false,truth:false},
-  ]
+  ])
 
+  let UpdatedData=[];
+
+  UpdatedData=data.map((datax,index)=>{
+    const newDatax={...datax}
+
+    if(index===0){
+      if(wordCount>0){
+        newDatax.curr=true;
+      }
+
+      if(newDatax.execute()){
+        newDatax.isPrev=true;
+        newDatax.truth=true;
+      }
+
+      else{
+        newDatax.truth=false;
+      }
+
+      return newDatax
+
+    }
+
+    setData(UpdatedData)
+  }
+    
+  )
 
   function ResizeArea(e){
     e.target.style.height="1px"
@@ -62,52 +89,8 @@ function App() {
           </div>
 
           {
-            data.map((datax,index)=>{
-              if(index===0){
-                if(wordCount>0){
-                  datax.curr=true
-                }
-
-                if(datax.execute()){
-                  datax.truth=true;
-                  datax.isPrev=true;
-                }
-
-                if(!datax.execute){
-                  datax.truth=false
-                }
-
-                if(datax.curr){
-                  return(<Condition key={index} rulename={datax.rule} ruledesc={datax.desc} trueValue={datax.truth}/>)
-                }
-
-                return null
-                
-              }
-
-              else{
-                if(data[index-1].isPrev){
-                  datax.curr=true;
-                }
-                
-                if(datax.execute()){
-                  datax.truth=true;
-                  datax.isPrev=true;
-                }
-
-                if(!datax.execute()){
-                  datax.truth=false
-                }
-
-                if(datax.curr){
-                  return(<Condition key={index} rulename={datax.rule} ruledesc={datax.desc} trueValue={datax.truth}/>)
-                }
-
-
-              }
-
-              
-
+            UpdatedData.map(datax=>{
+              return(<Condition rulename={datax.rule} ruledesc={datax.desc} trueValue={datax.truth}/>)
             })
           }
 
