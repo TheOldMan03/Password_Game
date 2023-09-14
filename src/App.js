@@ -39,10 +39,12 @@ function App() {
 
     }
 
-    setData(UpdatedData)
   }
+
     
   )
+
+  setData(UpdatedData)
 
   function ResizeArea(e){
     e.target.style.height="1px"
