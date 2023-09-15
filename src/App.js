@@ -34,6 +34,21 @@ function App() {
         }
       }
 
+      else{
+        if(data[index-1].isPrev){
+          newObj.curr=true;
+
+          if(newObj.execute(password)){
+            newObj.truth=true;
+            newObj.isPrev=true;
+          }
+
+          else{
+            newObj.truth=false;
+          }
+        }
+      }
+
       return newObj;
 
     })
