@@ -9,9 +9,9 @@ function App() {
   const [wordCount,setWordCount]=useState(0)
 
   const [data,setData]=useState([
-    {id:1,rule:"Rule 1",desc:"Your password must be at least 5 characters",execute:()=>CountCheck(wordCount),curr:false,isPrev:false,truth:false},
-    {id:2,rule:"Rule 2",desc:"Your password must contain a number",execute:()=>NumberCheck(password),curr:false,isPrev:false,truth:false},
-    {id:3,rule:"Rule 3",desc:"Your password must contain an uppercase letter",execute:()=>UpperCheck(password),curr:false,isPrev:false,truth:false}
+    {id:1,rule:"Rule 1",desc:"Your password must be at least 5 characters",execute:CountCheck,curr:false,isPrev:false,truth:false},
+    {id:2,rule:"Rule 2",desc:"Your password must contain a number",execute:NumberCheck,curr:false,isPrev:false,truth:false},
+    {id:3,rule:"Rule 3",desc:"Your password must contain an uppercase letter",execute:UpperCheck,curr:false,isPrev:false,truth:false}
     // {id:4,rule:"Rule 4",desc:"The digits in your password must add upto 5",execute:"A function",curr:false,isPrev:false,truth:false},
   ])
 
@@ -23,13 +23,13 @@ function App() {
         if(wordCount>0){
           newObj.curr=true;
 
-          if(newObj.execute()){
-            newObj.true=true;
+          if(newObj.execute(wordCount)){
+            newObj.truth=true;
             newObj.isPrev=true;
           }
 
           else{
-            newObj.true=false;
+            newObj.truth=false;
           }
         }
       }
@@ -41,7 +41,7 @@ function App() {
     setData(newData)
   }
 
-  useEffect(ChangeRule,[password]);
+  useEffect(ChangeRule,[password,wordCount]);
   
   function ResizeArea(e){
     e.target.style.height="1px"
@@ -90,7 +90,7 @@ function App() {
         {
           data.map(datax=>{
             if(datax.curr){
-              return(<Condition rulename={datax.rule} ruledesc={datax.desc} trueValue={datax.truth}/>)
+              return(<Condition key={datax.id} rulename={datax.rule} ruledesc={datax.desc} trueValue={datax.truth}/>)
             }
           })
         }
