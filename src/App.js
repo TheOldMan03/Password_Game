@@ -1,8 +1,7 @@
 import './App.css';
-import Condition from './Condition';
-import { RuleInfo } from './Data';
-import { useEffect, useState } from 'react';
-import { CountCheck,NumberCheck,UpperCheck } from './PasswordCheck';
+import { useState,useEffect } from 'react';
+import Condition from './Condition'
+import {CountCheck,NumberCheck,UpperCheck} from './PasswordCheck'
 
 function App() {
 
@@ -16,38 +15,34 @@ function App() {
     // {id:4,rule:"Rule 4",desc:"The digits in your password must add upto 5",execute:"A function",curr:false,isPrev:false,truth:false},
   ])
 
-  let UpdatedData=[];
-
-
-  //only do this when the password changes
-
-  useEffect(()=>{
-    UpdatedData=data.map((datax,index)=>{
-      const newDatax={...datax}
-  
+  const ChangeRule=()=>{
+    let newData=[];
+    newData=data.map((datax,index)=>{
+      const newObj={...datax}
       if(index===0){
         if(wordCount>0){
-          newDatax.curr=true;
+          newObj.curr=true;
 
-          if(newDatax.execute()){
-            newDatax.isPrev=true;
-            newDatax.truth=true;
+          if(newObj.execute()){
+            newObj.true=true;
+            newObj.isPrev=true;
           }
-    
+
           else{
-            newDatax.truth=false;
+            newObj.true=false;
           }
         }
-  
-        return newDatax
-  
       }
-  
-    })
-    setData(UpdatedData)
-  }
-  ,[password])
 
+      return newObj;
+
+    })
+
+    setData(newData)
+  }
+
+  useEffect(ChangeRule,[password]);
+  
   function ResizeArea(e){
     e.target.style.height="1px"
     e.target.style.height=(e.target.scrollHeight)+"px"
@@ -64,44 +59,45 @@ function App() {
   }
 
   return (
-    <RuleInfo.Provider value={{data,password,setPassword}}>
-      <div className="App">
-        
-        <div className="main">
+    
+    <div className="App">
+      
+      <div className="main">
 
-          <div className="text">
-            <h2>*</h2> 
-            The Password Game
-          </div>
-
-          <div className="input">
-            <div> 
-              <span>Please Choose a password</span>
-            </div>
-            
-            <div id="text">
-              <textarea 
-                className='pwdinput' 
-                value={password} 
-                onChange={PasswordLength}
-                onInput={ResizeArea}
-              ></textarea>
-
-              <span id="wcount">{wordCount}</span>
-            </div>
-            
-          </div>
-
-          {
-            UpdatedData.map(datax=>{
-              return(<Condition rulename={datax.rule} ruledesc={datax.desc} trueValue={datax.truth}/>)
-            })
-          }
-
+        <div className="text">
+          <h2>*</h2> 
+          The Password Game
         </div>
 
+        <div className="input">
+          <div> 
+            <span>Please Choose a password</span>
+          </div>
+          
+          <div id="text">
+            <textarea 
+              className='pwdinput' 
+              value={password} 
+              onChange={PasswordLength}
+              onInput={ResizeArea}
+            ></textarea>
+
+            <span id="wcount">{wordCount}</span>
+          </div>
+          
+        </div>
+
+        {
+          data.map(datax=>{
+            if(datax.curr){
+              return(<Condition rulename={datax.rule} ruledesc={datax.desc} trueValue={datax.truth}/>)
+            }
+          })
+        }
+
       </div>
-    </RuleInfo.Provider>
+
+    </div>
     
   );
 }
