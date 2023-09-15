@@ -1,1 +1,1 @@
-1.Rules not displaying
+Rules work as intended but the next rule only displays once the new character is added into the textarea
