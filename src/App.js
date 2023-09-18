@@ -2,6 +2,7 @@ import './App.css';
 import { useState,useEffect } from 'react';
 import Condition from './Condition'
 import {CountCheck,NumberCheck,UpperCheck} from './PasswordCheck'
+import { CSSTransition,TransitionGroup } from 'react-transition-group';
 
 function App() {
 
@@ -112,13 +113,20 @@ function App() {
           
         </div>
 
-        {
-          data.map(datax=>{
-            if(datax.curr){
-              return(<Condition key={datax.id} rulename={datax.rule} ruledesc={datax.desc} trueValue={datax.truth}/>)
-            }
-          })
-        }
+        <TransitionGroup>
+          {
+            data.map(datax=>{
+                if(datax.curr){
+                  return(
+                    <CSSTransition key={datax.id} timeout={300} classNames="tr">
+                      <Condition key={datax.id} rulename={datax.rule} ruledesc={datax.desc} trueValue={datax.truth}/>
+                    </CSSTransition>
+
+                  )
+                }
+            })
+          }
+        </TransitionGroup>
 
       </div>
 
