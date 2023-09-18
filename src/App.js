@@ -2,11 +2,13 @@ import './App.css';
 import { useState,useEffect } from 'react';
 import Condition from './Condition'
 import {CountCheck,NumberCheck,UpperCheck} from './PasswordCheck'
+import { CSSTransition,TransitionGroup } from 'react-transition-group';
 
 function App() {
 
   const [password,setPassword]=useState('')
   const [wordCount,setWordCount]=useState(0)
+  const [prevCount,setPrevCount]=useState(0)
 
   const [data,setData]=useState([
     {id:1,rule:"Rule 1",desc:"Your password must be at least 5 characters",execute:CountCheck,curr:false,isPrev:false,truth:false},
@@ -25,7 +27,11 @@ function App() {
 
           if(newObj.execute(wordCount)){
             newObj.truth=true;
-            newObj.isPrev=true;
+            
+            if(!newObj.isPrev){
+              newObj.isPrev=true;
+              setPrevCount(prevCount+1)
+            }
           }
 
           else{
@@ -40,7 +46,12 @@ function App() {
 
           if(newObj.execute(password)){
             newObj.truth=true;
-            newObj.isPrev=true;
+
+            if(!newObj.isPrev){
+              newObj.isPrev=true;
+              setPrevCount(prevCount+1)
+            }
+            
           }
 
           else{
@@ -56,7 +67,7 @@ function App() {
     setData(newData)
   }
 
-  useEffect(ChangeRule,[password,wordCount]);
+  useEffect(ChangeRule,[password,wordCount,prevCount]);
   
   function ResizeArea(e){
     e.target.style.height="1px"
@@ -102,13 +113,20 @@ function App() {
           
         </div>
 
-        {
-          data.map(datax=>{
-            if(datax.curr){
-              return(<Condition key={datax.id} rulename={datax.rule} ruledesc={datax.desc} trueValue={datax.truth}/>)
-            }
-          })
-        }
+        <TransitionGroup>
+          {
+            data.map(datax=>{
+                if(datax.curr){
+                  return(
+                    <CSSTransition key={datax.id} timeout={300} classNames="tr">
+                      <Condition key={datax.id} rulename={datax.rule} ruledesc={datax.desc} trueValue={datax.truth}/>
+                    </CSSTransition>
+
+                  )
+                }
+            })
+          }
+        </TransitionGroup>
 
       </div>
 
