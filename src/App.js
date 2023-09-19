@@ -1,8 +1,9 @@
 import './App.css';
 import { useState,useEffect } from 'react';
 import Condition from './Condition'
-import {CountCheck,NumberCheck,UpperCheck} from './PasswordCheck'
 import { CSSTransition,TransitionGroup } from 'react-transition-group';
+
+import {AddUptoFive, CountCheck,HasRomanNumeral,MonthofYear,NumberCheck,SpecialCheck,UpperCheck} from './PasswordCheck'
 
 function App() {
 
@@ -11,10 +12,13 @@ function App() {
   const [nextCount,setNextCount]=useState(0)
 
   const [data,setData]=useState([
+    {id:7,rule:"Rule 7",desc:"Your password must contain a roman numeral",execute:HasRomanNumeral,curr:false,isNext:false,truth:false},
+    {id:6,rule:"Rule 6",desc:"Your password must contain a month of the year",execute:MonthofYear,curr:false,isNext:false,truth:false},
+    {id:5,rule:"Rule 5",desc:"The digits in your password must add upto 25",execute:AddUptoFive,curr:false,isNext:false,truth:false},
+    {id:4,rule:"Rule 4",desc:"Your password must include a special character",execute:SpecialCheck,curr:false,isNext:false,truth:false},
     {id:3,rule:"Rule 3",desc:"Your password must contain an uppercase letter",execute:UpperCheck,curr:false,isNext:false,truth:false},
     {id:2,rule:"Rule 2",desc:"Your password must contain a number",execute:NumberCheck,curr:false,isNext:false,truth:false},
     {id:1,rule:"Rule 1",desc:"Your password must be at least 5 characters",execute:CountCheck,curr:false,isNext:false,truth:false}
-    // {id:4,rule:"Rule 4",desc:"The digits in your password must add upto 5",execute:"A function",curr:false,isPrev:false,truth:false},
   ])
 
   const ChangeRule=()=>{
@@ -55,6 +59,7 @@ function App() {
 
             if(!newObj.isNext){
               newObj.isNext=true;
+              setNextCount(nextCount+1);
             }
           }
 
