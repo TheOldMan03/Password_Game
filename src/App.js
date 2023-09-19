@@ -8,12 +8,12 @@ function App() {
 
   const [password,setPassword]=useState('')
   const [wordCount,setWordCount]=useState(0)
-  const [prevCount,setPrevCount]=useState(0)
+  const [nextCount,setNextCount]=useState(0)
 
   const [data,setData]=useState([
-    {id:1,rule:"Rule 1",desc:"Your password must be at least 5 characters",execute:CountCheck,curr:false,isPrev:false,truth:false},
-    {id:2,rule:"Rule 2",desc:"Your password must contain a number",execute:NumberCheck,curr:false,isPrev:false,truth:false},
-    {id:3,rule:"Rule 3",desc:"Your password must contain an uppercase letter",execute:UpperCheck,curr:false,isPrev:false,truth:false}
+    {id:3,rule:"Rule 3",desc:"Your password must contain an uppercase letter",execute:UpperCheck,curr:false,isNext:false,truth:false},
+    {id:2,rule:"Rule 2",desc:"Your password must contain a number",execute:NumberCheck,curr:false,isNext:false,truth:false},
+    {id:1,rule:"Rule 1",desc:"Your password must be at least 5 characters",execute:CountCheck,curr:false,isNext:false,truth:false}
     // {id:4,rule:"Rule 4",desc:"The digits in your password must add upto 5",execute:"A function",curr:false,isPrev:false,truth:false},
   ])
 
@@ -21,16 +21,19 @@ function App() {
     let newData=[];
     newData=data.map((datax,index)=>{
       const newObj={...datax}
-      if(index===0){
+      if(index===data.length-1){
         if(wordCount>0){
-          newObj.curr=true;
+
+          if(!newObj.curr){
+            newObj.curr=true;
+          }
 
           if(newObj.execute(wordCount)){
             newObj.truth=true;
             
-            if(!newObj.isPrev){
-              newObj.isPrev=true;
-              setPrevCount(prevCount+1)
+            if(!newObj.isNext){
+              newObj.isNext=true;
+              setNextCount(nextCount+1);
             }
           }
 
@@ -41,17 +44,18 @@ function App() {
       }
 
       else{
-        if(data[index-1].isPrev){
-          newObj.curr=true;
+        if(data[index+1].isNext){
 
+          if(!newObj.curr){
+            newObj.curr=true;
+          }
+          
           if(newObj.execute(password)){
             newObj.truth=true;
 
-            if(!newObj.isPrev){
-              newObj.isPrev=true;
-              setPrevCount(prevCount+1)
+            if(!newObj.isNext){
+              newObj.isNext=true;
             }
-            
           }
 
           else{
@@ -67,7 +71,7 @@ function App() {
     setData(newData)
   }
 
-  useEffect(ChangeRule,[password,wordCount,prevCount]);
+  useEffect(ChangeRule,[password,wordCount,nextCount]);
   
   function ResizeArea(e){
     e.target.style.height="1px"
