@@ -43,9 +43,11 @@ span{
   display: block;
   margin-top: 5px;
   min-width: 550px;
-  min-height:75px;
+  min-height:10px;
   border-radius: 12px;
   font-size: 2.2rem;
+
+  padding-left:8px;
 
   border-color: #bfbfbf;
 

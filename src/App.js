@@ -79,7 +79,7 @@ function App() {
   useEffect(ChangeRule,[password,wordCount,nextCount]);
   
   function ResizeArea(e){
-    e.target.style.height="1px"
+    e.target.style.height="50px"
     e.target.style.height=(e.target.scrollHeight)+"px"
   }
 
