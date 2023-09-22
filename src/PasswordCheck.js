@@ -70,3 +70,15 @@ export const HasRomanNumeral=(pwd)=>{
 
     return false;
 }
+
+export const HasSponsors=(pwd)=>{
+    const sponsor=["pepsi","starbucks","shell"]
+
+    for(let i of sponsor){
+        if(pwd.toLowerCase().includes(i)){
+            return true;
+        }
+    }
+
+    return false;
+}

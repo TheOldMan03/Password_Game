@@ -3,7 +3,7 @@ import { useState,useEffect } from 'react';
 import Condition from './Conditions/Condition'
 import { CSSTransition,TransitionGroup } from 'react-transition-group';
 
-import {AddUptoFive, CountCheck,HasRomanNumeral,MonthofYear,NumberCheck,SpecialCheck,UpperCheck} from './PasswordCheck'
+import {AddUptoFive, CountCheck,HasRomanNumeral,HasSponsors,MonthofYear,NumberCheck,SpecialCheck,UpperCheck} from './PasswordCheck'
 import Sponsor from './Conditions/Sponser';
 
 function App() {
@@ -13,6 +13,7 @@ function App() {
   const [nextCount,setNextCount]=useState(0)
 
   const [data,setData]=useState([
+    {id:8,rule:"Rule 8",desc:"Your password must include our sponsors!",execute:HasSponsors,curr:false,isNext:false,truth:false},
     {id:7,rule:"Rule 7",desc:"Your password must contain a roman numeral",execute:HasRomanNumeral,curr:false,isNext:false,truth:false},
     {id:6,rule:"Rule 6",desc:"Your password must contain a month of the year",execute:MonthofYear,curr:false,isNext:false,truth:false},
     {id:5,rule:"Rule 5",desc:"The digits in your password must add upto 25",execute:AddUptoFive,curr:false,isNext:false,truth:false},
@@ -22,65 +23,65 @@ function App() {
     {id:1,rule:"Rule 1",desc:"Your password must be at least 5 characters",execute:CountCheck,curr:false,isNext:false,truth:false}
   ])
 
-  // const ChangeRule=()=>{
-  //   let newData=[];
-  //   newData=data.map((datax,index)=>{
-  //     const newObj={...datax}
-  //     if(index===data.length-1){
-  //       if(wordCount>0){
+  const ChangeRule=()=>{
+    let newData=[];
+    newData=data.map((datax,index)=>{
+      const newObj={...datax}
+      if(index===data.length-1){
+        if(wordCount>0){
 
-  //         if(!newObj.curr){
-  //           newObj.curr=true;
-  //         }
+          if(!newObj.curr){
+            newObj.curr=true;
+          }
 
-  //         if(newObj.execute(wordCount)){
-  //           newObj.truth=true;
+          if(newObj.execute(wordCount)){
+            newObj.truth=true;
             
-  //           if(!newObj.isNext){
-  //             newObj.isNext=true;
-  //             setNextCount(nextCount+1);
-  //           }
-  //         }
+            if(!newObj.isNext){
+              newObj.isNext=true;
+              setNextCount(nextCount+1);
+            }
+          }
 
-  //         else{
-  //           newObj.truth=false;
-  //         }
-  //       }
-  //     }
+          else{
+            newObj.truth=false;
+          }
+        }
+      }
 
-  //     else{
-  //       if(data[index+1].isNext){
+      else{
+        if(data[index+1].isNext){
 
-  //         if(!newObj.curr){
-  //           newObj.curr=true;
-  //         }
+          if(!newObj.curr){
+            newObj.curr=true;
+          }
           
-  //         if(newObj.execute(password)){
-  //           newObj.truth=true;
+          if(newObj.execute(password)){
+            newObj.truth=true;
 
-  //           if(!newObj.isNext){
-  //             newObj.isNext=true;
-  //             setNextCount(nextCount+1);
-  //           }
-  //         }
+            if(!newObj.isNext){
+              newObj.isNext=true;
+              setNextCount(nextCount+1);
+            }
+          }
 
-  //         else{
-  //           newObj.truth=false;
-  //         }
-  //       }
-  //     }
+          else{
+            newObj.truth=false;
+          }
+        }
+      }
 
-  //     return newObj;
+      return newObj;
 
-  //   })
+    })
 
-  //   setData(newData)
-  // }
+    setData(newData)
+  }
 
-  // useEffect(ChangeRule,[password,wordCount,nextCount]);
+  useEffect(ChangeRule,[password,wordCount,nextCount]);
   
   function ResizeArea(e){
-    e.target.style.height="50px"
+    e.target.style.height="85px"
     e.target.style.height=(e.target.scrollHeight)+"px"
   }
 
@@ -123,22 +124,25 @@ function App() {
           
         </div>
 
-        {/* <TransitionGroup>
-          {
-            data.map(datax=>{
-                if(datax.curr){
-                  return(
-                    <CSSTransition key={datax.id} timeout={300} classNames="tr">
-                      <Condition key={datax.id} rulename={datax.rule} ruledesc={datax.desc} trueValue={datax.truth}/>
-                    </CSSTransition>
+        {
+          data.map(datax=>{
+              if(datax.curr){
 
+                if(datax.id==8){
+                  return(
+                    <Sponsor key={datax.id} rulename={datax.rule} ruledesc={datax.desc} trueValue={datax.truth}/>
                   )
                 }
-            })
-          }
-        </TransitionGroup> */}
 
-        <Sponsor/>
+                else{
+                  return(
+                    <Condition key={datax.id} rulename={datax.rule} ruledesc={datax.desc} trueValue={datax.truth}/>
+                  )
+                }
+              }
+          })
+        }
+      
 
       </div>
 
