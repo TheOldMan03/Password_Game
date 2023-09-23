@@ -5,6 +5,7 @@ import { CSSTransition,TransitionGroup } from 'react-transition-group';
 
 import {AddUptoFive, CountCheck,HasRomanNumeral,HasSponsors,MonthofYear,NumberCheck,SpecialCheck,UpperCheck} from './PasswordCheck'
 import Sponsor from './Conditions/Sponser';
+import Captcha from './Conditions/Captcha';
 
 function App() {
 
@@ -23,62 +24,62 @@ function App() {
     {id:1,rule:"Rule 1",desc:"Your password must be at least 5 characters",execute:CountCheck,curr:false,isNext:false,truth:false}
   ])
 
-  const ChangeRule=()=>{
-    let newData=[];
-    newData=data.map((datax,index)=>{
-      const newObj={...datax}
-      if(index===data.length-1){
-        if(wordCount>0){
+  // const ChangeRule=()=>{
+  //   let newData=[];
+  //   newData=data.map((datax,index)=>{
+  //     const newObj={...datax}
+  //     if(index===data.length-1){
+  //       if(wordCount>0){
 
-          if(!newObj.curr){
-            newObj.curr=true;
-          }
+  //         if(!newObj.curr){
+  //           newObj.curr=true;
+  //         }
 
-          if(newObj.execute(wordCount)){
-            newObj.truth=true;
+  //         if(newObj.execute(wordCount)){
+  //           newObj.truth=true;
             
-            if(!newObj.isNext){
-              newObj.isNext=true;
-              setNextCount(nextCount+1);
-            }
-          }
+  //           if(!newObj.isNext){
+  //             newObj.isNext=true;
+  //             setNextCount(nextCount+1);
+  //           }
+  //         }
 
-          else{
-            newObj.truth=false;
-          }
-        }
-      }
+  //         else{
+  //           newObj.truth=false;
+  //         }
+  //       }
+  //     }
 
-      else{
-        if(data[index+1].isNext){
+  //     else{
+  //       if(data[index+1].isNext){
 
-          if(!newObj.curr){
-            newObj.curr=true;
-          }
+  //         if(!newObj.curr){
+  //           newObj.curr=true;
+  //         }
           
-          if(newObj.execute(password)){
-            newObj.truth=true;
+  //         if(newObj.execute(password)){
+  //           newObj.truth=true;
 
-            if(!newObj.isNext){
-              newObj.isNext=true;
-              setNextCount(nextCount+1);
-            }
-          }
+  //           if(!newObj.isNext){
+  //             newObj.isNext=true;
+  //             setNextCount(nextCount+1);
+  //           }
+  //         }
 
-          else{
-            newObj.truth=false;
-          }
-        }
-      }
+  //         else{
+  //           newObj.truth=false;
+  //         }
+  //       }
+  //     }
 
-      return newObj;
+  //     return newObj;
 
-    })
+  //   })
 
-    setData(newData)
-  }
+  //   setData(newData)
+  // }
 
-  useEffect(ChangeRule,[password,wordCount,nextCount]);
+  // useEffect(ChangeRule,[password,wordCount,nextCount]);
   
   function ResizeArea(e){
     e.target.style.height="85px"
@@ -124,7 +125,7 @@ function App() {
           
         </div>
 
-        {
+        {/* {
           data.map(datax=>{
               if(datax.curr){
 
@@ -141,7 +142,9 @@ function App() {
                 }
               }
           })
-        }
+        } */}
+
+        <Captcha/>
       
 
       </div>

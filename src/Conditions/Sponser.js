@@ -19,10 +19,6 @@ const Sponsor = ({rulename,ruledesc,trueValue}) => {
             <img src={starbucks} alt="" className="logo" id="star" />
             <img src={shell} alt="" className="logo" id="shell"/>
         </div>
-
-        
-
-
       </div>
     </div>
   )
