@@ -2,7 +2,7 @@ import React from 'react'
 import './Condition.css'
 
 
-const Condition = ({rulename,ruledesc,trueValue,img}) => {
+const Condition = ({rulename,ruledesc,trueValue}) => {
   return (
     <div className='rule'>
       <div id="upperhalf" className={trueValue? 'true-upper':'false-upper'}>{rulename}</div>

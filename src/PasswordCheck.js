@@ -83,3 +83,8 @@ export const HasSponsors=(pwd)=>{
     return false;
 }
 
+
+
+const CaptchaCheck=(pwd)=>{
+
+}
