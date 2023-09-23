@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState,useEffect } from 'react'
 import './Condition.css'
 import "./Captcha.css"
 
@@ -7,6 +7,9 @@ import {faRefresh} from '@fortawesome/free-solid-svg-icons'
 
 
 const Captcha = ({rulename,ruledesc,trueValue}) => {
+
+  const [callFunc,setCallFunc]=useState(true)
+  const [captchaString,setCaptchaString]=useState("")
 
     function GenerateCaptcha(){
         let x="abcdefghijklmnopqrstuvwxyz1234567890"
@@ -19,6 +22,18 @@ const Captcha = ({rulename,ruledesc,trueValue}) => {
         let y=a+b+c+d+e
         return y
     }
+
+    const fun=()=>{
+      if(callFunc){
+        let x=GenerateCaptcha()
+        setCaptchaString(x)
+        setCallFunc(false)
+      }
+    }
+
+    useEffect(fun,[callFunc])
+
+
     
   return (
     <div className='rule'>
@@ -29,10 +44,10 @@ const Captcha = ({rulename,ruledesc,trueValue}) => {
 
         <div className="Capt">
             <div className="captcha_box">
-                23hO28
+              {captchaString}
             </div>
 
-            <button className='rstCap' onClick={GenerateCaptcha}>
+            <button className='rstCap' onClick={()=>setCallFunc(true)}>
               <FontAwesomeIcon icon={faRefresh}/>
             </button>
 
