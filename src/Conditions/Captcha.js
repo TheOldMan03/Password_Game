@@ -5,23 +5,23 @@ import "./Captcha.css"
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faRefresh} from '@fortawesome/free-solid-svg-icons'
 
+export const GenerateCaptcha=()=>{
+  let x="abcdefghijklmnopqrstuvwxyz1234567890"
+  let a=x[Math.floor(Math.random()*36)]
+  let b=x[Math.floor(Math.random()*36)]
+  let c=x[Math.floor(Math.random()*36)]
+  let d=x[Math.floor(Math.random()*36)]
+  let e=x[Math.floor(Math.random()*36)]
+
+  let y=a+b+c+d+e
+  return y
+}
+
 
 const Captcha = ({rulename,ruledesc,trueValue}) => {
 
   const [callFunc,setCallFunc]=useState(true)
   const [captchaString,setCaptchaString]=useState("")
-
-    function GenerateCaptcha(){
-        let x="abcdefghijklmnopqrstuvwxyz1234567890"
-        let a=x[Math.floor(Math.random()*36)]
-        let b=x[Math.floor(Math.random()*36)]
-        let c=x[Math.floor(Math.random()*36)]
-        let d=x[Math.floor(Math.random()*36)]
-        let e=x[Math.floor(Math.random()*36)]
-    
-        let y=a+b+c+d+e
-        return y
-    }
 
     const fun=()=>{
       if(callFunc){
