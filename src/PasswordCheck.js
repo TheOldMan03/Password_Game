@@ -1,5 +1,4 @@
-import { GenerateCaptcha } from "./Conditions/Captcha";
-
+import { getCaptcha } from "./Conditions/Captcha";
 
 export const CountCheck=(num)=>{
     if(num>=5){
@@ -86,12 +85,11 @@ export const HasSponsors=(pwd)=>{
     return false;
 }
 
-
-
 export const CaptchaCheck=(pwd)=>{
-    if(pwd.includes(GenerateCaptcha)){
-        return true
+    if(pwd.includes(getCaptcha())){
+        return true;
     }
 
     return false;
 }
+

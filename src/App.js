@@ -1,7 +1,7 @@
 import './App.css';
 import { useState,useEffect } from 'react';
 import Condition from './Conditions/Condition'
-import { CSSTransition,TransitionGroup } from 'react-transition-group';
+// import { CSSTransition,TransitionGroup } from 'react-transition-group';
 
 import {AddUptoFive, CaptchaCheck, CountCheck,HasRomanNumeral,HasSponsors,MonthofYear,NumberCheck,SpecialCheck,UpperCheck} from './PasswordCheck'
 import Sponsor from './Conditions/Sponser';
@@ -138,7 +138,7 @@ function App() {
 
                 else if(datax.id===9){
                   return(
-                    <Captcha key={datax.id} rulename={datax.rule} ruledesc={datax.ruledesc} trueValue={datax.truth}/>
+                    <Captcha key={datax.id} rulename={datax.rule} ruledesc={datax.desc} trueValue={datax.truth}/>
                   )
                 }
 

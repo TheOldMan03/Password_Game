@@ -15,9 +15,12 @@
     margin-top:20px;
 
     font-size:1.5rem;
+    /* font-family: 'Dancing Script', cursive;
+    font-family: 'Inter', sans-serif; */
     font-weight:700;
     text-decoration: line-through;
     text-decoration-thickness:2px ;
+
 
     text-align: center;
 }
