@@ -32,9 +32,8 @@ const Captcha = ({rulename,ruledesc,trueValue}) => {
       }
     }
 
+
     useEffect(fun,[callFunc])
-
-
     
   return (
     <div className='rule'>
@@ -64,7 +63,6 @@ const Captcha = ({rulename,ruledesc,trueValue}) => {
 export default Captcha
 
 export const getCaptcha=()=>{
-  console.log(value)
   return value;
 }
 

@@ -1,4 +1,6 @@
 import { getCaptcha } from "./Conditions/Captcha";
+import { ReturnWordle } from "./Conditions/Wordle";
+
 
 export const CountCheck=(num)=>{
     if(num>=5){
@@ -93,3 +95,19 @@ export const CaptchaCheck=(pwd)=>{
     return false;
 }
 
+
+export const CheckWordle=(pwd)=>{
+
+    if(pwd.includes(ReturnWordle())){
+        return true;
+    }
+
+    return false;
+
+}
+
+
+
+export const Check2letterElem=(pwd)=>{
+    const elem=["He","Li","Be","Ne","Na","Mg","Al","Si","Cl","Ar","Ca","Sc","Ti","Cr","Mn","Fe","Ni","Co","Cu","Zn","Ga"]
+}

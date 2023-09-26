@@ -3,9 +3,11 @@ import { useState,useEffect } from 'react';
 import Condition from './Conditions/Condition'
 // import { CSSTransition,TransitionGroup } from 'react-transition-group';
 
-import {AddUptoFive, CaptchaCheck, CountCheck,HasRomanNumeral,HasSponsors,MonthofYear,NumberCheck,SpecialCheck,UpperCheck} from './PasswordCheck'
+import {AddUptoFive, CaptchaCheck, CheckWordle, CountCheck,HasRomanNumeral,HasSponsors,MonthofYear,NumberCheck,SpecialCheck,UpperCheck} from './PasswordCheck'
 import Sponsor from './Conditions/Sponser';
 import Captcha from './Conditions/Captcha';
+import Wordle from './Conditions/Wordle';
+
 
 function App() {
 
@@ -13,7 +15,10 @@ function App() {
   const [wordCount,setWordCount]=useState(0)
   const [nextCount,setNextCount]=useState(0)
 
+  
+
   const [data,setData]=useState([
+    {id:10,rule:"Rule 10",desc:"Your password must include today's Wordle Answer",execute:CheckWordle,curr:false,isNext:false,truth:false},
     {id:9,rule:"Rule 9",desc:"Your password must include this CAPTCHA",execute:CaptchaCheck,curr:false,isNext:false,truth:false},
     {id:8,rule:"Rule 8",desc:"Your password must include our sponsors!",execute:HasSponsors,curr:false,isNext:false,truth:false},
     {id:7,rule:"Rule 7",desc:"Your password must contain a roman numeral",execute:HasRomanNumeral,curr:false,isNext:false,truth:false},
@@ -139,6 +144,12 @@ function App() {
                 else if(datax.id===9){
                   return(
                     <Captcha key={datax.id} rulename={datax.rule} ruledesc={datax.desc} trueValue={datax.truth}/>
+                  )
+                }
+
+                else if(datax.id===10){
+                  return(
+                    <Wordle key={datax.id} rulename={datax.rule} ruledesc={datax.desc} trueValue={datax.truth}/>
                   )
                 }
 
