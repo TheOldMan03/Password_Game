@@ -6,19 +6,18 @@ let Ans=""
 
 const Wordle = ({rulename,ruledesc,trueValue}) => {
 
-    let wordleAns=""
-
     useEffect(()=>{
         const currDate=new Date()
         const year=currDate.getFullYear()
         const month=currDate.getMonth()+1
         const day=currDate.getDate()
 
-        const wordleURL="https://www.nytimes.com/svc/wordle/v2/"+year+"-"+month+"-"+day+".json"
+
+        const wordleURL="https://www.nytimes.com/svc/wordle/v2/"+year+"-"+month+"-"+day
         axios.get(wordleURL)
         .then((response)=>{
-            console.log(response.data.solution)
-            wordleAns=response.data.solution
+            console.log(response.data)
+            setWordleAns(response.data)
         })
         
         .catch((error)=>{
@@ -28,14 +27,13 @@ const Wordle = ({rulename,ruledesc,trueValue}) => {
 
             else if(error.request){
                 console.log("Connection made but no response")
+                console.log(error.message)
             }
 
             else{
                 console.log("Error",error.message);
             }
         })
-
-        Ans=wordleAns
 
     },[])//call this only on mount
 
