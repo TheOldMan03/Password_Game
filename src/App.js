@@ -7,8 +7,6 @@ import {AddUptoFive, CaptchaCheck, Check2letterElem, CountCheck,HasRomanNumeral,
 import Sponsor from './Conditions/Sponser';
 import Captcha from './Conditions/Captcha';
 
-
-
 function App() {
 
   const [password,setPassword]=useState('')
@@ -153,6 +151,8 @@ function App() {
                   )
                 }
               }
+
+              return null
           })
         }
 
