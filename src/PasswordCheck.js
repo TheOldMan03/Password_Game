@@ -111,7 +111,7 @@ export const Check2letterElem=(pwd)=>{
 
     for(let i=0;i<periodicTable.length;i++){
         if(periodicTable[i].length===2){
-            if(pwd.includes(periodicTable[i].length)){
+            if(pwd.includes(periodicTable[i])){
                 return true
             }
         }
