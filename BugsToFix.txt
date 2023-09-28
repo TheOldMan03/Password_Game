@@ -1,2 +1,0 @@
-Weird bug where rule 10 is displayed before rule 9 is true
-(Rule 10 [or rule n] should be displayed iff rule 9 [or (n-1)] ka truth value becomes true)
