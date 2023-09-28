@@ -23,18 +23,18 @@ const Captcha = ({rulename,ruledesc,trueValue}) => {
   const [callFunc,setCallFunc]=useState(true)
   const [captchaString,setCaptchaString]=useState("")
 
-    const fun=()=>{
-      if(callFunc){
-        let x=GenerateCaptcha()
-        setCaptchaString(x)
-        value=x
-        setCallFunc(false)
-      }
+  const fun=()=>{
+    if(callFunc){
+      let x=GenerateCaptcha()
+      setCaptchaString(x)
+      value=x
+      setCallFunc(false)
     }
+  }
 
 
-    useEffect(fun,[callFunc])
-    
+  useEffect(fun,[callFunc])
+      
   return (
     <div className='rule'>
       <div id="upperhalf" className={trueValue? 'true-upper':'false-upper'}>{rulename}</div>
@@ -60,9 +60,11 @@ const Captcha = ({rulename,ruledesc,trueValue}) => {
   )
 }
 
+export const getCaptcha=()=>{
+    return value
+}
+
+
 export default Captcha
 
-export const getCaptcha=()=>{
-  return value;
-}
 

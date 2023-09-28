@@ -86,7 +86,14 @@ export const HasSponsors=(pwd)=>{
 }
 
 export const CaptchaCheck=(pwd)=>{
-    if(pwd.includes(getCaptcha())){
+
+    const captcha=getCaptcha();
+
+    if(captcha===""){
+        return false
+    }
+
+    if(pwd.includes(captcha)){
         return true;
     }
 
