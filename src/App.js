@@ -32,7 +32,7 @@ function App() {
             return true
         }
 
-        else if(!password.includes("🥚") && canPaulbekilled){
+        else if(!password.includes("\u1F95A") && canPaulbekilled){
           setPaulisDed(true)
           return false
           //paul is dead
@@ -40,11 +40,11 @@ function App() {
     }
 
     else{
-        if(password.includes("🐔")){
+        if(password.includes("\u1F414")){
             return true
         }
 
-        else if(!password.includes("🐔") && canPaulbekilled){
+        else if(!password.includes("\u1F414") && canPaulbekilled){
           setPaulisDed(true)
           return false
         }
