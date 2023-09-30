@@ -3,7 +3,7 @@ import { useState,useEffect } from 'react';
 import Condition from './Conditions/Condition'
 // import { CSSTransition,TransitionGroup } from 'react-transition-group';
 
-import {AddUptoFive, CaptchaCheck, Check2letterElem, CountCheck,HasRomanNumeral,HasSponsors,MonthofYear,NumberCheck,SpecialCheck,UpperCheck} from './PasswordCheck'
+import {AddUptoFive, CaptchaCheck, Check2letterElem, CountCheck,HasRomanNumeral,HasSponsors,LeapYearCheck,MonthofYear,NumberCheck,SpecialCheck,UpperCheck} from './PasswordCheck'
 import Sponsor from './Conditions/Sponser';
 import Captcha from './Conditions/Captcha';
 
@@ -16,6 +16,7 @@ function App() {
   
 
   const [data,setData]=useState([
+    {id:11,rule:"Rule 11",desc:"Your password must include a leap year",execute:LeapYearCheck,curr:false,isNext:false,truth:false},
     {id:10,rule:"Rule 10",desc:"Your password must include a 2 letter symbol from the periodic table",execute:Check2letterElem,curr:false,isNext:false,truth:false},
     {id:9,rule:"Rule 9",desc:"Your password must include this CAPTCHA",execute:CaptchaCheck,curr:false,isNext:false,truth:false},
     {id:8,rule:"Rule 8",desc:"Your password must include our sponsors!",execute:HasSponsors,curr:false,isNext:false,truth:false},

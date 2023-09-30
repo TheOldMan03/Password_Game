@@ -125,7 +125,28 @@ export const Check2letterElem=(pwd)=>{
     }
 
     return false;
+}
 
+export const LeapYearCheck=(pwd)=>{
+    const nums=["1","2","3","4","5","6","7","8","9","0"]
+    let numString=""
 
+    for(let i=0;i<pwd.length;i++){
+        numString=""
+        if(nums.includes(pwd[i])){
+            while(nums.includes(pwd[i])){
+                numString+=pwd[i]
+                i++;
+            }
 
+            //after generating the number string
+            const ActualNum=Number(numString)
+
+            if(ActualNum%4===0 && ActualNum%100===0 && ActualNum%400===0){
+                return true;
+            }
+        }
+    }
+
+    return false;
 }
