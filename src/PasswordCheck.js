@@ -21,7 +21,7 @@ export const UpperCheck=(pwd)=>{
 }
 
 export const SpecialCheck=(pwd)=>{
-    const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+    const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"|,.<>/?~]/;
     return specialChars.test(pwd);
 }
 
@@ -148,5 +148,25 @@ export const LeapYearCheck=(pwd)=>{
         }
     }
 
-    return false;
+    return false
+
+}
+
+export const HelloPaul=(pwd,stage,canPaulbekilled)=>{
+    
+    if(stage===0){
+        if(pwd.includes("🥚")){
+            canPaulbekilled=true
+            return true
+        }
+    }
+
+    else{
+        if(pwd.includes("🐔")){
+            return true
+        }
+    }
+
+    return false
+
 }

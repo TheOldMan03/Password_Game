@@ -6,14 +6,13 @@ import Condition from './Conditions/Condition'
 import {AddUptoFive, CaptchaCheck, Check2letterElem, CountCheck,HasRomanNumeral,HasSponsors,LeapYearCheck,MonthofYear,NumberCheck,SpecialCheck,UpperCheck} from './PasswordCheck'
 import Sponsor from './Conditions/Sponser';
 import Captcha from './Conditions/Captcha';
+import Gameover from './Gameover';
 
 function App() {
 
   const [password,setPassword]=useState('')
   const [wordCount,setWordCount]=useState(0)
   const [nextCount,setNextCount]=useState(0)
-
-  
 
   const [data,setData]=useState([
     {id:11,rule:"Rule 11",desc:"Your password must include a leap year",execute:LeapYearCheck,curr:false,isNext:false,truth:false},
@@ -29,62 +28,62 @@ function App() {
     {id:1,rule:"Rule 1",desc:"Your password must be at least 5 characters",execute:CountCheck,curr:false,isNext:false,truth:false}
   ])
 
-  const ChangeRule=()=>{
-    let newData=[];
-    newData=data.map((datax,index)=>{
-      const newObj={...datax}
-      if(index===data.length-1){//only for the last element
-        if(wordCount>0){
+  // const ChangeRule=()=>{
+  //   let newData=[];
+  //   newData=data.map((datax,index)=>{
+  //     const newObj={...datax}
+  //     if(index===data.length-1){//only for the last element
+  //       if(wordCount>0){
 
-          if(!newObj.curr){
-            newObj.curr=true;
-          }
+  //         if(!newObj.curr){
+  //           newObj.curr=true;
+  //         }
 
-          if(newObj.execute(wordCount)){
-            newObj.truth=true;
+  //         if(newObj.execute(wordCount)){
+  //           newObj.truth=true;
             
-            if(!newObj.isNext){
-              newObj.isNext=true;
-              setNextCount(nextCount+1);
-            }
-          }
+  //           if(!newObj.isNext){
+  //             newObj.isNext=true;
+  //             setNextCount(nextCount+1);
+  //           }
+  //         }
 
-          else{
-            newObj.truth=false;
-          }
-        }
-      }
+  //         else{
+  //           newObj.truth=false;
+  //         }
+  //       }
+  //     }
 
-      else{
-        if(data[index+1].isNext){
+  //     else{
+  //       if(data[index+1].isNext){
 
-          if(!newObj.curr){
-            newObj.curr=true;
-          }
+  //         if(!newObj.curr){
+  //           newObj.curr=true;
+  //         }
           
-          if(newObj.execute(password)){
-            newObj.truth=true;
+  //         if(newObj.execute(password)){
+  //           newObj.truth=true;
 
-            if(!newObj.isNext){
-              newObj.isNext=true;
-              setNextCount(nextCount+1);
-            }
-          }
+  //           if(!newObj.isNext){
+  //             newObj.isNext=true;
+  //             setNextCount(nextCount+1);
+  //           }
+  //         }
 
-          else{
-            newObj.truth=false;
-          }
-        }
-      }
+  //         else{
+  //           newObj.truth=false;
+  //         }
+  //       }
+  //     }
 
-      return newObj;
+  //     return newObj;
 
-    })
+  //   })
 
-    setData(newData)
-  }
+  //   setData(newData)
+  // }
 
-  useEffect(ChangeRule,[password,wordCount,nextCount]);
+  // useEffect(ChangeRule,[password,wordCount,nextCount]);
   
   function ResizeArea(e){
     e.target.style.height="85px"
@@ -130,7 +129,7 @@ function App() {
           
         </div>
 
-        {
+         {/* {
           data.map(datax=>{
               if(datax.curr){
 
@@ -155,10 +154,13 @@ function App() {
 
               return null
           })
-        }
+        }  */}
 
 
       </div>
+
+      <Gameover/>
+      
 
     </div>
     
