@@ -152,21 +152,3 @@ export const LeapYearCheck=(pwd)=>{
 
 }
 
-export const HelloPaul=(pwd,stage,canPaulbekilled)=>{
-    
-    if(stage===0){
-        if(pwd.includes("🥚")){
-            canPaulbekilled=true
-            return true
-        }
-    }
-
-    else{
-        if(pwd.includes("🐔")){
-            return true
-        }
-    }
-
-    return false
-
-}

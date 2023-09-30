@@ -14,7 +14,49 @@ function App() {
   const [wordCount,setWordCount]=useState(0)
   const [nextCount,setNextCount]=useState(0)
 
+  const [isPaulDed,setPaulisDed]=useState(false)
+  const [canPaulbekilled,setKillable]=useState(false)
+  const [stage,setStage]=useState(0)
+
+
+  const HelloPaul=()=>{
+
+    if(stage===0){
+        if(password.includes("🥚")){
+            if(!canPaulbekilled){
+              setKillable(true)
+              //this means that Paul is susceptible to dying 
+              //if he is ever removed from the password then the game is over
+            }
+
+            return true
+        }
+
+        else if(!password.includes("🥚") && canPaulbekilled){
+          setPaulisDed(true)
+          return false
+          //paul is dead
+        }
+    }
+
+    else{
+        if(password.includes("🐔")){
+            return true
+        }
+
+        else if(!password.includes("🐔") && canPaulbekilled){
+          setPaulisDed(true)
+          return false
+        }
+    }
+
+
+    return false
+
+  }
+
   const [data,setData]=useState([
+    {id:12,rule:"Rule 12",desc:"This is my chicken Paul 🥚, he hasn't hatched yet, Please put him in your password and keep him safe",execute:HelloPaul,curr:false,isNext:false,truth:false},
     {id:11,rule:"Rule 11",desc:"Your password must include a leap year",execute:LeapYearCheck,curr:false,isNext:false,truth:false},
     {id:10,rule:"Rule 10",desc:"Your password must include a 2 letter symbol from the periodic table",execute:Check2letterElem,curr:false,isNext:false,truth:false},
     {id:9,rule:"Rule 9",desc:"Your password must include this CAPTCHA",execute:CaptchaCheck,curr:false,isNext:false,truth:false},
@@ -28,62 +70,82 @@ function App() {
     {id:1,rule:"Rule 1",desc:"Your password must be at least 5 characters",execute:CountCheck,curr:false,isNext:false,truth:false}
   ])
 
-  // const ChangeRule=()=>{
-  //   let newData=[];
-  //   newData=data.map((datax,index)=>{
-  //     const newObj={...datax}
-  //     if(index===data.length-1){//only for the last element
-  //       if(wordCount>0){
 
-  //         if(!newObj.curr){
-  //           newObj.curr=true;
-  //         }
+  const ChangeRule=()=>{
+    let newData=[];
+    newData=data.map((datax,index)=>{
+      const newObj={...datax}
+      if(index===data.length-1){//only for the last element
+        if(wordCount>0){
 
-  //         if(newObj.execute(wordCount)){
-  //           newObj.truth=true;
+          if(!newObj.curr){
+            newObj.curr=true;
+          }
+
+          if(newObj.execute(wordCount)){
+            newObj.truth=true;
             
-  //           if(!newObj.isNext){
-  //             newObj.isNext=true;
-  //             setNextCount(nextCount+1);
-  //           }
-  //         }
+            if(!newObj.isNext){
+              newObj.isNext=true;
+              setNextCount(nextCount+1);
+            }
+          }
 
-  //         else{
-  //           newObj.truth=false;
-  //         }
-  //       }
-  //     }
+          else{
+            newObj.truth=false;
+          }
+        }
+      }
 
-  //     else{
-  //       if(data[index+1].isNext){
+      else{
+        if(data[index+1].isNext){
 
-  //         if(!newObj.curr){
-  //           newObj.curr=true;
-  //         }
+          if(!newObj.curr){
+            newObj.curr=true;
+          }
+
+          if(index===0){// I need to change the index as i add more rules the index will change
+            if(newObj.execute()){
+              newObj.truth=true
+            }
+
+            if(!newObj.isNext){
+              newObj.isNext=true;
+              setNextCount(nextCount+1);
+            }
+
+            else{
+              newObj.truth=false;
+            }
+          }
+
+          else{
+            if(newObj.execute(password)){
+              newObj.truth=true;
+  
+              if(!newObj.isNext){
+                newObj.isNext=true;
+                setNextCount(nextCount+1);
+              }
+            }
+  
+            else{
+              newObj.truth=false;
+            }
+          }
           
-  //         if(newObj.execute(password)){
-  //           newObj.truth=true;
+        }
+      }
 
-  //           if(!newObj.isNext){
-  //             newObj.isNext=true;
-  //             setNextCount(nextCount+1);
-  //           }
-  //         }
+      return newObj;
 
-  //         else{
-  //           newObj.truth=false;
-  //         }
-  //       }
-  //     }
+    })
 
-  //     return newObj;
+    setData(newData)
+  }
 
-  //   })
 
-  //   setData(newData)
-  // }
-
-  // useEffect(ChangeRule,[password,wordCount,nextCount]);
+  useEffect(ChangeRule,[password,wordCount,nextCount]);
   
   function ResizeArea(e){
     e.target.style.height="85px"
@@ -129,7 +191,7 @@ function App() {
           
         </div>
 
-         {/* {
+         {
           data.map(datax=>{
               if(datax.curr){
 
@@ -154,12 +216,12 @@ function App() {
 
               return null
           })
-        }  */}
+        } 
 
 
       </div>
 
-      <Gameover/>
+      {isPaulDed?<Gameover/>:null}
       
 
     </div>
