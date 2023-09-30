@@ -3,9 +3,9 @@ import "./Gameover.css"
 
 const Gameover = () => {
   return (
-    <div>
+    <div className='GO'>
         <div className="gameover">
-            Game Over You can't take care of 1 small animal...you meanie
+            PAUL HAS BEEN SLAIN
         </div>
     </div>
   )
