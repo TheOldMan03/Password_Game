@@ -7,6 +7,7 @@ import {AddUptoFive, CaptchaCheck, Check2letterElem, CountCheck,HasRomanNumeral,
 import Sponsor from './Conditions/Sponser';
 import Captcha from './Conditions/Captcha';
 import Gameover from './Gameover';
+import { useRef } from 'react';
 
 function App() {
 
@@ -14,38 +15,42 @@ function App() {
   const [wordCount,setWordCount]=useState(0)
   const [nextCount,setNextCount]=useState(0)
 
-  const [isPaulDed,setPaulisDed]=useState(false)
-  const [canPaulbekilled,setKillable]=useState(false)
-  const [stage,setStage]=useState(0)
+  const [isPaulDed,setisPaulDed]=useState(false)
+  const [canPaulbekilled,setCanPaulbekilled]=useState(false)
 
+  const stateRef_paulded=useRef();
+  const stateRef_canPauldie=useRef();
 
-  const HelloPaul=()=>{
+  stateRef_paulded.current=isPaulDed
+  stateRef_canPauldie.current=canPaulbekilled
+
+  const HelloPaul=(pwd,stage)=>{
 
     if(stage===0){
-        if(password.includes("🥚")){
-            if(!canPaulbekilled){
-              setKillable(true)
+        if(pwd.includes("🥚")){
+            if(!stateRef_canPauldie.current){
+              setCanPaulbekilled(true)
               //this means that Paul is susceptible to dying 
-              //if he is ever removed from the password then the game is over
+              //if he is ever removed from the pwd then the game is over
             }
 
             return true
         }
 
-        else if(!password.includes("\u1F95A") && canPaulbekilled){
-          setPaulisDed(true)
+        else if(!pwd.includes("🥚") && stateRef_canPauldie.current){
+          setisPaulDed(true)
           return false
           //paul is dead
         }
     }
 
     else{
-        if(password.includes("\u1F414")){
+        if(pwd.includes("🐔")){
             return true
         }
 
-        else if(!password.includes("\u1F414") && canPaulbekilled){
-          setPaulisDed(true)
+        else if(!pwd.includes("🐔") && stateRef_canPauldie.current){
+          setisPaulDed(true)
           return false
         }
     }
@@ -54,6 +59,7 @@ function App() {
     return false
 
   }
+
 
   const [data,setData]=useState([
     {id:12,rule:"Rule 12",desc:"This is my chicken Paul 🥚, he hasn't hatched yet, Please put him in your password and keep him safe",execute:HelloPaul,curr:false,isNext:false,truth:false},
@@ -70,6 +76,7 @@ function App() {
     {id:1,rule:"Rule 1",desc:"Your password must be at least 5 characters",execute:CountCheck,curr:false,isNext:false,truth:false}
   ])
 
+  
 
   const ChangeRule=()=>{
     let newData=[];
@@ -104,19 +111,28 @@ function App() {
             newObj.curr=true;
           }
 
-          if(index===0){// I need to change the index as i add more rules the index will change
-            if(newObj.execute()){
-              newObj.truth=true
+          if(index===0){
+            if(newObj.execute(password,0)){
+              newObj.truth=true;
+
+              if(!newObj.isNext){
+                newObj.isNext=true
+                setNextCount(nextCount+1)
+              }
             }
 
-            if(!newObj.isNext){
-              newObj.isNext=true;
-              setNextCount(nextCount+1);
+            else if(!newObj.execute(password,0) && isPaulDed){
+              newObj.isNext=false;
+              newObj.truth=false;
+
+              //this is the only time where isNext of a rule becomes false
             }
 
             else{
               newObj.truth=false;
             }
+
+
           }
 
           else{
@@ -133,7 +149,7 @@ function App() {
               newObj.truth=false;
             }
           }
-          
+
         }
       }
 
