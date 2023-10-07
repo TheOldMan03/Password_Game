@@ -322,7 +322,9 @@ export const PeriodicSum=(pwd)=>{
         }
     }
 
-    sum+=periodicTable[pwd[pwd.length-1]]
+    if(pwd[[pwd.length-1]] in periodicTable){
+        sum+=periodicTable[pwd[pwd.length-1]]
+    }
 
     console.log(sum)
 
