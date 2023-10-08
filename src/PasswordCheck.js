@@ -326,8 +326,6 @@ export const PeriodicSum=(pwd)=>{
         sum+=periodicTable[pwd[pwd.length-1]]
     }
 
-    console.log(sum)
-
     if(sum===3){
         return true
     }
