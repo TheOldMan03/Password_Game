@@ -62,29 +62,28 @@ function App() {
 
   const [data,setData]=useState([
     {id:13,rule:"Rule 13",desc:"The elements in your password must have atomic numbers that add up to 200",execute:PeriodicSum,curr:false,isNext:false,truth:false},
-    // {id:12,rule:"Rule 12",desc:"This is my chicken Paul 🥚, he hasn't hatched yet, Please put him in your password and keep him safe",execute:HelloPaul,curr:false,isNext:false,truth:false},
-    // {id:11,rule:"Rule 11",desc:"Your password must include a leap year",execute:LeapYearCheck,curr:false,isNext:false,truth:false},
-    // {id:10,rule:"Rule 10",desc:"Your password must include a 2 letter symbol from the periodic table",execute:Check2letterElem,curr:false,isNext:false,truth:false},
-    // {id:9,rule:"Rule 9",desc:"Your password must include this CAPTCHA",execute:CaptchaCheck,curr:false,isNext:false,truth:false},
-    // {id:8,rule:"Rule 8",desc:"Your password must include our sponsors!",execute:HasSponsors,curr:false,isNext:false,truth:false},
-    // {id:7,rule:"Rule 7",desc:"Your password must contain a roman numeral",execute:HasRomanNumeral,curr:false,isNext:false,truth:false},
-    // {id:6,rule:"Rule 6",desc:"Your password must contain a month of the year",execute:MonthofYear,curr:false,isNext:false,truth:false},
-    // {id:5,rule:"Rule 5",desc:"The digits in your password must add upto 25",execute:AddUptoFive,curr:false,isNext:false,truth:false},
-    // {id:4,rule:"Rule 4",desc:"Your password must include a special character",execute:SpecialCheck,curr:false,isNext:false,truth:false},
-    // {id:3,rule:"Rule 3",desc:"Your password must contain an uppercase letter",execute:UpperCheck,curr:false,isNext:false,truth:false},
-    // {id:2,rule:"Rule 2",desc:"Your password must contain a number",execute:NumberCheck,curr:false,isNext:false,truth:false},
+    {id:12,rule:"Rule 12",desc:"This is my chicken Paul 🥚, he hasn't hatched yet, Please put him in your password and keep him safe",execute:HelloPaul,curr:false,isNext:false,truth:false},
+    {id:11,rule:"Rule 11",desc:"Your password must include a leap year",execute:LeapYearCheck,curr:false,isNext:false,truth:false},
+    {id:10,rule:"Rule 10",desc:"Your password must include a 2 letter symbol from the periodic table",execute:Check2letterElem,curr:false,isNext:false,truth:false},
+    {id:9,rule:"Rule 9",desc:"Your password must include this CAPTCHA",execute:CaptchaCheck,curr:false,isNext:false,truth:false},
+    {id:8,rule:"Rule 8",desc:"Your password must include our sponsors!",execute:HasSponsors,curr:false,isNext:false,truth:false},
+    {id:7,rule:"Rule 7",desc:"Your password must contain a roman numeral",execute:HasRomanNumeral,curr:false,isNext:false,truth:false},
+    {id:6,rule:"Rule 6",desc:"Your password must contain a month of the year",execute:MonthofYear,curr:false,isNext:false,truth:false},
+    {id:5,rule:"Rule 5",desc:"The digits in your password must add upto 25",execute:AddUptoFive,curr:false,isNext:false,truth:false},
+    {id:4,rule:"Rule 4",desc:"Your password must include a special character",execute:SpecialCheck,curr:false,isNext:false,truth:false},
+    {id:3,rule:"Rule 3",desc:"Your password must contain an uppercase letter",execute:UpperCheck,curr:false,isNext:false,truth:false},
+    {id:2,rule:"Rule 2",desc:"Your password must contain a number",execute:NumberCheck,curr:false,isNext:false,truth:false},
     {id:1,rule:"Rule 1",desc:"Your password must be at least 5 characters",execute:CountCheck,curr:false,isNext:false,truth:false}
   ])
 
-  const [fstack,setfStack]=useState([])
+  
   
   const ChangeRule=()=>{
-    let newData=[];
-    let fdata=[];
-
+    let newData=data;
+    
     newData=data.map((datax,index)=>{
       const newObj={...datax}
-      if(index===data.length-1){//only for the last element
+      if(datax.id===1){//only for the last element
         if(wordCount>0){
 
           if(!newObj.curr){
@@ -140,7 +139,6 @@ function App() {
   
             else{
               newObj.truth=false;
-
             }
           }
         }
@@ -149,16 +147,7 @@ function App() {
       return newObj;
     })
 
-    fdata=data.map(datax=>{
-      const newObj={...datax}
-
-      if(newObj.curr && !newObj.truth){
-        return newObj;
-      }
-    })
-
     setData(newData)
-    setfStack(fdata)
   }
 
 
@@ -208,39 +197,9 @@ function App() {
           
         </div>
 
-        {
-          fstack.map(fx=>{
-            if(fstack.length===0){
-              return null
-            }
-
-            if(fx.curr && !fx.truth){
-              if(fx.id===8){
-                return(
-                  <Sponsor key={fx.id} rulename={fx.rule} ruledesc={fx.desc} trueValue={fx.truth}/>
-                )
-              }
-
-              else if(fx.id===9){
-                return(
-                  <Captcha key={fx.id} rulename={fx.rule} ruledesc={fx.desc} trueValue={fx.truth}/>
-                )
-              }
-
-              else{
-                return(
-                  <Condition key={fx.id} rulename={fx.rule} ruledesc={fx.desc} trueValue={fx.truth}/>
-                )
-              }
-            }
-
-            return null
-          })
-        }
-
          {
           data.map(datax=>{
-              if(datax.curr && datax.truth){
+              if(datax.curr){
 
                 if(datax.id===8){
                   return(

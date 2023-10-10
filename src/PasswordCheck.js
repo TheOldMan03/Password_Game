@@ -1,7 +1,7 @@
 import { getCaptcha } from "./Conditions/Captcha";
 
 export const CountCheck=(num)=>{
-    if(num>=2){
+    if(num>=5){
         return true;
     }
 
@@ -326,7 +326,8 @@ export const PeriodicSum=(pwd)=>{
         sum+=periodicTable[pwd[pwd.length-1]]
     }
 
-    if(sum===3){
+
+    if(sum===200){
         return true
     }
 
