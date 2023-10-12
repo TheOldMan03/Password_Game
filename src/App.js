@@ -79,14 +79,14 @@ function App() {
   const [display,setDisplay]=useState([])
   
   const ChangeRule=()=>{
-    let newData=data;
+    let newData=[];
     let fData=[];
     let tData=[];
 
     newData=data.map((datax,index)=>{
       const newObj={...datax}
       if(datax.id===1){//only for the last element
-        if(wordCount>0){
+        if(wordCount>0 || nextCount>0){
 
           if(!newObj.curr){
             newObj.curr=true;
@@ -160,13 +160,7 @@ function App() {
     })
 
     const combined=[...fData,...tData]
-    console.log(fData)
-    console.log("this is fdata")
-    console.log(tData)
-    console.log("This is tdata")
     setDisplay(combined)
-    console.log(combined)
-    console.log("This is combined data")
     setData(newData)
   }
 
