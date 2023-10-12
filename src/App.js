@@ -204,9 +204,17 @@ function App() {
               value={password} 
               onChange={PasswordLength}
               onInput={ResizeArea}
-            ></textarea>
+            >
+
+            {/* I need to add a line underneath here */}
+
+            </textarea>
 
             <span id="wcount">{wordCount}</span>
+          </div>
+
+          <div className="bottomfunc">
+            <button>Bold</button>
           </div>
           
         </div>
