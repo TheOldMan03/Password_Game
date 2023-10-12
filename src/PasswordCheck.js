@@ -334,3 +334,14 @@ export const PeriodicSum=(pwd)=>{
     return false
 
 }
+
+const boldVowels=(pwd)=>{
+    const vowels=["a","e","i","o","u"];
+
+    for(let i=0;i<pwd.length;i++){
+        if(vowels.includes(pwd[i].toLowerCase())){
+            
+        }
+    }
+
+}

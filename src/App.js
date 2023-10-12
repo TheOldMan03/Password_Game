@@ -76,11 +76,13 @@ function App() {
     {id:1,rule:"Rule 1",desc:"Your password must be at least 5 characters",execute:CountCheck,curr:false,isNext:false,truth:false}
   ])
 
-  
+  const [display,setDisplay]=useState([])
   
   const ChangeRule=()=>{
     let newData=data;
-    
+    let fData=[];
+    let tData=[];
+
     newData=data.map((datax,index)=>{
       const newObj={...datax}
       if(datax.id===1){//only for the last element
@@ -97,10 +99,14 @@ function App() {
               newObj.isNext=true;
               setNextCount(nextCount+1);
             }
+
+            tData.push(newObj)
+
           }
 
           else{
             newObj.truth=false;
+            fData.push(newObj)
           }
         }
       }
@@ -120,10 +126,13 @@ function App() {
                 newObj.isNext=true
                 setNextCount(nextCount+1)
               }
+
+              tData.push(newObj)
             }
 
             else{
               newObj.truth=false;
+              fData.push(newObj)
             }
           }
 
@@ -135,10 +144,13 @@ function App() {
                 newObj.isNext=true;
                 setNextCount(nextCount+1);
               }
+
+              tData.push(newObj)
             }
   
             else{
               newObj.truth=false;
+              fData.push(newObj)
             }
           }
         }
@@ -147,6 +159,14 @@ function App() {
       return newObj;
     })
 
+    const combined=[...fData,...tData]
+    console.log(fData)
+    console.log("this is fdata")
+    console.log(tData)
+    console.log("This is tdata")
+    setDisplay(combined)
+    console.log(combined)
+    console.log("This is combined data")
     setData(newData)
   }
 
@@ -198,7 +218,7 @@ function App() {
         </div>
 
          {
-          data.map(datax=>{
+          display.map(datax=>{
               if(datax.curr){
 
                 if(datax.id===8){
