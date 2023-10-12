@@ -45,11 +45,12 @@ span{
   display: block;
   margin-top: 5px;
   min-width: 550px;
-  height:85px;
+  height:64px;
   border-radius: 12px;
   font-size: 2.2rem;
 
-  padding-left:8px;
+  padding-left:15px;
+  padding-top:15px;
 
   border-color: #bfbfbf;
 
