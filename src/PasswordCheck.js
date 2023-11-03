@@ -344,7 +344,9 @@ export const LanguageBarrier=(pwd)=>{
     const Index=LN();
     console.log(Index)
 
-    if(pwd.includes(EnglishWords[Index])){
+    const LC=pwd.toLowerCase();
+
+    if(LC.includes(EnglishWords[Index])){
         return true;
     }
 
