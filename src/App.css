@@ -53,35 +53,14 @@ span{
   padding-top:15px;
 
   border-color: #bfbfbf;
+  background-color: white;
 
   outline: none;
   resize: none;
 }
 
+
 .pwdinput::-webkit-scrollbar{
   width:0;
   /* this removes the scrollbar from the text area */
 }
-
-@keyframes fade-in {
-  0%{
-    opacity: 0;
-  }
-
-  100%{
-    opacity:1;
-  }
-}
-
-.tr{
-  opacity: 0;
-  animation: fade-in 0.5s ease-in-out;
-  transition: background-color 0.7s ease-in-out;
-}
-
-.bottomfunc{
-  width:550px;
-  border-color: #bfbfbf;
-  background-color: white;
-}
-

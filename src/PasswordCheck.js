@@ -1,4 +1,5 @@
 import { getCaptcha } from "./Conditions/Captcha";
+import { LN } from "./Conditions/Translate";
 
 export const CountCheck=(num)=>{
     if(num>=5){
@@ -335,13 +336,21 @@ export const PeriodicSum=(pwd)=>{
 
 }
 
-const boldVowels=(pwd)=>{
-    const vowels=["a","e","i","o","u"];
+export const LanguageBarrier=(pwd)=>{
+    const EnglishWords=[
+        "science","maths","pineapple","bread","light","chair","focusonyourstudies"
+    ]
 
-    for(let i=0;i<pwd.length;i++){
-        if(vowels.includes(pwd[i].toLowerCase())){
-            
-        }
+    const Index=LN();
+    console.log(Index)
+
+    if(pwd.includes(EnglishWords[Index])){
+        return true;
     }
 
+    return false;
+
+
 }
+
+

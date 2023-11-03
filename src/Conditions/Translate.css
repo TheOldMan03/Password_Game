@@ -1,0 +1,7 @@
+.captcha_box{
+    width:400px;
+    height:60px;
+    text-decoration: none;
+    background: linear-gradient(to right,#D4145A,#FBB03B);
+    color:white;
+}
