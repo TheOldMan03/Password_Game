@@ -1,9 +1,9 @@
 import React,{useState,useEffect} from 'react'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faRefresh} from '@fortawesome/free-solid-svg-icons'
-import './Captcha.css'
 import './Condition.css'
 import './Translate.css'
+import './Captcha.css'
 
 
 const RandomizerWord=()=>{
@@ -47,7 +47,7 @@ const Translate = ({rulename,ruledesc,trueValue}) => {
         {ruledesc}
 
         <div className="Capt">
-            <div className="captcha_box">
+            <div className="captcha_box" id="translate_box">
               {LanguageW}
             </div>
 
