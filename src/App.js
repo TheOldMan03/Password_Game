@@ -112,6 +112,7 @@ function App() {
     let newData=[];
     let fData=[];
     let tData=[];
+    let WrongCount=0;
 
     newData=data.map((datax,index)=>{
       const newObj={...datax}
@@ -121,7 +122,7 @@ function App() {
           if(!displayFirstRule){
             setDFR(true)
           }
-          
+
           if(!newObj.curr){
             newObj.curr=true;
           }
@@ -129,18 +130,24 @@ function App() {
           if(newObj.execute(wordCount)){
             newObj.truth=true;
 
-            if(!newObj.isNext){
+            if(WrongCount>0){
+              WrongCount--
+            }
+
+            console.log(WrongCount)
+
+            if(!newObj.isNext && WrongCount===0){
               newObj.isNext=true;
-              setNextCount(nextCount+1);
             }
 
             tData.push(newObj)
-
           }
 
           else{
+            WrongCount++
             newObj.truth=false;
             fData.push(newObj)
+            console.log(WrongCount)
           }
         }
       }
@@ -155,8 +162,12 @@ function App() {
           if(newObj.id===12){
             if(newObj.execute(password,0)){
               newObj.truth=true;
+              
+              if(WrongCount>0){
+                WrongCount--
+              }
 
-              if(!newObj.isNext){
+              if(!newObj.isNext && WrongCount==0){
                 newObj.isNext=true
                 setNextCount(nextCount+1)
               }
@@ -164,7 +175,8 @@ function App() {
               tData.push(newObj)
             }
 
-            else{
+            else{         
+              WrongCount++     
               newObj.truth=false;
               fData.push(newObj)
             }
@@ -173,8 +185,12 @@ function App() {
           else{
             if(newObj.execute(password)){
               newObj.truth=true;
+              
+              if(WrongCount>0){
+                WrongCount--
+              }
 
-              if(!newObj.isNext){
+              if(!newObj.isNext && WrongCount==0){
                 newObj.isNext=true;
                 setNextCount(nextCount+1);
               }
@@ -183,6 +199,7 @@ function App() {
             }
   
             else{
+              WrongCount++
               newObj.truth=false;
               fData.push(newObj)
             }
