@@ -25,18 +25,16 @@ let val=-1;
 const Translate = ({rulename,ruledesc,trueValue}) => {
 
     const [LanguageW,setLanguageW]=useState("")
-    const [callFunc,setCallFunc]=useState(true);
-
+    
     function fun(){
-        if(callFunc){
-            let x=RandomizerWord();
-            setLanguageW(x[0])
-            val=x[1];
-            setCallFunc(false);
-        }
+        
+        let x=RandomizerWord();
+        setLanguageW(x[0])
+        val=x[1];
+        
     }
 
-    useEffect(fun,[callFunc])
+    useEffect(fun,[])
 
 
   return (
@@ -50,11 +48,6 @@ const Translate = ({rulename,ruledesc,trueValue}) => {
             <div className="captcha_box" id="translate_box">
               {LanguageW}
             </div>
-
-            <button className='rstCap' onClick={()=>setCallFunc(true)}>
-              <FontAwesomeIcon icon={faRefresh}/>
-            </button>
-
 
         </div>
 

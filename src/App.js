@@ -22,9 +22,12 @@ function App() {
   const [canPaulbekilled,setCanPaulbekilled]=useState(false)
   const [paulStage,setPaulStage]=useState(0)
 
-  const [fireIgnition,setFireIgnition]=useState(true)
+  // const [fireIgnition,setFireIgnition]=useState(true)
+
   //this state is used for the FireIn function where if it is true then it will automatically return
   //true and not check anything
+
+  // const [eggCount,setEggCount]=useState(0)
 
   const stateRef_paulded=useRef();
   const stateRef_canPauldie=useRef();
@@ -68,56 +71,85 @@ function App() {
 
   }
 
-  const fireIn=(pwd)=>{
+  /*the function below does not seem to work properly and will kept on standstill */
 
-    if(pwd.includes('🔥') && !fireIgnition){
-      setFireIgnition(true)
-    }
 
-    if(fireIgnition){
-  
-      let randomIndex=-1;
-      let stopFunction;
-      randomIndex=Math.floor(Math.random()*pwd.length);
+  // const AddFireFunction=()=>{
+  //   let finalValue=false;
+  //   let eggIndex=-1
+  //   const pwd_ref=useRef();
+  //   pwd_ref.current=password
 
-      setTimeout(()=>{
-        if(!pwd.includes("🔥")){
-          stopFunction=true;
-          setFireIgnition(false)
-        }
-      },1500)
 
-      if(stopFunction){
-        return true;
-      }
+  //   let randomIndex=Math.floor(Math.random()*pwd_ref.current.length);
 
-      let tempPassword=""
-      for(let i=0;i<pwd.length;i++){
-        if(i===randomIndex){
-          tempPassword+="🔥"
-        }
+  //   for(let i=0;i<pwd_ref.current.length;i++){
+  //     if(pwd_ref.current[i]==="🥚"){
+  //       eggIndex=i;
+  //       break;
+  //     }      
+  //   }
 
-        else{
-          tempPassword+=pwd[i]
-        }
-      }
 
-      setPassword(tempPassword)
-     
-      
-      return false;
-    }
+  //   function setFireintoPassword(){
+  //     const eC=eggCount;
 
-    else{
-      return true;
-    }
+  //     if(eC>pwd_ref.current.length){
+  //       return;
+  //     }
 
-  }
+  //     if(pwd_ref.current[randomIndex]==="🔥" && eC<pwd_ref.current.length){
+  //       //the 2nd condition is used so that if all characters are fire then it skips this check
+  //       while(pwd_ref.current[randomIndex]==="🔥"){
+  //         randomIndex=Math.floor(Math.random()*pwd_ref.current.length);
+  //       }
+  //     }
+
+  //     if(eC<=4 && randomIndex===eggIndex){
+  //       while(randomIndex===eggIndex){
+  //         randomIndex=Math.floor(Math.random()*pwd_ref.current.length);
+  //       }
+  //     }
+
+  //     pwd_ref.current=pwd_ref.current.substr(0,randomIndex)+"🔥"+pwd_ref.current.substr(randomIndex+1);
+  //     setPassword(pwd_ref.current)
+  //     setEggCount(eggCount+1)
+  //   }
+
+  //   useEffect(()=>{
+  //     setTimeout(setFireintoPassword,5000)
+  //   },[pwd_ref.current])
+
+  //   useEffect(()=>{
+  //     if(!pwd_ref.current.includes("🔥")){
+  //       finalValue=true;
+  //     }
+  //   },[pwd_ref.current])
+
+  //   if(finalValue){
+  //     return true
+  //   }
+
+  // }
+
+  // const FireIn=()=>{
+
+  //   const pwd_ref=useRef()
+  //   pwd_ref.current=password
+
+  //   if(pwd_ref.current.includes('🔥') && !fireIgnition){
+  //     setFireIgnition(true)
+  //   }
+    
+  //   if(fireIgnition){
+  //     AddFireFunction();
+  //   }
+  // }
 
 
   const [data,setData]=useState([
-    {id:15,rule:"Rule 15",desc:"Oh No! Your password has caught fire 🔥....Quick Extinguish it!!",execute:fireIn,curr:false,isNext:false,truth:false,WC:true},
-    // {id:14,rule:"Rule 14",desc:"The password must contain the english Translation of the word in the box",execute:pwdCheck.LanguageBarrier,curr:false,isNext:false,truth:false,WC:true},
+    // {id:15,rule:"Rule 15",desc:"Oh No! Your password has caught fire 🔥....Quick Extinguish it!!",execute:FireIn,curr:false,isNext:false,truth:false,WC:true},
+    {id:14,rule:"Rule 14",desc:"The password must contain the english Translation of the word in the box",execute:pwdCheck.LanguageBarrier,curr:false,isNext:false,truth:false,WC:true},
     // {id:13,rule:"Rule 13",desc:"The elements in your password must have atomic numbers that add up to 200",execute:pwdCheck.PeriodicSum,curr:false,isNext:false,truth:false,WC:true},
     {id:12,rule:"Rule 12",desc:"This is my chicken Paul 🥚, he hasn't hatched yet, Please put him in your password and keep him safe",execute:HelloPaul,curr:false,isNext:false,truth:false,WC:true},
     // {id:11,rule:"Rule 11",desc:"Your password must include a leap year",execute:pwdCheck.LeapYearCheck,curr:false,isNext:false,truth:false,WC:true},
