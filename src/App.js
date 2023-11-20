@@ -140,10 +140,12 @@ function App() {
       return;
     }
 
-    const RandomIndex=Math.floor(Math.random()*pwd.length);
+    let RandomIndex=Math.floor(Math.random()*pwd.length);
 
     if(pwd[RandomIndex]==="🥚" && eggCount.current<4){
-      RandomIndex=Math.floor(Math.random()*pwd.length);
+      while(pwd[RandomIndex]==="🥚"){
+        RandomIndex=Math.floor(Math.random()*pwd.length);
+      }
     }
 
     const newPassword=pwd.substring(0,RandomIndex)+"🔥"+pwd.substring(RandomIndex+1);

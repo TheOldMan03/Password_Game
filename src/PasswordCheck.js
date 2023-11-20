@@ -22,7 +22,7 @@ export const UpperCheck=(pwd)=>{
 }
 
 export const SpecialCheck=(pwd)=>{
-    const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"|,.<>/?~]/;
+    const specialChars = /[`!@#$%^&*()_+\-={};':"|,.<>/?~]/;
     return specialChars.test(pwd);
 }
 
