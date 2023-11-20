@@ -14,34 +14,29 @@ function App() {
   const [password,setPassword]=useState('')
   const [wordCount,setWordCount]=useState(0)
   const [nextCount,setNextCount]=useState(0)
-  const [displayFirstRule,setDFR]=useState(false)
-
-  const [falseCount,setFalseCount]=useState(0)
+  
+  const [displayFirstRule,setDFR]=useState(false);
+  const falseCount=useRef(0);
 
   const [isPaulDed,setisPaulDed]=useState(false)
-  const [canPaulbekilled,setCanPaulbekilled]=useState(false)
   const [paulStage,setPaulStage]=useState(0)
 
-  const [fireStatus,setFireStatus]=useState(0);
+  const canPaulbekilled=useRef(false);
+
+  const fireStatus=useRef(0);
   //0 means random character will be converted to a fire emoji
   //1 means the function shud check whether a fire emoji exists
   //3 means always return true and never execute the other 2 functions.... as its job is done
 
-  const stateRef_fs=useRef();
-  stateRef_fs.current=fireStatus
-
   const stateRef_paulded=useRef();
-  const stateRef_canPauldie=useRef();
-
   stateRef_paulded.current=isPaulDed
-  stateRef_canPauldie.current=canPaulbekilled
-
+  
   const HelloPaul=(pwd)=>{
 
     if(paulStage===0){
         if(pwd.includes("🥚")){
-            if(!stateRef_canPauldie.current){
-              setCanPaulbekilled(true)
+            if(!canPaulbekilled.current){
+              canPaulbekilled.current=true
               //this means that Paul is susceptible to dying 
               //if he is ever removed from the pwd then the game is over
             }
@@ -49,7 +44,7 @@ function App() {
             return true
         }
 
-        else if(!pwd.includes("🥚") && stateRef_canPauldie.current){
+        else if(!pwd.includes("🥚") && canPaulbekilled.current){
           setisPaulDed(true)
           return false
           //paul is dead
@@ -61,7 +56,7 @@ function App() {
             return true
         }
 
-        else if(!pwd.includes("🐔") && stateRef_canPauldie.current){
+        else if(!pwd.includes("🐔") && canPaulbekilled.current){
           setisPaulDed(true)
           return false
         }
@@ -92,20 +87,36 @@ function App() {
     {id:1,rule:"Rule 1",desc:"Your password must be at least 5 characters",execute:pwdCheck.CountCheck,curr:false,isNext:false,truth:false,WC:true}
   ])
 
+  const TimeId=useRef(null);
+
   function ParentFireFunction(pwd){
-    if(stateRef_fs.current===0){
+
+    if(fireStatus.current===0){
       //Convert one random character to a fire emoji
       addFire(pwd)
 
     }
 
-    else if(stateRef_fs.current===1){
+    else if(fireStatus.current===1){
+
+      if(TimeId.current){
+        clearTimeout(TimeId);
+      }
+
       if(!pwd.includes("🔥")){
-        setFireStatus(3);
+        fireStatus.current=3;
+        clearTimeout(TimeId.current);
+        TimeId.current=null;
         return true;
       }
 
       else{
+
+        TimeId.current=setTimeout(()=>{
+          fireStatus.current=0;
+          console.log("TImer in")
+        },2000);
+
         return false;
       }
     }
@@ -121,7 +132,7 @@ function App() {
     const RandomIndex=Math.floor(Math.random()*pwd.length);
     const newPassword=pwd.substring(0,RandomIndex)+"🔥"+pwd.substring(RandomIndex+1);
     setPassword(newPassword);
-    setFireStatus(1);
+    fireStatus.current=1;
   }
 
 
@@ -131,7 +142,7 @@ function App() {
     let newData=[];
     let fData=[];
     let tData=[];
-    let WrongCount=falseCount;
+    let WrongCount=falseCount.current;
 
     newData=data.map((datax,index)=>{
       const newObj={...datax}
@@ -216,11 +227,11 @@ function App() {
     const combined=[...fData,...tData]
     setDisplay(combined)
     setData(newData)
-    setFalseCount(WrongCount)
+    falseCount.current=WrongCount;
   }
 
 
-  useEffect(ChangeRule,[password,wordCount,nextCount,falseCount]);
+  useEffect(ChangeRule,[password,nextCount]);
   
   function ResizeArea(e){
     e.target.style.height="64px"
