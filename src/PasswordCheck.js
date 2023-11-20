@@ -2,7 +2,7 @@ import { getCaptcha } from "./Conditions/Captcha";
 import { LN } from "./Conditions/Translate";
 
 export const CountCheck=(num)=>{
-    if(num>=3){
+    if(num>=5){
         return true;
     }
 

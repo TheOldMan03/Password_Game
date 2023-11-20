@@ -22,6 +22,9 @@ function App() {
   const [paulStage,setPaulStage]=useState(0)
 
   const canPaulbekilled=useRef(false);
+  const TimeId=useRef(null);
+
+  const eggCount=useRef(0);
 
   const fireStatus=useRef(0);
   //0 means random character will be converted to a fire emoji
@@ -73,21 +76,19 @@ function App() {
     {id:15,rule:"Rule 15",desc:"Oh no, the password caught on fire 🔥....Quick douse it!",execute:ParentFireFunction,curr:false,isNext:false,truth:false,WC:true},
     {id:14,rule:"Rule 14",desc:"The password must contain the english Translation of the word in the box",execute:pwdCheck.LanguageBarrier,curr:false,isNext:false,truth:false,WC:true},
     // {id:13,rule:"Rule 13",desc:"The elements in your password must have atomic numbers that add up to 200",execute:pwdCheck.PeriodicSum,curr:false,isNext:false,truth:false,WC:true},
-    // {id:12,rule:"Rule 12",desc:"This is my chicken Paul 🥚, he hasn't hatched yet, Please put him in your password and keep him safe",execute:HelloPaul,curr:false,isNext:false,truth:false,WC:true},
+    {id:12,rule:"Rule 12",desc:"This is my chicken Paul 🥚, he hasn't hatched yet, Please put him in your password and keep him safe",execute:HelloPaul,curr:false,isNext:false,truth:false,WC:true},
     // {id:11,rule:"Rule 11",desc:"Your password must include a leap year",execute:pwdCheck.LeapYearCheck,curr:false,isNext:false,truth:false,WC:true},
     // {id:10,rule:"Rule 10",desc:"Your password must include a 2 letter symbol from the periodic table",execute:pwdCheck.Check2letterElem,curr:false,isNext:false,truth:false,WC:true},
     // {id:9,rule:"Rule 9",desc:"Your password must include this CAPTCHA",execute:pwdCheck.CaptchaCheck,curr:false,isNext:false,truth:false,WC:true},
-    // {id:8,rule:"Rule 8",desc:"Your password must include our sponsors!",execute:pwdCheck.HasSponsors,curr:false,isNext:false,truth:false,WC:true},
-    // {id:7,rule:"Rule 7",desc:"Your password must contain a roman numeral",execute:pwdCheck.HasRomanNumeral,curr:false,isNext:false,truth:false,WC:true},
-    // {id:6,rule:"Rule 6",desc:"Your password must contain a month of the year",execute:pwdCheck.MonthofYear,curr:false,isNext:false,truth:false,WC:true},
-    // {id:5,rule:"Rule 5",desc:"The digits in your password must add upto 25",execute:pwdCheck.AddUptoFive,curr:false,isNext:false,truth:false,WC:true},
-    // {id:4,rule:"Rule 4",desc:"Your password must include a special character",execute:pwdCheck.SpecialCheck,curr:false,isNext:false,truth:false,WC:true},
-    // {id:3,rule:"Rule 3",desc:"Your password must contain an uppercase letter",execute:pwdCheck.UpperCheck,curr:false,isNext:false,truth:false,WC:true},
+    {id:8,rule:"Rule 8",desc:"Your password must include our sponsors!",execute:pwdCheck.HasSponsors,curr:false,isNext:false,truth:false,WC:true},
+    {id:7,rule:"Rule 7",desc:"Your password must contain a roman numeral",execute:pwdCheck.HasRomanNumeral,curr:false,isNext:false,truth:false,WC:true},
+    {id:6,rule:"Rule 6",desc:"Your password must contain a month of the year",execute:pwdCheck.MonthofYear,curr:false,isNext:false,truth:false,WC:true},
+    {id:5,rule:"Rule 5",desc:"The digits in your password must add upto 25",execute:pwdCheck.AddUptoFive,curr:false,isNext:false,truth:false,WC:true},
+    {id:4,rule:"Rule 4",desc:"Your password must include a special character",execute:pwdCheck.SpecialCheck,curr:false,isNext:false,truth:false,WC:true},
+    {id:3,rule:"Rule 3",desc:"Your password must contain an uppercase letter",execute:pwdCheck.UpperCheck,curr:false,isNext:false,truth:false,WC:true},
     {id:2,rule:"Rule 2",desc:"Your password must contain a number",execute:pwdCheck.NumberCheck,curr:false,isNext:false,truth:false,WC:true},
     {id:1,rule:"Rule 1",desc:"Your password must be at least 5 characters",execute:pwdCheck.CountCheck,curr:false,isNext:false,truth:false,WC:true}
   ])
-
-  const TimeId=useRef(null);
 
   function ParentFireFunction(pwd){
 
@@ -121,7 +122,11 @@ function App() {
       }
     }
 
-    else{
+    else if(fireStatus.current===3 && pwd.includes("🔥")){
+      fireStatus.current=0;
+    }
+
+    else {
       return true;
     }
 
@@ -129,10 +134,23 @@ function App() {
   }
 
   const addFire=(pwd)=>{
+
+    if(eggCount.current>=pwd.length){
+      fireStatus.current=1;
+      return;
+    }
+
     const RandomIndex=Math.floor(Math.random()*pwd.length);
+
+    if(pwd[RandomIndex]==="🥚" && eggCount.current<4){
+      RandomIndex=Math.floor(Math.random()*pwd.length);
+    }
+
     const newPassword=pwd.substring(0,RandomIndex)+"🔥"+pwd.substring(RandomIndex+1);
     setPassword(newPassword);
+    setNextCount(nextCount+1);
     fireStatus.current=1;
+    eggCount.current+=1;
   }
 
 
