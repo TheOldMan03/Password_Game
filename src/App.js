@@ -261,8 +261,7 @@ function App() {
     falseCount.current=WrongCount;
   }
 
-
-  useEffect(ChangeRule,[password,nextCount,fireStatus.current]);
+  useEffect(ChangeRule,[password,nextCount,fireStatus]);
   
   function ResizeArea(e){
     e.target.style.height="64px"
