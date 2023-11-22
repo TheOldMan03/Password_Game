@@ -1,5 +1,5 @@
 import './App.css';
-import { useState,useEffect,useRef } from 'react';
+import { useState,useEffect,useRef} from 'react';
 import Condition from './Conditions/Condition'
 // import { CSSTransition,TransitionGroup } from 'react-transition-group';
 
@@ -28,7 +28,8 @@ function App() {
   const eggCount=useRef(0);
 
   const [fireStatus,setFireStatus]=useState(0)
-  const fs=useRef(fireStatus);
+  const fs=useRef();
+  fs.current=fireStatus
   //0 means random character will be converted to a fire emoji
   //1 means the function shud check whether a fire emoji exists
   //3 means always return true and never execute the other 2 functions.... as its job is done
@@ -106,7 +107,7 @@ function App() {
       fireTimeId.current=setTimeout(()=>{
         addFire(pwd)
         console.log("Fire Added")
-      },2000);
+      },2500);
     }
 
     else if(fs.current===1){
@@ -116,7 +117,7 @@ function App() {
       }
 
       if(!pwd.includes("🔥")){
-        setFireStatus(3);
+        setFireStatus(3)
         clearTimeout(TimeId.current);
         TimeId.current=null;
         return true;
@@ -125,16 +126,16 @@ function App() {
       else{
 
         TimeId.current=setTimeout(()=>{
-          setFireStatus(0)
+          setFireStatus(0);
           console.log("User ka time khatam")
-        },3500);
+        },3000);
 
         return false;
       }
     }
 
     else if(fs.current===3 && pwd.includes("🔥")){
-      setFireStatus(0);
+     setFireStatus(0);
     }
 
     else {
@@ -161,9 +162,9 @@ function App() {
 
     const newPassword=pwd.substring(0,RandomIndex)+"🔥"+pwd.substring(RandomIndex+1);
     setPassword(newPassword);
-    setNextCount(nextCount+1);
-    setFireStatus(1);
+    setFireStatus(1); 
     eggCount.current+=1;
+
   }
 
   const [display,setDisplay]=useState([])
