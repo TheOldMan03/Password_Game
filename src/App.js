@@ -21,11 +21,15 @@ function App() {
   const [isPaulDed,setisPaulDed]=useState(false)
   const [paulStage,setPaulStage]=useState(0)
 
+  const pS=useRef();
+  pS.current=paulStage
+
   const canPaulbekilled=useRef(false);
   const TimeId=useRef(null);
   const fireTimeId=useRef(null)
 
   const eggCount=useRef(0);
+  const eggIndex=useRef(-1)
 
   const [fireStatus,setFireStatus]=useState(0)
   const fs=useRef();
@@ -39,7 +43,7 @@ function App() {
   
   const HelloPaul=(pwd)=>{
 
-    if(paulStage===0){
+    if(pS.current===0){
         if(pwd.includes("🥚")){
             if(!canPaulbekilled.current){
               canPaulbekilled.current=true
@@ -77,18 +81,18 @@ function App() {
 
   const [data,setData]=useState([
     {id:15,rule:"Rule 15",desc:"Oh no, the password caught on fire 🔥....Quick douse it!",execute:ParentFireFunction,curr:false,isNext:false,truth:false,WC:true},
-    {id:14,rule:"Rule 14",desc:"The password must contain the english Translation of the word in the box",execute:pwdCheck.LanguageBarrier,curr:false,isNext:false,truth:false,WC:true},
-    {id:13,rule:"Rule 13",desc:"The elements in your password must have atomic numbers that add up to 200",execute:pwdCheck.PeriodicSum,curr:false,isNext:false,truth:false,WC:true},
+    // {id:14,rule:"Rule 14",desc:"The password must contain the english Translation of the word in the box",execute:pwdCheck.LanguageBarrier,curr:false,isNext:false,truth:false,WC:true},
+    // {id:13,rule:"Rule 13",desc:"The elements in your password must have atomic numbers that add up to 200",execute:pwdCheck.PeriodicSum,curr:false,isNext:false,truth:false,WC:true},
     {id:12,rule:"Rule 12",desc:"This is my chicken Paul 🥚, he hasn't hatched yet, Please put him in your password and keep him safe",execute:HelloPaul,curr:false,isNext:false,truth:false,WC:true},
-    {id:11,rule:"Rule 11",desc:"Your password must include a leap year",execute:pwdCheck.LeapYearCheck,curr:false,isNext:false,truth:false,WC:true},
-    {id:10,rule:"Rule 10",desc:"Your password must include a 2 letter symbol from the periodic table",execute:pwdCheck.Check2letterElem,curr:false,isNext:false,truth:false,WC:true},
-    {id:9,rule:"Rule 9",desc:"Your password must include this CAPTCHA",execute:pwdCheck.CaptchaCheck,curr:false,isNext:false,truth:false,WC:true},
-    {id:8,rule:"Rule 8",desc:"Your password must include our sponsors!",execute:pwdCheck.HasSponsors,curr:false,isNext:false,truth:false,WC:true},
-    {id:7,rule:"Rule 7",desc:"Your password must contain a roman numeral",execute:pwdCheck.HasRomanNumeral,curr:false,isNext:false,truth:false,WC:true},
-    {id:6,rule:"Rule 6",desc:"Your password must contain a month of the year",execute:pwdCheck.MonthofYear,curr:false,isNext:false,truth:false,WC:true},
-    {id:5,rule:"Rule 5",desc:"The digits in your password must add upto 25",execute:pwdCheck.AddUptoFive,curr:false,isNext:false,truth:false,WC:true},
-    {id:4,rule:"Rule 4",desc:"Your password must include a special character",execute:pwdCheck.SpecialCheck,curr:false,isNext:false,truth:false,WC:true},
-    {id:3,rule:"Rule 3",desc:"Your password must contain an uppercase letter",execute:pwdCheck.UpperCheck,curr:false,isNext:false,truth:false,WC:true},
+    // {id:11,rule:"Rule 11",desc:"Your password must include a leap year",execute:pwdCheck.LeapYearCheck,curr:false,isNext:false,truth:false,WC:true},
+    // {id:10,rule:"Rule 10",desc:"Your password must include a 2 letter symbol from the periodic table",execute:pwdCheck.Check2letterElem,curr:false,isNext:false,truth:false,WC:true},
+    // {id:9,rule:"Rule 9",desc:"Your password must include this CAPTCHA",execute:pwdCheck.CaptchaCheck,curr:false,isNext:false,truth:false,WC:true},
+    // {id:8,rule:"Rule 8",desc:"Your password must include our sponsors!",execute:pwdCheck.HasSponsors,curr:false,isNext:false,truth:false,WC:true},
+    // {id:7,rule:"Rule 7",desc:"Your password must contain a roman numeral",execute:pwdCheck.HasRomanNumeral,curr:false,isNext:false,truth:false,WC:true},
+    // {id:6,rule:"Rule 6",desc:"Your password must contain a month of the year",execute:pwdCheck.MonthofYear,curr:false,isNext:false,truth:false,WC:true},
+    // {id:5,rule:"Rule 5",desc:"The digits in your password must add upto 25",execute:pwdCheck.AddUptoFive,curr:false,isNext:false,truth:false,WC:true},
+    // {id:4,rule:"Rule 4",desc:"Your password must include a special character",execute:pwdCheck.SpecialCheck,curr:false,isNext:false,truth:false,WC:true},
+    // {id:3,rule:"Rule 3",desc:"Your password must contain an uppercase letter",execute:pwdCheck.UpperCheck,curr:false,isNext:false,truth:false,WC:true},
     {id:2,rule:"Rule 2",desc:"Your password must contain a number",execute:pwdCheck.NumberCheck,curr:false,isNext:false,truth:false,WC:true},
     {id:1,rule:"Rule 1",desc:"Your password must be at least 5 characters",execute:pwdCheck.CountCheck,curr:false,isNext:false,truth:false,WC:true}
   ])
@@ -106,7 +110,6 @@ function App() {
 
       fireTimeId.current=setTimeout(()=>{
         addFire(pwd)
-        console.log("Fire Added")
       },1500);
     }
 
@@ -119,6 +122,7 @@ function App() {
       if(!pwd.includes("🔥")){
         setFireStatus(3)
         clearTimeout(TimeId.current);
+        eggCount.current=0;
         TimeId.current=null;
         return true;
       }
@@ -127,7 +131,6 @@ function App() {
 
         TimeId.current=setTimeout(()=>{
           setFireStatus(0);
-          console.log("User ka time khatam")
         },2000);
 
         return false;
@@ -139,6 +142,13 @@ function App() {
     }
 
     else {
+
+      if(pS.current===0){
+        let newPwd=pwd.replace("🥚","🐔");
+        setPassword(newPwd);
+        setPaulStage(1)
+      }
+
       return true;
     }
 
@@ -152,10 +162,14 @@ function App() {
       return;
     }
 
+    if(eggIndex.current===-1 && pwd.includes("🥚")){
+        eggIndex.current=pwd.indexOf("🥚");
+    }
+
     let RandomIndex=Math.floor(Math.random()*pwd.length);
 
-    if((pwd[RandomIndex]==="🥚" && eggCount.current<7) || pwd[RandomIndex]==="🔥"){
-      while(pwd[RandomIndex]==="🥚" || pwd[RandomIndex]==="🔥"){
+    if(((RandomIndex===eggIndex.current || RandomIndex===eggIndex.current+1) && eggCount.current<6)){
+      while(RandomIndex===eggIndex.current || RandomIndex===eggIndex.current+1){
         RandomIndex=Math.floor(Math.random()*pwd.length);
       }
     }
@@ -261,7 +275,7 @@ function App() {
     falseCount.current=WrongCount;
   }
 
-  useEffect(ChangeRule,[password,nextCount,fireStatus]);
+  useEffect(ChangeRule,[password,nextCount,fireStatus,paulStage]);
   
   function ResizeArea(e){
     e.target.style.height="64px"
