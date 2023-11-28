@@ -38,6 +38,10 @@ function App() {
   //1 means the function shud check whether a fire emoji exists
   //3 means always return true and never execute the other 2 functions.... as its job is done
 
+  const [wormStatus,setWormStatus]=useState(0);
+  const wormS=useRef();
+  wormS.current=wormStatus;
+
   const stateRef_paulded=useRef();
   stateRef_paulded.current=isPaulDed
   
@@ -80,6 +84,7 @@ function App() {
  
 
   const [data,setData]=useState([
+    {id:16,rule:"Rule 16",desc:"Ah looks like Paul has hatched...Could you feed him 🐛?",execute:WormCheck,curr:false,isNext:false,truth:false,WC:true},
     {id:15,rule:"Rule 15",desc:"Oh no, the password caught on fire 🔥....Quick douse it!",execute:ParentFireFunction,curr:false,isNext:false,truth:false,WC:true},
     // {id:14,rule:"Rule 14",desc:"The password must contain the english Translation of the word in the box",execute:pwdCheck.LanguageBarrier,curr:false,isNext:false,truth:false,WC:true},
     // {id:13,rule:"Rule 13",desc:"The elements in your password must have atomic numbers that add up to 200",execute:pwdCheck.PeriodicSum,curr:false,isNext:false,truth:false,WC:true},
@@ -97,9 +102,6 @@ function App() {
     {id:1,rule:"Rule 1",desc:"Your password must be at least 5 characters",execute:pwdCheck.CountCheck,curr:false,isNext:false,truth:false,WC:true}
   ])
 
-  
-
-
   function ParentFireFunction(pwd){
 
     if(fs.current===0){
@@ -116,7 +118,7 @@ function App() {
     else if(fs.current===1){
 
       if(TimeId.current){
-        clearTimeout(TimeId);
+        clearTimeout(TimeId.current);
       }
 
       if(!pwd.includes("🔥")){
@@ -178,6 +180,62 @@ function App() {
     setPassword(newPassword);
     setFireStatus(1); 
     eggCount.current+=1;
+
+  }
+
+  const wormFeed=useRef(null);
+  const wormHungry=useRef(null);
+
+  function WormCheck(pwd){
+
+    if(wormS.current===0){ //0 means that it is hungry
+      
+      if(pwd.includes("🐛")){
+        // wormS.current=1;
+        setWormStatus(1);
+        clearTimeout(wormHungry.current);
+        wormHungry.current=null;
+      }
+
+      else{
+
+        if(wormHungry.current){
+          return false;
+        }
+
+        wormHungry.current=setTimeout(()=>{
+          setisPaulDed(true);
+        },20000)
+      }
+    }
+
+    else{ //paul is being fed
+
+      if(wormFeed.current){
+        clearTimeout(wormFeed.current);
+        wormFeed.current=null;
+      }
+      
+      if(!pwd.includes("🐛")){
+        // wormS.current=0;
+        setWormStatus(0);
+      }
+
+      else{
+          wormFeed.current=setTimeout(()=>{
+            const wormIndex=pwd.indexOf("🐛")
+            const newPwd=pwd.substring(0,wormIndex)+pwd.substring(wormIndex+2);
+            setPassword(newPwd);  
+        },10000)
+
+      }
+    }
+
+    if(wormS.current===1){
+      return true;
+    }
+
+    return false;
 
   }
 
@@ -275,7 +333,7 @@ function App() {
     falseCount.current=WrongCount;
   }
 
-  useEffect(ChangeRule,[password,nextCount,fireStatus,paulStage]);
+  useEffect(ChangeRule,[password,nextCount,fireStatus,paulStage,wormStatus]);
   
   function ResizeArea(e){
     e.target.style.height="64px"
@@ -368,4 +426,3 @@ function App() {
 }
 
 export default App;
-
