@@ -16,7 +16,7 @@ function App() {
   const [nextCount,setNextCount]=useState(0)
   
   const [displayFirstRule,setDFR]=useState(false);
-  const falseCount=useRef(0);
+  const [falseCount,setFalseCount]=useState(0);
 
   const [isPaulDed,setisPaulDed]=useState(false)
   const [paulStage,setPaulStage]=useState(0)
@@ -178,6 +178,7 @@ function App() {
 
     const newPassword=pwd.substring(0,RandomIndex)+"🔥"+pwd.substring(RandomIndex+1);
     setPassword(newPassword);
+    setWordCount(newPassword.length);
     setFireStatus(1); 
     eggCount.current+=1;
 
@@ -225,7 +226,8 @@ function App() {
           wormFeed.current=setTimeout(()=>{
             const wormIndex=pwd.indexOf("🐛")
             const newPwd=pwd.substring(0,wormIndex)+pwd.substring(wormIndex+2);
-            setPassword(newPwd);  
+            setPassword(newPwd);
+            setWordCount(newPwd.length);  
         },10000)
 
       }
@@ -245,7 +247,7 @@ function App() {
     let newData=[];
     let fData=[];
     let tData=[];
-    let WrongCount=falseCount.current;
+    let WrongCount=falseCount;
 
     newData=data.map((datax,index)=>{
       const newObj={...datax}
@@ -330,10 +332,10 @@ function App() {
     const combined=[...fData,...tData]
     setDisplay(combined)
     setData(newData)
-    falseCount.current=WrongCount;
+    setFalseCount(WrongCount);
   }
 
-  useEffect(ChangeRule,[password,nextCount,fireStatus,paulStage,wormStatus]);
+  useEffect(ChangeRule,[password,nextCount,fireStatus,paulStage,wormStatus,falseCount]);
   
   function ResizeArea(e){
     e.target.style.height="64px"
