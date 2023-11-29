@@ -42,6 +42,8 @@ function App() {
   const wormS=useRef();
   wormS.current=wormStatus;
 
+  const paulBelly=useRef(0);
+
   const stateRef_paulded=useRef();
   stateRef_paulded.current=isPaulDed
   
@@ -220,6 +222,7 @@ function App() {
       if(!pwd.includes("🐛")){
         // wormS.current=0;
         setWormStatus(0);
+        paulBelly.current=0;
       }
 
       else{
@@ -227,8 +230,13 @@ function App() {
             const wormIndex=pwd.indexOf("🐛")
             const newPwd=pwd.substring(0,wormIndex)+pwd.substring(wormIndex+2);
             setPassword(newPwd);
-            setWordCount(newPwd.length);  
+            setWordCount(newPwd.length);
+            paulBelly.current+=1;  
         },10000)
+
+        if(paulBelly.current>=5){
+          setisPaulDed(true);
+        }
 
       }
     }
