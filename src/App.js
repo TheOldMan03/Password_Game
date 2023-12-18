@@ -250,87 +250,64 @@ function App() {
   }
 
   const [display,setDisplay]=useState([])
-  
+
+
   const ChangeRule=()=>{
     let newData=[];
     let fData=[];
     let tData=[];
     let WrongCount=falseCount;
 
+
+    const UpdateRule=(Truth,newObj)=>{
+      if(!newObj.curr){
+        newObj.curr=true;
+      }
+  
+      if(newObj.execute(Truth?wordCount:password)){
+        newObj.truth=true;
+  
+        if(WrongCount>0 && !newObj.WC){
+          WrongCount--
+          newObj.WC=true;
+        }
+  
+        if(!newObj.isNext && WrongCount===0){
+          newObj.isNext=true;
+          setNextCount(nextCount+1)
+        }
+  
+        tData.push(newObj)
+      }
+  
+      else{
+        if(newObj.WC){
+          WrongCount++;
+          newObj.WC=false
+        }
+  
+        newObj.truth=false;
+        fData.push(newObj)
+      }
+    }
+  
     newData=data.map((datax,index)=>{
       const newObj={...datax}
-      if(datax.id===1){//only for the last element
-        if(wordCount>0 || displayFirstRule){
-          
-          if(!displayFirstRule){
-            setDFR(true)
-          }
-
-          if(!newObj.curr){
-            newObj.curr=true;
-          }
-
-          if(newObj.execute(wordCount)){
-            newObj.truth=true;
-
-            if(WrongCount>0 && !newObj.WC){
-              WrongCount--
-              newObj.WC=true;
-            }
-
-            if(!newObj.isNext && WrongCount===0){
-              newObj.isNext=true;
-              setNextCount(nextCount+1)
-            }
-
-            tData.push(newObj)
-          }
-
-          else{
-            if(newObj.WC){
-              WrongCount++;
-              newObj.WC=false
-            }
-
-            newObj.truth=false;
-            fData.push(newObj)
-          }
+      if(datax.id===1 && (wordCount > 0 || displayFirstRule)){//only for the last element
+      
+        if(!displayFirstRule){
+          setDFR(true)
         }
+
+        UpdateRule(true,newObj);
+        
       }
+      
 
       else{
-        if(data[index+1].isNext){
 
-          if(!newObj.curr){
-            newObj.curr=true;
-          }
-
-          if(newObj.execute(password)){
-            newObj.truth=true;
-            
-            if(WrongCount>0 && !newObj.WC){
-              WrongCount--
-              newObj.WC=true;
-            }
-
-            if(!newObj.isNext && WrongCount===0){
-              newObj.isNext=true;
-              setNextCount(nextCount+1);
-            }
-
-            tData.push(newObj)
-          }
-
-          else{
-            
-            if(newObj.WC){
-              WrongCount++;
-              newObj.WC=false;
-            }
-
-            newObj.truth=false;
-            fData.push(newObj)
-          }
+        if(datax.id!==1 && data[index+1].isNext){
+          UpdateRule(false,newObj);
         }
       }
 
