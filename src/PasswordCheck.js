@@ -1,5 +1,5 @@
-import { getCaptcha } from "./Conditions/Captcha";
-import { LN } from "./Conditions/Translate";
+import { getCaptcha } from "./Conditions/Captcha/Captcha.js";
+import { LN } from "./Conditions/Translate/Translate.js";
 
 export const CountCheck=(num)=>{
     if(num>=2){

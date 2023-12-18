@@ -1,5 +1,5 @@
 import { useState,useEffect } from 'react'
-import './Condition.css'
+import '../Condition/Condition.css'
 import "./Captcha.css"
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'

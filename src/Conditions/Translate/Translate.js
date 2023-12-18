@@ -1,9 +1,7 @@
 import React,{useState,useEffect} from 'react'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faRefresh} from '@fortawesome/free-solid-svg-icons'
-import './Condition.css'
+import '../Condition/Condition.css'
 import './Translate.css'
-import './Captcha.css'
+import '../Captcha/Captcha.css'
 
 
 const RandomizerWord=()=>{

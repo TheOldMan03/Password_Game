@@ -1,13 +1,14 @@
 import './App.css';
 import { useState,useEffect,useRef} from 'react';
-import Condition from './Conditions/Condition'
+import Condition from './Conditions/Condition/Condition.js'
 // import { CSSTransition,TransitionGroup } from 'react-transition-group';
 
 import * as pwdCheck from './PasswordCheck'
-import Sponsor from './Conditions/Sponser';
-import Captcha from './Conditions/Captcha';
+import {HelloPaul}  from './SpecialConditions/HelloPaul.js';
+import Sponsor from './Conditions/Sponser/Sponser.js';
+import Captcha from './Conditions/Captcha/Captcha.js';
 import Gameover from './Gameover';
-import Translate from './Conditions/Translate';
+import Translate from './Conditions/Translate/Translate.js';
 
 function App() {
 
@@ -18,237 +19,28 @@ function App() {
   const [displayFirstRule,setDFR]=useState(false);
   const [falseCount,setFalseCount]=useState(0);
 
-  const [isPaulDed,setisPaulDed]=useState(false)
-  const [paulStage,setPaulStage]=useState(0)
 
-  const pS=useRef();
-  pS.current=paulStage
-
-  const canPaulbekilled=useRef(false);
-  const TimeId=useRef(null);
-  const fireTimeId=useRef(null)
-
-  const eggCount=useRef(0);
-  const eggIndex=useRef(-1)
-
-  const [fireStatus,setFireStatus]=useState(0)
-  const fs=useRef();
-  fs.current=fireStatus
-  //0 means random character will be converted to a fire emoji
-  //1 means the function shud check whether a fire emoji exists
-  //3 means always return true and never execute the other 2 functions.... as its job is done
-
-  const [wormStatus,setWormStatus]=useState(0);
-  const wormS=useRef();
-  wormS.current=wormStatus;
-
-  const paulBelly=useRef(0);
-
-  const stateRef_paulded=useRef();
-  stateRef_paulded.current=isPaulDed
-  
-  const HelloPaul=(pwd)=>{
-
-    if(pS.current===0){
-        if(pwd.includes("🥚")){
-            if(!canPaulbekilled.current){
-              canPaulbekilled.current=true
-              //this means that Paul is susceptible to dying 
-              //if he is ever removed from the pwd then the game is over
-            }
-
-            return true
-        }
-
-        else if(!pwd.includes("🥚") && canPaulbekilled.current){
-          setisPaulDed(true)
-          return false
-          //paul is dead
-        }
-    }
-
-    else{
-        if(pwd.includes("🐔")){
-            return true
-        }
-
-        else if(!pwd.includes("🐔") && canPaulbekilled.current){
-          setisPaulDed(true)
-          return false
-        }
-    }
-
-
-    return false
-
-  }
-
- 
 
   const [data,setData]=useState([
-    {id:16,rule:"Rule 16",desc:"Ah looks like Paul has hatched...Could you feed him 🐛?",execute:WormCheck,curr:false,isNext:false,truth:false,WC:true},
-    {id:15,rule:"Rule 15",desc:"Oh no, the password caught on fire 🔥....Quick douse it!",execute:ParentFireFunction,curr:false,isNext:false,truth:false,WC:true},
+    // {id:16,rule:"Rule 16",desc:"Ah looks like Paul has hatched...Could you feed him 🐛?",execute:WormCheck,curr:false,isNext:false,truth:false,WC:true},
+    // {id:15,rule:"Rule 15",desc:"Oh no, the password caught on fire 🔥....Quick douse it!",execute:ParentFireFunction,curr:false,isNext:false,truth:false,WC:true},
     {id:14,rule:"Rule 14",desc:"The password must contain the english Translation of the word in the box",execute:pwdCheck.LanguageBarrier,curr:false,isNext:false,truth:false,WC:true},
     {id:13,rule:"Rule 13",desc:"The elements in your password must have atomic numbers that add up to 200",execute:pwdCheck.PeriodicSum,curr:false,isNext:false,truth:false,WC:true},
     {id:12,rule:"Rule 12",desc:"This is my chicken Paul 🥚, he hasn't hatched yet, Please put him in your password and keep him safe",execute:HelloPaul,curr:false,isNext:false,truth:false,WC:true},
-    {id:11,rule:"Rule 11",desc:"Your password must include a leap year",execute:pwdCheck.LeapYearCheck,curr:false,isNext:false,truth:false,WC:true},
-    {id:10,rule:"Rule 10",desc:"Your password must include a 2 letter symbol from the periodic table",execute:pwdCheck.Check2letterElem,curr:false,isNext:false,truth:false,WC:true},
-    {id:9,rule:"Rule 9",desc:"Your password must include this CAPTCHA",execute:pwdCheck.CaptchaCheck,curr:false,isNext:false,truth:false,WC:true},
-    {id:8,rule:"Rule 8",desc:"Your password must include our sponsors!",execute:pwdCheck.HasSponsors,curr:false,isNext:false,truth:false,WC:true},
-    {id:7,rule:"Rule 7",desc:"Your password must contain a roman numeral",execute:pwdCheck.HasRomanNumeral,curr:false,isNext:false,truth:false,WC:true},
-    {id:6,rule:"Rule 6",desc:"Your password must contain a month of the year",execute:pwdCheck.MonthofYear,curr:false,isNext:false,truth:false,WC:true},
-    {id:5,rule:"Rule 5",desc:"The digits in your password must add upto 25",execute:pwdCheck.AddUptoFive,curr:false,isNext:false,truth:false,WC:true},
-    {id:4,rule:"Rule 4",desc:"Your password must include a special character",execute:pwdCheck.SpecialCheck,curr:false,isNext:false,truth:false,WC:true},
-    {id:3,rule:"Rule 3",desc:"Your password must contain an uppercase letter",execute:pwdCheck.UpperCheck,curr:false,isNext:false,truth:false,WC:true},
-    {id:2,rule:"Rule 2",desc:"Your password must contain a number",execute:pwdCheck.NumberCheck,curr:false,isNext:false,truth:false,WC:true},
+    // {id:11,rule:"Rule 11",desc:"Your password must include a leap year",execute:pwdCheck.LeapYearCheck,curr:false,isNext:false,truth:false,WC:true},
+    // {id:10,rule:"Rule 10",desc:"Your password must include a 2 letter symbol from the periodic table",execute:pwdCheck.Check2letterElem,curr:false,isNext:false,truth:false,WC:true},
+    // {id:9,rule:"Rule 9",desc:"Your password must include this CAPTCHA",execute:pwdCheck.CaptchaCheck,curr:false,isNext:false,truth:false,WC:true},
+    // {id:8,rule:"Rule 8",desc:"Your password must include our sponsors!",execute:pwdCheck.HasSponsors,curr:false,isNext:false,truth:false,WC:true},
+    // {id:7,rule:"Rule 7",desc:"Your password must contain a roman numeral",execute:pwdCheck.HasRomanNumeral,curr:false,isNext:false,truth:false,WC:true},
+    // {id:6,rule:"Rule 6",desc:"Your password must contain a month of the year",execute:pwdCheck.MonthofYear,curr:false,isNext:false,truth:false,WC:true},
+    // {id:5,rule:"Rule 5",desc:"The digits in your password must add upto 25",execute:pwdCheck.AddUptoFive,curr:false,isNext:false,truth:false,WC:true},
+    // {id:4,rule:"Rule 4",desc:"Your password must include a special character",execute:pwdCheck.SpecialCheck,curr:false,isNext:false,truth:false,WC:true},
+    // {id:3,rule:"Rule 3",desc:"Your password must contain an uppercase letter",execute:pwdCheck.UpperCheck,curr:false,isNext:false,truth:false,WC:true},
+    // {id:2,rule:"Rule 2",desc:"Your password must contain a number",execute:pwdCheck.NumberCheck,curr:false,isNext:false,truth:false,WC:true},
     {id:1,rule:"Rule 1",desc:"Your password must be at least 5 characters",execute:pwdCheck.CountCheck,curr:false,isNext:false,truth:false,WC:true}
   ])
 
-  function ParentFireFunction(pwd){
-
-    if(fs.current===0){
-
-      if(fireTimeId.current){
-        clearTimeout(fireTimeId.current);
-      }
-
-      fireTimeId.current=setTimeout(()=>{
-        addFire(pwd)
-      },1500);
-    }
-
-    else if(fs.current===1){
-
-      if(TimeId.current){
-        clearTimeout(TimeId.current);
-      }
-
-      if(!pwd.includes("🔥")){
-        setFireStatus(3)
-        clearTimeout(TimeId.current);
-        eggCount.current=0;
-        TimeId.current=null;
-        return true;
-      }
-
-      else{
-
-        TimeId.current=setTimeout(()=>{
-          setFireStatus(0);
-        },2000);
-
-        return false;
-      }
-    }
-
-    else if(fs.current===3 && pwd.includes("🔥")){
-     setFireStatus(0);
-    }
-
-    else {
-
-      if(pS.current===0){
-        let newPwd=pwd.replace("🥚","🐔");
-        setPassword(newPwd);
-        setPaulStage(1)
-      }
-
-      return true;
-    }
-
-    return false;
-  }
-
-  const addFire=(pwd)=>{
-
-    if(eggCount.current>=pwd.length){
-      setFireStatus(1);
-      return;
-    }
-
-    if(eggIndex.current===-1 && pwd.includes("🥚")){
-        eggIndex.current=pwd.indexOf("🥚");
-    }
-
-    let RandomIndex=Math.floor(Math.random()*pwd.length);
-
-    if(((RandomIndex===eggIndex.current || RandomIndex===eggIndex.current+1) && eggCount.current<6)){
-      while(RandomIndex===eggIndex.current || RandomIndex===eggIndex.current+1){
-        RandomIndex=Math.floor(Math.random()*pwd.length);
-      }
-    }
-
-    const newPassword=pwd.substring(0,RandomIndex)+"🔥"+pwd.substring(RandomIndex+1);
-    setPassword(newPassword);
-    setWordCount(newPassword.length);
-    setFireStatus(1); 
-    eggCount.current+=1;
-
-  }
-
-  const wormFeed=useRef(null);
-  const wormHungry=useRef(null);
-
-  function WormCheck(pwd){
-
-    if(wormS.current===0){ //0 means that it is hungry
-      
-      if(pwd.includes("🐛")){
-        // wormS.current=1;
-        setWormStatus(1);
-        clearTimeout(wormHungry.current);
-        wormHungry.current=null;
-      }
-
-      else{
-
-        if(wormHungry.current){
-          return false;
-        }
-
-        wormHungry.current=setTimeout(()=>{
-          setisPaulDed(true);
-        },20000)
-      }
-    }
-
-    else{ //paul is being fed
-
-      if(wormFeed.current){
-        clearTimeout(wormFeed.current);
-        wormFeed.current=null;
-      }
-      
-      if(!pwd.includes("🐛")){
-        // wormS.current=0;
-        setWormStatus(0);
-        paulBelly.current=0;
-      }
-
-      else{
-          wormFeed.current=setTimeout(()=>{
-            const wormIndex=pwd.indexOf("🐛")
-            const newPwd=pwd.substring(0,wormIndex)+pwd.substring(wormIndex+2);
-            setPassword(newPwd);
-            setWordCount(newPwd.length);
-            paulBelly.current+=1;  
-        },10000)
-
-        if(paulBelly.current>=5){
-          setisPaulDed(true);
-        }
-
-      }
-    }
-
-    if(wormS.current===1){
-      return true;
-    }
-
-    return false;
-
-  }
-
+ 
   const [display,setDisplay]=useState([])
 
 
@@ -320,7 +112,7 @@ function App() {
     setFalseCount(WrongCount);
   }
 
-  useEffect(ChangeRule,[password,nextCount,fireStatus,paulStage,wormStatus,falseCount]);
+  useEffect(ChangeRule,[password,nextCount,falseCount]);
   
   function ResizeArea(e){
     e.target.style.height="64px"
@@ -403,7 +195,7 @@ function App() {
           })
         } 
 
-      {isPaulDed?<Gameover/>:null}
+      {/* {isPaulDed?<Gameover/>:null} */}
 
       </div>
 

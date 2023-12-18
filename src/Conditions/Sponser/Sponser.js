@@ -1,8 +1,8 @@
 import React from 'react'
-import pepsi from "./images/pepsi_icon.png"
-import starbucks from "./images/starbucks.png"
-import shell from "./images/shell.png"
-import './Condition.css'
+import pepsi from "../images/pepsi_icon.png"
+import starbucks from "../images/starbucks.png"
+import shell from "../images/shell.png"
+import '../Condition/Condition.css'
 import "./Sponser.css"
 
 
