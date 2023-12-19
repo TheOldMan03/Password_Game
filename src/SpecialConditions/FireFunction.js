@@ -1,17 +1,17 @@
 function ParentFireFunction(pwd){
 
-    if(fs.current===0){
+    if(fs===0){
 
-      if(fireTimeId.current){
-        clearTimeout(fireTimeId.current);
+      if(fireTimeId){
+        clearTimeout(fireTimeId);
       }
 
-      fireTimeId.current=setTimeout(()=>{
+      fireTimeId=setTimeout(()=>{
         addFire(pwd)
       },1500);
     }
 
-    else if(fs.current===1){
+    else if(fs===1){
 
       if(TimeId.current){
         clearTimeout(TimeId.current);
@@ -20,14 +20,14 @@ function ParentFireFunction(pwd){
       if(!pwd.includes("🔥")){
         setFireStatus(3)
         clearTimeout(TimeId.current);
-        eggCount.current=0;
-        TimeId.current=null;
+        eggCount=0;
+        TimeId=null;
         return true;
       }
 
       else{
 
-        TimeId.current=setTimeout(()=>{
+        TimeId=setTimeout(()=>{
           setFireStatus(0);
         },2000);
 

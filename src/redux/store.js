@@ -1,13 +1,16 @@
 import {configureStore} from "@reduxjs/toolkit"
-import paulDedReducer from './PaulStates/isPaulDed/isPaulDed'
-import paulStageReducer from "./PaulStates/PaulStage/paulStage"
-import cpbkReducer from "./PaulStates/canPaulBekilled/cpbk"
-
+import paulDedReducer from './PaulStates/isPaulDed'
+import paulStageReducer from "./PaulStates/paulStage"
+import cpbkReducer from "./PaulStates/cpbk"
+import passwordReducer from "./MainStates/passwordstate"
+import wordCountReducer from "./MainStates/wordcountstate"
 
 export default configureStore({
     reducer:{
         paulDed:paulDedReducer,
         paulStage:paulStageReducer,
-        cpbk:cpbkReducer
+        cpbk:cpbkReducer,
+        pwd:passwordReducer,
+        wc:wordCountReducer
     }
 })

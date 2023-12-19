@@ -1,7 +1,8 @@
 import './App.css';
-import { useState,useEffect,useRef} from 'react';
+import { useState,useEffect} from 'react';
 import Condition from './Conditions/Condition/Condition.js'
 // import { CSSTransition,TransitionGroup } from 'react-transition-group';
+import store from './redux/store';
 
 import * as pwdCheck from './PasswordCheck'
 import {HelloPaul}  from './SpecialConditions/HelloPaul.js';
@@ -9,16 +10,20 @@ import Sponsor from './Conditions/Sponser/Sponser.js';
 import Captcha from './Conditions/Captcha/Captcha.js';
 import Gameover from './Gameover';
 import Translate from './Conditions/Translate/Translate.js';
+import { setPwd } from './redux/MainStates/passwordstate.js';
+import { setWC } from './redux/MainStates/wordcountstate.js';
+import { useDispatch, useSelector } from 'react-redux';
 
 function App() {
 
-  const [password,setPassword]=useState('')
-  const [wordCount,setWordCount]=useState(0)
+  const password=useSelector(state=>state.pwd.value)
+  const wordCount=useSelector(state=>state.wc.value)
+  const dispatch=useDispatch();
+
   const [nextCount,setNextCount]=useState(0)
   
   const [displayFirstRule,setDFR]=useState(false);
   const [falseCount,setFalseCount]=useState(0);
-
 
 
   const [data,setData]=useState([
@@ -120,13 +125,14 @@ function App() {
   }
 
   function PasswordLength(e){
-    setPassword(e.target.value);
+    dispatch(setPwd(e.target.value))
+    console.log(e.target.value)
     WordSize(e)
   }
   
   
   function WordSize(e){
-    setWordCount(e.target.value.length)
+    dispatch(setWC(e.target.value.length))
   }
 
   return (

@@ -1,5 +1,5 @@
-import { killable } from "../redux/PaulStates/canPaulBekilled/cpbk";
-import { paulDeath } from "../redux/PaulStates/isPaulDed/isPaulDed";
+import { killable } from "../redux/PaulStates/cpbk";
+import { paulDeath } from "../redux/PaulStates/isPaulDed";
 import store from "../redux/store";
 
 export const HelloPaul=(pwd)=>{
