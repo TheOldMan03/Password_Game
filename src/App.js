@@ -2,8 +2,6 @@ import './App.css';
 import { useState,useEffect} from 'react';
 import Condition from './Conditions/Condition/Condition.js'
 // import { CSSTransition,TransitionGroup } from 'react-transition-group';
-import store from './redux/store';
-
 import * as pwdCheck from './PasswordCheck'
 import {HelloPaul}  from './SpecialConditions/HelloPaul.js';
 import Sponsor from './Conditions/Sponser/Sponser.js';

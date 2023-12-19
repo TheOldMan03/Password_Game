@@ -1,3 +1,10 @@
+import store from '../store';
+
+
+// const fs=store.getState().fireStatus.value;
+const pS=store.getState().paulStage.value;
+const eggCount=store.getState().eggC.value;
+
 function ParentFireFunction(pwd){
 
     if(fs===0){
@@ -41,7 +48,7 @@ function ParentFireFunction(pwd){
 
     else {
 
-      if(pS.current===0){
+      if(pS===0){
         let newPwd=pwd.replace("🥚","🐔");
         setPassword(newPwd);
         setPaulStage(1)
@@ -60,8 +67,8 @@ function ParentFireFunction(pwd){
       return;
     }
 
-    if(eggIndex.current===-1 && pwd.includes("🥚")){
-        eggIndex.current=pwd.indexOf("🥚");
+    if(eggIndex===-1 && pwd.includes("🥚")){
+        eggIndex=pwd.indexOf("🥚");
     }
 
     let RandomIndex=Math.floor(Math.random()*pwd.length);
@@ -76,6 +83,6 @@ function ParentFireFunction(pwd){
     setPassword(newPassword);
     setWordCount(newPassword.length);
     setFireStatus(1); 
-    eggCount.current+=1;
+    eggCount+=1;
 
   }

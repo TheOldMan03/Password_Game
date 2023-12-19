@@ -4,6 +4,7 @@ import paulStageReducer from "./PaulStates/paulStage"
 import cpbkReducer from "./PaulStates/cpbk"
 import passwordReducer from "./MainStates/passwordstate"
 import wordCountReducer from "./MainStates/wordcountstate"
+import eggCReducer from "./FireStates/eggcount"
 
 export default configureStore({
     reducer:{
@@ -11,6 +12,7 @@ export default configureStore({
         paulStage:paulStageReducer,
         cpbk:cpbkReducer,
         pwd:passwordReducer,
-        wc:wordCountReducer
+        wc:wordCountReducer,
+        eggC:eggCReducer,
     }
 })
