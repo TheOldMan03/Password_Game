@@ -28,8 +28,6 @@ export function ParentFireFunction(pwd){
       let fid=setTimeout(()=>{addFire(pwd)},1500);
       dispatch(setFTID(fid));
 
-      console.log(fireTimeId);
-
     }
 
     else if(fs===1){

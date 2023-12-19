@@ -1,59 +1,81 @@
-function WormCheck(pwd){
+import { resetWHTID,setWHTID } from '../redux/WormStates/wormhungry';
+import { ws_mode1,ws_mode0 } from '../redux/WormStates/wormstatus';
+import { setWFTID,resetWFTID } from '../redux/WormStates/wormfeed';
+import store from '../redux/store';
+import { incPB, resetPB } from '../redux/WormStates/paulbelly';
+import { setWC } from '../redux/MainStates/wordcountstate';
+import { paulDeath } from '../redux/PaulStates/isPaulDed';
+import { setPwd } from '../redux/MainStates/passwordstate';
 
-    if(wormS.current===0){ //0 means that it is hungry
-      
-      if(pwd.includes("🐛")){
-        // wormS.current=1;
-        setWormStatus(1);
-        clearTimeout(wormHungry.current);
-        wormHungry.current=null;
-      }
 
-      else{
+export function WormCheck(pwd){
 
-        if(wormHungry.current){
-          return false;
-        }
+   const wormS=store.getState().ws.value;
+   const wormHungry=store.getState().whtid.value;
+   const wormFeed=store.getState().wftid.value;
+   const paulBelly=store.getState().paulbelly.value;
+   const dispatch=store.dispatch;
 
-        wormHungry.current=setTimeout(()=>{
-          setisPaulDed(true);
-        },20000)
-      }
+
+  if(wormS===0){ //0 means that it is hungry
+    
+    if(pwd.includes("🐛")){
+      // wormS.current=1;
+      dispatch(ws_mode1());
+      clearTimeout(wormHungry);
+      dispatch(resetWHTID());
     }
 
-    else{ //paul is being fed
+    else{
 
-      if(wormFeed.current){
-        clearTimeout(wormFeed.current);
-        wormFeed.current=null;
-      }
-      
-      if(!pwd.includes("🐛")){
-        // wormS.current=0;
-        setWormStatus(0);
-        paulBelly.current=0;
+      if(wormHungry){
+        return false;
       }
 
-      else{
-          wormFeed.current=setTimeout(()=>{
-            const wormIndex=pwd.indexOf("🐛")
-            const newPwd=pwd.substring(0,wormIndex)+pwd.substring(wormIndex+2);
-            setPassword(newPwd);
-            setWordCount(newPwd.length);
-            paulBelly.current+=1;  
-        },10000)
+      let x=setTimeout(()=>{
+        dispatch(paulDeath())
+      },20000)
 
-        if(paulBelly.current>=5){
-          setisPaulDed(true);
-        }
+      dispatch(setWHTID(x));
 
-      }
+      return false;
+    }
+  }
+
+  else{ //paul is being fed
+
+    if(wormFeed){
+      clearTimeout(wormFeed);
+      dispatch(resetWFTID()); 
+    }
+    
+    if(!pwd.includes("🐛")){
+      // wormS.current=0;
+      dispatch(ws_mode0());
+      dispatch(resetPB());
     }
 
-    if(wormS.current===1){
-      return true;
+    else{
+
+      let y=setTimeout(()=>{
+        const wormIndex=pwd.indexOf("🐛")
+        const newPwd=pwd.substring(0,wormIndex)+pwd.substring(wormIndex+2);
+        dispatch(setPwd(newPwd));
+        dispatch(setWC(newPwd.length));
+        dispatch(incPB())
+      },10000)
+
+
+      dispatch(setWFTID(y))
+
+      if(paulBelly>=5){
+        dispatch(paulDeath());
+      }
+
     }
 
-    return false;
+    return true;
 
   }
+
+}

@@ -9,7 +9,7 @@ export const isPaulDed=createSlice({
 
     reducers:{
         paulDeath:(state)=>{
-            state.value=false;
+            state.value=true;
         }
     }
 })

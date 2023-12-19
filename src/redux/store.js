@@ -9,6 +9,10 @@ import eggIndexReducer from "./FireStates/eggindex"
 import fireStatusReducer from "./FireStates/fireStatus"
 import fireTimeIdReducer from "./FireStates/firetimeid"
 import timeIdReducer from "./FireStates/timeid"
+import wormStatusReducer from "./WormStates/wormstatus"
+import wormHungryReducer from "./WormStates/wormhungry"
+import wormFeedReducer from "./WormStates/wormfeed"
+import PaulBellyReducer from "./WormStates/paulbelly"
 
 export default configureStore({
     reducer:{
@@ -21,6 +25,11 @@ export default configureStore({
         eggIndex:eggIndexReducer,
         fireStatus:fireStatusReducer,
         FTID:fireTimeIdReducer,
-        TID:timeIdReducer
+        TID:timeIdReducer,
+
+        ws:wormStatusReducer,
+        whtid:wormHungryReducer,
+        wftid:wormFeedReducer,
+        paulbelly:PaulBellyReducer
     }
 })
