@@ -14,6 +14,7 @@ export const HelloPaul=(pwd)=>{
             if(!canPaulbekilled){
               
               dispatch(killable())
+              console.log(canPaulbekilled)
               //this means that Paul is susceptible to dying 
               //if he is ever removed from the pwd then the game is over
             }
