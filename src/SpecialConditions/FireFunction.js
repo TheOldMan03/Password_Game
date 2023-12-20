@@ -89,7 +89,7 @@ export function ParentFireFunction(pwd){
     let RandomIndex=Math.floor(Math.random()*pwd.length);
 
     if(((RandomIndex===eggIndex || RandomIndex+1===eggIndex) && eggCount<6)){
-      while(RandomIndex===eggIndex || RandomIndex===eggIndex){
+      while(RandomIndex===eggIndex || RandomIndex+1===eggIndex){
         RandomIndex=Math.floor(Math.random()*pwd.length);
       }
     }
