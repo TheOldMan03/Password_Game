@@ -8,12 +8,16 @@ export const paulStage=createSlice({
     },
 
     reducers:{
-        setStage:(state)=>{
+        intermediateStage:(state)=>{
             state.value=1;
+        },
+
+        setStage:(state)=>{
+            state.value=2;
         }
     }
 })
 
 
-export const {setStage}=paulStage.actions;
+export const {setStage,intermediateStage}=paulStage.actions;
 export default paulStage.reducer;

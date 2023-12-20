@@ -1,2 +1,1 @@
-1.There is a small bug where when PaulStage changes to 1....the password does not change the egg emoji to chicken emoji
-2.If captcha exists in password and user decides to reset Captcha then the condition box still becomes true until a character is removed or added in password
+1.If captcha exists in password and user decides to reset Captcha then the condition box still becomes true until a character is removed or added in password

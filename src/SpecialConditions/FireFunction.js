@@ -3,7 +3,7 @@ import { fs_mode1, fs_mode3 ,fs_mode0} from '../redux/FireStates/fireStatus';
 import { setFTID } from '../redux/FireStates/firetimeid';
 import { setPwd } from '../redux/MainStates/passwordstate';
 import { setWC } from '../redux/MainStates/wordcountstate';
-import { setStage } from '../redux/PaulStates/paulStage';
+import { intermediateStage} from '../redux/PaulStates/paulStage';
 import { resetEggCount,incEggCount } from '../redux/FireStates/eggcount';
 import store from '../redux/store';
 import { setTID,resetTID } from '../redux/FireStates/timeid';
@@ -60,9 +60,9 @@ export function ParentFireFunction(pwd){
     else {
 
       if(pS===0){
-        let newPwd=pwd.replace("🥚","🐔");
+        const newPwd=pwd.replace("🥚","🐔")
+        dispatch(intermediateStage());
         dispatch(setPwd(newPwd));
-        dispatch(setStage());
       }
 
       return true;
@@ -88,7 +88,7 @@ export function ParentFireFunction(pwd){
 
     let RandomIndex=Math.floor(Math.random()*pwd.length);
 
-    if(((RandomIndex===eggIndex || RandomIndex===eggIndex) && eggCount<6)){
+    if(((RandomIndex===eggIndex || RandomIndex+1===eggIndex) && eggCount<6)){
       while(RandomIndex===eggIndex || RandomIndex===eggIndex){
         RandomIndex=Math.floor(Math.random()*pwd.length);
       }
