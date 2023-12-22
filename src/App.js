@@ -6,7 +6,7 @@ import * as pwdCheck from './PasswordCheck'
 import {HelloPaul}  from './SpecialConditions/HelloPaul.js';
 import Sponsor from './Conditions/Sponser/Sponser.js';
 import Captcha from './Conditions/Captcha/Captcha.js';
-import Gameover from './Gameover';
+import Gameover from './GameoverScreens/Gameover.js';
 import Translate from './Conditions/Translate/Translate.js';
 import {ParentFireFunction} from './SpecialConditions/FireFunction.js';
 import {WormCheck} from './SpecialConditions/FeedPaul.js';
@@ -22,6 +22,7 @@ function App() {
   const pS=useSelector(state=>state.paulStage.value)
   const wormStatus=useSelector(state=>state.ws.value)
   const isPaulDed=useSelector(state=>state.paulDed.value)
+  const pauldeathStage=useSelector(state=>state.pdStages.value)
   const dispatch=useDispatch();
 
   const [nextCount,setNextCount]=useState(0)
@@ -32,18 +33,18 @@ function App() {
 
   const [data,setData]=useState([
     {id:16,rule:"Rule 16",desc:"Looks like the warmth from the fire made Paul hatch....could you feed him not more than 5 🐛",execute:WormCheck,curr:false,isNext:false,truth:false,WC:true},
-    {id:15,rule:"Rule 15",desc:"Oh no, a fire broke out and its spreading randomly...quick douse it before its too late!",execute:ParentFireFunction,curr:false,isNext:false,truth:false,WC:true},
-    {id:14,rule:"Rule 14",desc:"The password must contain the english Translation of the word in the box",execute:pwdCheck.LanguageBarrier,curr:false,isNext:false,truth:false,WC:true},
-    {id:13,rule:"Rule 13",desc:"The elements in your password must have atomic numbers that add to 200",execute:pwdCheck.PeriodicSum,curr:false,isNext:false,truth:false,WC:true},
+    // {id:15,rule:"Rule 15",desc:"Oh no, a fire broke out and its spreading randomly...quick douse it before its too late!",execute:ParentFireFunction,curr:false,isNext:false,truth:false,WC:true},
+    // {id:14,rule:"Rule 14",desc:"The password must contain the english Translation of the word in the box",execute:pwdCheck.LanguageBarrier,curr:false,isNext:false,truth:false,WC:true},
+    // {id:13,rule:"Rule 13",desc:"The elements in your password must have atomic numbers that add to 200",execute:pwdCheck.PeriodicSum,curr:false,isNext:false,truth:false,WC:true},
     {id:12,rule:"Rule 12",desc:"This is Paul 🥚,could you keep him safe?",execute:HelloPaul,curr:false,isNext:false,truth:false,WC:true},
-    {id:11,rule:"Rule 11",desc:"Your password must include a leap year",execute:pwdCheck.LeapYearCheck,curr:false,isNext:false,truth:false,WC:true},
-    {id:10,rule:"Rule 10",desc:"Your password must include a 2 letter symbol from the periodic table",execute:pwdCheck.Check2letterElem,curr:false,isNext:false,truth:false,WC:true},
-    {id:9,rule:"Rule 9",desc:"Your password must include this CAPTCHA",execute:pwdCheck.CaptchaCheck,curr:false,isNext:false,truth:false,WC:true},
-    {id:8,rule:"Rule 8",desc:"Your password must include our sponsors!",execute:pwdCheck.HasSponsors,curr:false,isNext:false,truth:false,WC:true},
-    {id:7,rule:"Rule 7",desc:"Your password must contain a roman numeral",execute:pwdCheck.HasRomanNumeral,curr:false,isNext:false,truth:false,WC:true},
-    {id:6,rule:"Rule 6",desc:"Your password must contain a month of the year",execute:pwdCheck.MonthofYear,curr:false,isNext:false,truth:false,WC:true},
-    {id:5,rule:"Rule 5",desc:"The digits in your password must add to 25",execute:pwdCheck.AddUptoFive,curr:false,isNext:false,truth:false,WC:true},
-    {id:4,rule:"Rule 4",desc:"Your password must include a special character",execute:pwdCheck.SpecialCheck,curr:false,isNext:false,truth:false,WC:true},
+    // {id:11,rule:"Rule 11",desc:"Your password must include a leap year",execute:pwdCheck.LeapYearCheck,curr:false,isNext:false,truth:false,WC:true},
+    // {id:10,rule:"Rule 10",desc:"Your password must include a 2 letter symbol from the periodic table",execute:pwdCheck.Check2letterElem,curr:false,isNext:false,truth:false,WC:true},
+    // {id:9,rule:"Rule 9",desc:"Your password must include this CAPTCHA",execute:pwdCheck.CaptchaCheck,curr:false,isNext:false,truth:false,WC:true},
+    // {id:8,rule:"Rule 8",desc:"Your password must include our sponsors!",execute:pwdCheck.HasSponsors,curr:false,isNext:false,truth:false,WC:true},
+    // {id:7,rule:"Rule 7",desc:"Your password must contain a roman numeral",execute:pwdCheck.HasRomanNumeral,curr:false,isNext:false,truth:false,WC:true},
+    // {id:6,rule:"Rule 6",desc:"Your password must contain a month of the year",execute:pwdCheck.MonthofYear,curr:false,isNext:false,truth:false,WC:true},
+    // {id:5,rule:"Rule 5",desc:"The digits in your password must add to 25",execute:pwdCheck.AddUptoFive,curr:false,isNext:false,truth:false,WC:true},
+    // {id:4,rule:"Rule 4",desc:"Your password must include a special character",execute:pwdCheck.SpecialCheck,curr:false,isNext:false,truth:false,WC:true},
     {id:3,rule:"Rule 3",desc:"Your password must contain an uppercase letter",execute:pwdCheck.UpperCheck,curr:false,isNext:false,truth:false,WC:true},
     {id:2,rule:"Rule 2",desc:"Your password must contain a number",execute:pwdCheck.NumberCheck,curr:false,isNext:false,truth:false,WC:true},
     {id:1,rule:"Rule 1",desc:"Your password must be at least 5 characters",execute:pwdCheck.CountCheck,curr:false,isNext:false,truth:false,WC:true}
@@ -146,6 +147,10 @@ function App() {
     14: Translate,
     // Add more mappings as needed
   };
+
+  const slainmsg="Paul has been slain"
+  const underfedmsg="Paul has been underfed"
+  const overfedmsg="Paul has been overfed"
   
 
   return (
@@ -193,7 +198,24 @@ function App() {
           })
         } 
 
-      {isPaulDed?<Gameover/>:null} 
+        {isPaulDed && (
+          <Gameover desc={() => {
+            switch (pauldeathStage) {
+              case 0:
+                return slainmsg;
+              case 1:
+                return underfedmsg;
+              case 2:
+                return overfedmsg;
+              default:
+                return slainmsg; // Handle potential unexpected values
+            }
+          }}
+          />
+        )}
+        
+     
+      
 
       </div>
 

@@ -1,6 +1,7 @@
 import { killable } from "../redux/PaulStates/cpbk";
 import { paulDeath } from "../redux/PaulStates/isPaulDed";
 import { setStage } from "../redux/PaulStates/paulStage";
+import { paulhasbeenslain } from "../redux/PaulStates/pauldeathstages";
 import store from "../redux/store";
 
 export const HelloPaul=(pwd)=>{
@@ -24,6 +25,7 @@ export const HelloPaul=(pwd)=>{
 
         else if(!pwd.includes("🥚") && canPaulbekilled){
           dispatch(paulDeath())
+          dispatch(paulhasbeenslain())
           return false
           //paul is dead
         }
@@ -41,8 +43,8 @@ export const HelloPaul=(pwd)=>{
         }
 
         else if(!pwd.includes("🐔") && canPaulbekilled){
-          console.log("This should not happen tho")
           dispatch(paulDeath())
+          dispatch(paulhasbeenslain())
           return false
         }
     }

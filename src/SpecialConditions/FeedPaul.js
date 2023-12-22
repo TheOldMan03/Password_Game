@@ -6,6 +6,7 @@ import { incPB, resetPB } from '../redux/WormStates/paulbelly';
 import { setWC } from '../redux/MainStates/wordcountstate';
 import { paulDeath } from '../redux/PaulStates/isPaulDed';
 import { setPwd } from '../redux/MainStates/passwordstate';
+import { overfed, underfed } from '../redux/PaulStates/pauldeathstages';
 
 
 export function WormCheck(pwd){
@@ -34,6 +35,7 @@ export function WormCheck(pwd){
 
       let x=setTimeout(()=>{
         dispatch(paulDeath())
+        dispatch(underfed())
       },20000)
 
       dispatch(setWHTID(x));
@@ -70,6 +72,7 @@ export function WormCheck(pwd){
 
       if(paulBelly>=5){
         dispatch(paulDeath());
+        dispatch(overfed())
       }
 
     }

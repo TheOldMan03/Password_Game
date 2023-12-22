@@ -1,11 +1,15 @@
 import React from 'react'
 import "./Gameover.css"
 
-const Gameover = () => {
+const Gameover = ({desc}) => {
+
+  const description = desc();
+
+
   return (
     <div className='GO'>
         <div className="gameover">
-            PAUL HAS BEEN SLAIN
+            {description}
         </div>
     </div>
   )

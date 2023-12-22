@@ -13,6 +13,7 @@ import wormStatusReducer from "./WormStates/wormstatus"
 import wormHungryReducer from "./WormStates/wormhungry"
 import wormFeedReducer from "./WormStates/wormfeed"
 import PaulBellyReducer from "./WormStates/paulbelly"
+import pauldeathReducer from "./PaulStates/pauldeathstages"
 
 export default configureStore({
     reducer:{
@@ -30,6 +31,8 @@ export default configureStore({
         ws:wormStatusReducer,
         whtid:wormHungryReducer,
         wftid:wormFeedReducer,
-        paulbelly:PaulBellyReducer
+        paulbelly:PaulBellyReducer,
+
+        pdStages:pauldeathReducer
     }
 })
