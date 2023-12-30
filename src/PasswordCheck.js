@@ -252,7 +252,7 @@ export const LanguageBarrier=(pwd)=>{
 }
 
 export const Riddlemethis=(pwd)=>{
-    const riddlewords=["dog","cat","mad","sad"];
+    const riddlewords=["footsteps","coin","egg","towel","promise","silence","river","bottle","age","piano","clock","comb","glove","phone","legs","future"];
     const randomIndex=store.getState().RTRandom.value;
     const dispatch=store.dispatch
 
