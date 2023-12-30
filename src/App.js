@@ -33,6 +33,7 @@ function App() {
 
 
   const [data,setData]=useState([
+    {id:18,rule:"Rule 18",desc:"Your password must contain either of the following:\n I am Loved,I am worthy,I am enough ",execute:pwdCheck.affirmations,curr:false,isNext:false,truth:false,WC:true},
     {id:17,rule:"Rule 17",desc:"Solve the riddle",execute:pwdCheck.Riddlemethis,curr:false,isNext:false,truth:false,WC:true},
     // {id:16,rule:"Rule 16",desc:"Looks like the warmth from the fire made Paul hatch....could you feed him not more than 5 🐛",execute:WormCheck,curr:false,isNext:false,truth:false,WC:true},
     // {id:15,rule:"Rule 15",desc:"Oh no, a fire broke out and its spreading randomly...quick douse it before its too late!",execute:ParentFireFunction,curr:false,isNext:false,truth:false,WC:true},

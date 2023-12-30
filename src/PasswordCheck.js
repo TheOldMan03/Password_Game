@@ -275,3 +275,16 @@ export const Riddlemethis=(pwd)=>{
 }
 
 
+export const affirmations=(pwd)=>{
+    const affirm=["iamloved","iamworthy","iamenough"];
+
+    for(let i of affirm){
+        if(pwd.toLowerCase().includes(i)){
+            return true;
+        }
+    }
+
+    return false
+
+}
+
