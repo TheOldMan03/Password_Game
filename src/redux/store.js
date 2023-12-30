@@ -14,6 +14,8 @@ import wormHungryReducer from "./WormStates/wormhungry"
 import wormFeedReducer from "./WormStates/wormfeed"
 import PaulBellyReducer from "./WormStates/paulbelly"
 import pauldeathReducer from "./PaulStates/pauldeathstages"
+import rtreducer from "./riddleStates/rt_redux"
+import rtrandomizerreducer from "./riddleStates/randomizer"
 
 export default configureStore({
     reducer:{
@@ -33,6 +35,8 @@ export default configureStore({
         wftid:wormFeedReducer,
         paulbelly:PaulBellyReducer,
 
-        pdStages:pauldeathReducer
+        pdStages:pauldeathReducer,
+        RTState:rtreducer,
+        RTRandom:rtrandomizerreducer
     }
 })

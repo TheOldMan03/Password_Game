@@ -1,5 +1,8 @@
 import { getCaptcha } from "./Conditions/Captcha/Captcha.js";
 import { LN } from "./Conditions/Translate/Translate.js";
+import { randomizer_RT } from "./redux/riddleStates/randomizer.js";
+import { resetRTimer,setRTimer } from "./redux/riddleStates/rt_redux.js";
+import store from "./redux/store.js";
 
 export const CountCheck=(num)=>{
     if(num>=5){
@@ -246,8 +249,29 @@ export const LanguageBarrier=(pwd)=>{
     }
 
     return false;
+}
+
+export const Riddlemethis=(pwd)=>{
+    const riddlewords=["dog","cat","mad","sad"];
+    const randomIndex=store.getState().RTRandom.value;
+    const dispatch=store.dispatch
+
+    if(randomIndex===-1){
+        let x=Math.floor(Math.random()*riddlewords.length);
+        dispatch(randomizer_RT(x));
+        return;
+    }
+
+    console.log(riddlewords[randomIndex])
+
+    if(pwd.includes(riddlewords[randomIndex])){
+        dispatch(resetRTimer())
+        return true;
+    }
 
 
+    dispatch(setRTimer())
+    return false;
 }
 
 
