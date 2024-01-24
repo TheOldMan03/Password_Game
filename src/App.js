@@ -1,19 +1,15 @@
 import './App.css';
 import { useState,useEffect} from 'react';
-import Condition from './Conditions/Condition/Condition.js'
+
 // import { CSSTransition,TransitionGroup } from 'react-transition-group';
 import * as pwdCheck from './PasswordCheck'
-import {HelloPaul}  from './SpecialConditions/HelloPaul.js';
-import Sponsor from './Conditions/Sponser/Sponser.js';
-import Captcha from './Conditions/Captcha/Captcha.js';
+import { HelloPaul,ParentFireFunction,WormCheck} from './SpecialConditions/index.js';
+import { Captcha,Condition,Sponser,Translate,RiddleTimer,Colorcondition} from './Conditions/index.js';
 import Gameover from './GameoverScreens/Gameover.js';
-import Translate from './Conditions/Translate/Translate.js';
-import {ParentFireFunction} from './SpecialConditions/FireFunction.js';
-import {WormCheck} from './SpecialConditions/FeedPaul.js';
+
 import { setPwd } from './redux/MainStates/passwordstate.js';
 import { setWC } from './redux/MainStates/wordcountstate.js';
 import { useDispatch, useSelector } from 'react-redux';
-import RiddleTimer from './Conditions/RiddleTimer/RT.js';
 
 function App() {
 
@@ -33,23 +29,24 @@ function App() {
 
 
   const [data,setData]=useState([
-    {id:18,rule:"Rule 18",desc:"Your password must contain either of the following:\n I am Loved,I am worthy,I am enough ",execute:pwdCheck.affirmations,curr:false,isNext:false,truth:false,WC:true},
-    {id:17,rule:"Rule 17",desc:"Solve the riddle",execute:pwdCheck.Riddlemethis,curr:false,isNext:false,truth:false,WC:true},
-    // {id:16,rule:"Rule 16",desc:"Looks like the warmth from the fire made Paul hatch....could you feed him not more than 5 🐛",execute:WormCheck,curr:false,isNext:false,truth:false,WC:true},
-    // {id:15,rule:"Rule 15",desc:"Oh no, a fire broke out and its spreading randomly...quick douse it before its too late!",execute:ParentFireFunction,curr:false,isNext:false,truth:false,WC:true},
-    // {id:14,rule:"Rule 14",desc:"The password must contain the english Translation of the word in the box",execute:pwdCheck.LanguageBarrier,curr:false,isNext:false,truth:false,WC:true},
-    // {id:13,rule:"Rule 13",desc:"The elements in your password must have atomic numbers that add to 200",execute:pwdCheck.PeriodicSum,curr:false,isNext:false,truth:false,WC:true},
-    // {id:12,rule:"Rule 12",desc:"This is Paul 🥚,could you keep him safe?",execute:HelloPaul,curr:false,isNext:false,truth:false,WC:true},
-    // {id:11,rule:"Rule 11",desc:"Your password must include a leap year",execute:pwdCheck.LeapYearCheck,curr:false,isNext:false,truth:false,WC:true},
-    // {id:10,rule:"Rule 10",desc:"Your password must include a 2 letter symbol from the periodic table",execute:pwdCheck.Check2letterElem,curr:false,isNext:false,truth:false,WC:true},
-    // {id:9,rule:"Rule 9",desc:"Your password must include this CAPTCHA",execute:pwdCheck.CaptchaCheck,curr:false,isNext:false,truth:false,WC:true},
-    // {id:8,rule:"Rule 8",desc:"Your password must include our sponsors!",execute:pwdCheck.HasSponsors,curr:false,isNext:false,truth:false,WC:true},
-    // {id:7,rule:"Rule 7",desc:"Your password must contain a roman numeral",execute:pwdCheck.HasRomanNumeral,curr:false,isNext:false,truth:false,WC:true},
-    // {id:6,rule:"Rule 6",desc:"Your password must contain a month of the year",execute:pwdCheck.MonthofYear,curr:false,isNext:false,truth:false,WC:true},
-    // {id:5,rule:"Rule 5",desc:"The digits in your password must add to 25",execute:pwdCheck.AddUptoFive,curr:false,isNext:false,truth:false,WC:true},
-    // {id:4,rule:"Rule 4",desc:"Your password must include a special character",execute:pwdCheck.SpecialCheck,curr:false,isNext:false,truth:false,WC:true},
-    // {id:3,rule:"Rule 3",desc:"Your password must contain an uppercase letter",execute:pwdCheck.UpperCheck,curr:false,isNext:false,truth:false,WC:true},
-    // {id:2,rule:"Rule 2",desc:"Your password must contain a number",execute:pwdCheck.NumberCheck,curr:false,isNext:false,truth:false,WC:true},
+    {id:19,rule:"Rule 19",desc:"Your password must contain this color in hex",execute:pwdCheck.colorcode,curr:false,isNext:false,truth:false,WC:true},
+    {id:18,rule:"Rule 18",desc:"Your password must contain either of the following:I am Loved,I am worthy,I am enough ",execute:pwdCheck.affirmations,curr:false,isNext:false,truth:false,WC:true},
+    {id:17,rule:"Rule 17",desc:"Your password must contain the answer to this riddle",execute:pwdCheck.Riddlemethis,curr:false,isNext:false,truth:false,WC:true},
+    {id:16,rule:"Rule 16",desc:"Looks like the warmth from the fire made Paul hatch....could you feed him not more than 5 🐛",execute:WormCheck,curr:false,isNext:false,truth:false,WC:true},
+    {id:15,rule:"Rule 15",desc:"A fire broke out and its spreading randomly...",execute:ParentFireFunction,curr:false,isNext:false,truth:false,WC:true},
+    {id:14,rule:"Rule 14",desc:"The password must contain the english Translation of the word in the box",execute:pwdCheck.LanguageBarrier,curr:false,isNext:false,truth:false,WC:true},
+    {id:13,rule:"Rule 13",desc:"The elements in your password must have atomic numbers that add to 200",execute:pwdCheck.PeriodicSum,curr:false,isNext:false,truth:false,WC:true},
+    {id:12,rule:"Rule 12",desc:"This is Paul 🥚,could you keep him safe?",execute:HelloPaul,curr:false,isNext:false,truth:false,WC:true},
+    {id:11,rule:"Rule 11",desc:"Your password must include a leap year",execute:pwdCheck.LeapYearCheck,curr:false,isNext:false,truth:false,WC:true},
+    {id:10,rule:"Rule 10",desc:"Your password must include a 2 letter symbol from the periodic table",execute:pwdCheck.Check2letterElem,curr:false,isNext:false,truth:false,WC:true},
+    {id:9,rule:"Rule 9",desc:"Your password must include this CAPTCHA",execute:pwdCheck.CaptchaCheck,curr:false,isNext:false,truth:false,WC:true},
+    {id:8,rule:"Rule 8",desc:"Your password must include our sponsors!",execute:pwdCheck.HasSponsors,curr:false,isNext:false,truth:false,WC:true},
+    {id:7,rule:"Rule 7",desc:"Your password must contain a roman numeral",execute:pwdCheck.HasRomanNumeral,curr:false,isNext:false,truth:false,WC:true},
+    {id:6,rule:"Rule 6",desc:"Your password must contain a month of the year",execute:pwdCheck.MonthofYear,curr:false,isNext:false,truth:false,WC:true},
+    {id:5,rule:"Rule 5",desc:"The digits in your password must add to 25",execute:pwdCheck.AddUptoFive,curr:false,isNext:false,truth:false,WC:true},
+    {id:4,rule:"Rule 4",desc:"Your password must include a special character",execute:pwdCheck.SpecialCheck,curr:false,isNext:false,truth:false,WC:true},
+    {id:3,rule:"Rule 3",desc:"Your password must contain an uppercase letter",execute:pwdCheck.UpperCheck,curr:false,isNext:false,truth:false,WC:true},
+    {id:2,rule:"Rule 2",desc:"Your password must contain a number",execute:pwdCheck.NumberCheck,curr:false,isNext:false,truth:false,WC:true},
     {id:1,rule:"Rule 1",desc:"Your password must be at least 5 characters",execute:pwdCheck.CountCheck,curr:false,isNext:false,truth:false,WC:true}
   ])
 
@@ -145,10 +142,11 @@ function App() {
   
   
   const componentMap = {
-    8: Sponsor,
+    8: Sponser,
     9: Captcha,
     14: Translate,
-    17: RiddleTimer
+    17: RiddleTimer,
+    19: Colorcondition
     // Add more mappings as needed
   };
 
@@ -190,7 +188,7 @@ function App() {
         </div>
 
 
-         {
+       {
           display.map(datax => {
             if (datax.curr) {
               const Component = componentMap[datax.id] || Condition
@@ -216,7 +214,9 @@ function App() {
             }
           }}
           />
-        )}
+        )} 
+
+        
 
       </div>
 

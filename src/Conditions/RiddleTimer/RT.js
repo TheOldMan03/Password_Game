@@ -8,8 +8,8 @@ import { useSelector } from 'react-redux'
 const RiddleTimer = ({rulename,ruledesc,trueValue}) => {
 
 
-    const [second,setSecond]=useState(10)
-    const [minute,setMinute]=useState(1)
+    const [second,setSecond]=useState(59)
+    const [minute,setMinute]=useState(0)
     const shouldRun=useSelector(state=>state.RTState.value)
     const randomVal=useSelector(state=>state.RTRandom.value)
     const timeID=useRef(null);

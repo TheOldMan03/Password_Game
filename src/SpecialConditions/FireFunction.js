@@ -5,13 +5,14 @@ import { setPwd } from '../redux/MainStates/passwordstate';
 import { setWC } from '../redux/MainStates/wordcountstate';
 import { intermediateStage} from '../redux/PaulStates/paulStage';
 import { resetEggCount,incEggCount } from '../redux/FireStates/eggcount';
-import store from '../redux/store';
 import { setTID,resetTID } from '../redux/FireStates/timeid';
+
+import store from '../redux/store';
 
 const dispatch=store.dispatch;
 
 
-export function ParentFireFunction(pwd){
+export default function ParentFireFunction(pwd){
 
   const pS=store.getState().paulStage.value;
   const fs=store.getState().fireStatus.value;

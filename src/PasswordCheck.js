@@ -1,6 +1,7 @@
 import { getCaptcha } from "./Conditions/Captcha/Captcha.js";
 import { LN } from "./Conditions/Translate/Translate.js";
 import { randomizer_RT } from "./redux/riddleStates/randomizer.js";
+import { gethexColor } from "./Conditions/Colorbox/Colorcondition.js";
 import { resetRTimer,setRTimer } from "./redux/riddleStates/rt_redux.js";
 import store from "./redux/store.js";
 
@@ -262,7 +263,6 @@ export const Riddlemethis=(pwd)=>{
         return;
     }
 
-    console.log(riddlewords[randomIndex])
 
     if(pwd.includes(riddlewords[randomIndex])){
         dispatch(resetRTimer())
@@ -286,5 +286,15 @@ export const affirmations=(pwd)=>{
 
     return false
 
+}
+
+export const colorcode=(pwd)=>{
+    const colorhexstring=gethexColor()
+
+    if(pwd.includes(colorhexstring)){
+        return true
+    }
+
+    return false
 }
 

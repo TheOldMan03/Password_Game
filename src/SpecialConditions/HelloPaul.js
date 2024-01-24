@@ -4,7 +4,7 @@ import { setStage } from "../redux/PaulStates/paulStage";
 import { paulhasbeenslain } from "../redux/PaulStates/pauldeathstages";
 import store from "../redux/store";
 
-export const HelloPaul=(pwd)=>{
+export default function HelloPaul(pwd){
 
   const pS=store.getState().paulStage.value
   const canPaulbekilled=store.getState().cpbk.value

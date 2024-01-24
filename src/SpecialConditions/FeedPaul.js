@@ -1,15 +1,15 @@
 import { resetWHTID,setWHTID } from '../redux/WormStates/wormhungry';
 import { ws_mode1,ws_mode0 } from '../redux/WormStates/wormstatus';
 import { setWFTID,resetWFTID } from '../redux/WormStates/wormfeed';
-import store from '../redux/store';
 import { incPB, resetPB } from '../redux/WormStates/paulbelly';
 import { setWC } from '../redux/MainStates/wordcountstate';
 import { paulDeath } from '../redux/PaulStates/isPaulDed';
 import { setPwd } from '../redux/MainStates/passwordstate';
 import { overfed, underfed } from '../redux/PaulStates/pauldeathstages';
+import store from '../redux/store';
 
 
-export function WormCheck(pwd){
+export default function WormCheck(pwd){
 
    const wormS=store.getState().ws.value;
    const wormHungry=store.getState().whtid.value;

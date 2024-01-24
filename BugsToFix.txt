@@ -1,1 +1,7 @@
 1.If captcha exists in password and user decides to reset Captcha then the condition box still becomes true until a character is removed or added in password
+
+
+Thing to do...
+
+Try to do the strong Emoji thing
+Ideally try to count the number of occurances that emoji has occured...becoem true when count>=3
