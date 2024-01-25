@@ -20,6 +20,7 @@ function App() {
   const wormStatus=useSelector(state=>state.ws.value)
   const isPaulDed=useSelector(state=>state.paulDed.value)
   const pauldeathStage=useSelector(state=>state.pdStages.value)
+  const RTGameover=useSelector(state=>state.RTGameover.value)
   const dispatch=useDispatch();
 
   const [nextCount,setNextCount]=useState(0)
@@ -216,7 +217,9 @@ function App() {
             }
           }}
           />
-        )} 
+        )}
+
+        {RTGameover && (<Gameover desc={()=>"You died!"}/>)}
 
         
 

@@ -1,42 +1,27 @@
 import {configureStore} from "@reduxjs/toolkit"
-import paulDedReducer from './PaulStates/isPaulDed'
-import paulStageReducer from "./PaulStates/paulStage"
-import cpbkReducer from "./PaulStates/cpbk"
-import passwordReducer from "./MainStates/passwordstate"
-import wordCountReducer from "./MainStates/wordcountstate"
-import eggCReducer from "./FireStates/eggcount"
-import eggIndexReducer from "./FireStates/eggindex"
-import fireStatusReducer from "./FireStates/fireStatus"
-import fireTimeIdReducer from "./FireStates/firetimeid"
-import timeIdReducer from "./FireStates/timeid"
-import wormStatusReducer from "./WormStates/wormstatus"
-import wormHungryReducer from "./WormStates/wormhungry"
-import wormFeedReducer from "./WormStates/wormfeed"
-import PaulBellyReducer from "./WormStates/paulbelly"
-import pauldeathReducer from "./PaulStates/pauldeathstages"
-import rtreducer from "./riddleStates/rt_redux"
-import rtrandomizerreducer from "./riddleStates/randomizer"
+import * as MS from './storeIndex.js';
 
 export default configureStore({
     reducer:{
-        paulDed:paulDedReducer,
-        paulStage:paulStageReducer,
-        cpbk:cpbkReducer,
-        pwd:passwordReducer,
-        wc:wordCountReducer,
-        eggC:eggCReducer,
-        eggIndex:eggIndexReducer,
-        fireStatus:fireStatusReducer,
-        FTID:fireTimeIdReducer,
-        TID:timeIdReducer,
+        paulDed:MS.paulDedReducer,
+        paulStage:MS.paulStageReducer,
+        cpbk:MS.cpbkReducer,
+        pwd:MS.passwordReducer,
+        wc:MS.wordCountReducer,
+        eggC:MS.eggCReducer,
+        eggIndex:MS.eggIndexReducer,
+        fireStatus:MS.fireStatusReducer,
+        FTID:MS.fireTimeIdReducer,
+        TID:MS.timeIdReducer,
 
-        ws:wormStatusReducer,
-        whtid:wormHungryReducer,
-        wftid:wormFeedReducer,
-        paulbelly:PaulBellyReducer,
+        ws:MS.wormStatusReducer,
+        whtid:MS.wormHungryReducer,
+        wftid:MS.wormFeedReducer,
+        paulbelly:MS.PaulBellyReducer,
 
-        pdStages:pauldeathReducer,
-        RTState:rtreducer,
-        RTRandom:rtrandomizerreducer
+        pdStages:MS.pauldeathReducer,
+        RTState:MS.rtreducer,
+        RTRandom:MS.rtrandomizerreducer,
+        RTGameover:MS.rtgameover
     }
 })
