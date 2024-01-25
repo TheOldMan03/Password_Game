@@ -5,8 +5,12 @@ import { gethexColor } from "./Conditions/Colorbox/Colorcondition.js";
 import { resetRTimer,setRTimer } from "./redux/riddleStates/rt_redux.js";
 import store from "./redux/store.js";
 
-export const CountCheck=(num)=>{
-    if(num>=5){
+
+export const CountCheck=()=>{
+
+    const pwdlen=store.getState().wc.value
+
+    if(pwdlen>=5){
         return true;
     }
 
@@ -15,25 +19,36 @@ export const CountCheck=(num)=>{
     }
 }
 
-export const NumberCheck=(pwd)=>{
+export const NumberCheck=()=>{
+
+    const pwd=store.getState().pwd.value
+
     const Regex=/\d/;
     return Regex.test(pwd);
 }
 
-export const UpperCheck=(pwd)=>{
+export const UpperCheck=()=>{
+
+    const pwd=store.getState().pwd.value
+
     const Regex=/[A-Z]/
     return Regex.test(pwd)
 }
 
-export const SpecialCheck=(pwd)=>{
+export const SpecialCheck=()=>{
+
+    const pwd=store.getState().pwd.value
+
     const specialChars = /[`!@#$%^&*()_+\-={};':"|,.<>/?~]/;
     return specialChars.test(pwd);
 }
 
-export const AddUptoFive=(pwd)=>{
+export const AddUptoFive=()=>{
+
+    const pwd=store.getState().pwd.value
+
     const Regex=/[0-9]/
     let sum=0;
-
 
     let i=0;
     for(i=0;i<pwd.length;i++){
@@ -42,7 +57,7 @@ export const AddUptoFive=(pwd)=>{
         }
     }
 
-    if(sum===50){
+    if(sum===25){
         return true;
     }
 
@@ -51,7 +66,10 @@ export const AddUptoFive=(pwd)=>{
     }
 }
 
-export const MonthofYear=(pwd)=>{
+export const MonthofYear=()=>{
+
+    const pwd=store.getState().pwd.value
+
     const months=["january","february","march","april","may","june","july","august","september","october","november","december"]
     const lowerCase=pwd.toLowerCase();
 
@@ -66,7 +84,9 @@ export const MonthofYear=(pwd)=>{
 
 }
 
-export const HasRomanNumeral=(pwd)=>{
+export const HasRomanNumeral=()=>{
+
+    const pwd=store.getState().pwd.value
     const Roman=["I","V","X","L","C","D","M"]
 
     for(let i of Roman){//Niko,lets go bowling
@@ -78,8 +98,9 @@ export const HasRomanNumeral=(pwd)=>{
     return false;
 }
 
-export const HasSponsors=(pwd)=>{
+export const HasSponsors=()=>{
     const sponsor=["pepsi","starbucks","shell"]
+    const pwd=store.getState().pwd.value
 
     for(let i of sponsor){
         if(pwd.toLowerCase().includes(i)){
@@ -90,8 +111,9 @@ export const HasSponsors=(pwd)=>{
     return false;
 }
 
-export const CaptchaCheck=(pwd)=>{
+export const CaptchaCheck=()=>{
 
+    const pwd=store.getState().pwd.value
     const captcha=getCaptcha();
 
     if(captcha===""){
@@ -105,7 +127,9 @@ export const CaptchaCheck=(pwd)=>{
     return false;
 }
 
-export const Check2letterElem=(pwd)=>{
+export const Check2letterElem=()=>{
+
+    const pwd=store.getState().pwd.value
     const periodicTable = [
         "He", "Li", "Be","Ne",
         "Na", "Mg", "Al", "Si", "Cl", "Ar","Ca",
@@ -130,7 +154,9 @@ export const Check2letterElem=(pwd)=>{
     return false;
 }
 
-export const LeapYearCheck=(pwd)=>{
+export const LeapYearCheck=()=>{
+
+    const pwd=store.getState().pwd.value
     const nums=["1","2","3","4","5","6","7","8","9","0"]
     let numString=""
 
@@ -155,7 +181,9 @@ export const LeapYearCheck=(pwd)=>{
 
 }
 
-export const PeriodicSum=(pwd)=>{
+export const PeriodicSum=()=>{
+
+    const pwd=store.getState().pwd.value
     const periodicTable = {
         'H': 1,'He': 2,'Li': 3,'Be': 4,'B': 5,'C': 6,'N': 7,'O': 8,'F': 9,'Ne': 10,'Na': 11,
         'Mg': 12,'Al': 13,'Si': 14,'P': 15,'S': 16,'Cl': 17,
@@ -237,7 +265,9 @@ export const PeriodicSum=(pwd)=>{
 
 }
 
-export const LanguageBarrier=(pwd)=>{
+export const LanguageBarrier=()=>{
+
+    const pwd=store.getState().pwd.value
     const EnglishWords=[
         "science","maths","pineapple","bread","light","chair","focusonyourstudies"
     ]
@@ -252,7 +282,8 @@ export const LanguageBarrier=(pwd)=>{
     return false;
 }
 
-export const Riddlemethis=(pwd)=>{
+export const Riddlemethis=()=>{
+    const pwd=store.getState().pwd.value
     const riddlewords=["footsteps","coin","egg","towel","promise","silence","river","bottle","age","piano","clock","comb","glove","phone","legs","future"];
     const randomIndex=store.getState().RTRandom.value;
     const dispatch=store.dispatch
@@ -275,7 +306,8 @@ export const Riddlemethis=(pwd)=>{
 }
 
 
-export const affirmations=(pwd)=>{
+export const affirmations=()=>{
+    const pwd=store.getState().pwd.value
     const affirm=["iamloved","iamworthy","iamenough"];
 
     for(let i of affirm){
@@ -288,7 +320,8 @@ export const affirmations=(pwd)=>{
 
 }
 
-export const colorcode=(pwd)=>{
+export const colorcode=()=>{
+    const pwd=store.getState().pwd.value
     const colorhexstring=gethexColor()
 
     if(pwd.includes(colorhexstring)){
@@ -298,33 +331,14 @@ export const colorcode=(pwd)=>{
     return false
 }
 
-export const pwdlength=(pwd)=>{
+export const pwdlength=()=>{
     const WC=store.getState().wc.value.toString()
+    const pwd=store.getState().pwd.value
 
     if(pwd.includes(WC)){
         return true;
     }
 
     return false
-}
-
-export const primenumcheck=(pwd)=>{
-    const primeNos=["2", "3", "5", "7", "11", "13", "17", "19", "23", "29", "31", "37", "41", 
-    "43", "47", "53", "59", "61", "67", "71", "73", "79", "83", "89", "97", "101", 
-    "103", "107", "109", "113", "127", "131", "137", "139", "149", "151", "157", "163", 
-    "167", "173", "179", "181", "191", "193", "197", "199", "211", "223", "227", "229", 
-    "233", "239", "241", "251", "257", "263", "269", "271", "277", "281", "283", "293", 
-    "307", "311", "313", "317", "331", "337", "347", "349", "353", "359", "367", "373", 
-    "379", "383", "389", "397", "401", "409", "419", "421", "431", "433", "439", "443", 
-    "449", "457", "461", "463", "467", "479", "487", "491", "499"]
-
-    for(let i=0;i<primeNos.length;i++){
-        if(pwd.includes(primeNos[i])){
-            return true;
-        }
-    }
-
-    return false;
-
 }
 

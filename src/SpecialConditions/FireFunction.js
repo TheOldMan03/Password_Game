@@ -12,10 +12,11 @@ import store from '../redux/store';
 const dispatch=store.dispatch;
 
 
-export default function ParentFireFunction(pwd){
+export default function ParentFireFunction(){
 
   const pS=store.getState().paulStage.value;
   const fs=store.getState().fireStatus.value;
+  const pwd=store.getState().pwd.value
   const fireTimeId=store.getState().FTID.value;
   const TimeId=store.getState().TID.value;
 

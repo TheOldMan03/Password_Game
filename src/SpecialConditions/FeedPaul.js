@@ -9,12 +9,13 @@ import { overfed, underfed } from '../redux/PaulStates/pauldeathstages';
 import store from '../redux/store';
 
 
-export default function WormCheck(pwd){
+export default function WormCheck(){
 
    const wormS=store.getState().ws.value;
    const wormHungry=store.getState().whtid.value;
    const wormFeed=store.getState().wftid.value;
    const paulBelly=store.getState().paulbelly.value;
+   const pwd=store.getState().pwd.value
    const dispatch=store.dispatch;
 
 
