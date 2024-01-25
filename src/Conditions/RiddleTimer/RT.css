@@ -1,0 +1,16 @@
+#Question{
+    border:none;
+    text-decoration: none;
+}
+
+#Ques{
+    flex-direction: column;
+    align-items:  center;
+}
+
+#TimerBox{
+    background: none;
+    background-color: black;
+    color:white;
+    text-decoration: none;
+}

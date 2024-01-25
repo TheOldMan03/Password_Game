@@ -1,7 +1,7 @@
 import React,{useState,useEffect,useRef} from 'react'
 import '../Condition/Condition.css'
-import '../Translate/Translate.css'
 import '../Captcha/Captcha.css'
+import './RT.css'
 import { useSelector } from 'react-redux'
 
 
@@ -77,13 +77,13 @@ const RiddleTimer = ({rulename,ruledesc,trueValue}) => {
       <div id="lowerhalf" className={trueValue? 'true-lower':'false-lower'}>
         {ruledesc}
 
-        <div className="Capt">
+        <div className="Capt" id="Ques">
 
-        <div className="captcha_box" id="translate_box">
+        <div className="captcha_box" id="Question">
               {RiddleObj[randomVal].q}
             </div>
 
-            <div className="captcha_box" id="translate_box">
+            <div className="captcha_box" id="TimerBox">
               {minute}:{second}
             </div>
 

@@ -14,7 +14,7 @@ function RNGColour(){
   return [R,G,B]
 }
 
-let val=""
+let val="-1"
 let x
 
 function Colorconditon({rulename,ruledesc,trueValue}) {
