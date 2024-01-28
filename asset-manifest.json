@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/Password_Game/static/css/main.ef349ee6.css",
-    "main.js": "/Password_Game/static/js/main.791764f0.js",
+    "main.css": "/Password_Game/static/css/main.75c7891f.css",
+    "main.js": "/Password_Game/static/js/main.d5ee8d87.js",
     "static/media/pepsi_icon.png": "/Password_Game/static/media/pepsi_icon.885adf4997a007875100.png",
     "static/media/shell.png": "/Password_Game/static/media/shell.2328ff2cab8042125fdb.png",
     "static/media/starbucks.png": "/Password_Game/static/media/starbucks.d5d39c5362e031e12ca1.png",
     "index.html": "/Password_Game/index.html",
-    "main.ef349ee6.css.map": "/Password_Game/static/css/main.ef349ee6.css.map",
-    "main.791764f0.js.map": "/Password_Game/static/js/main.791764f0.js.map"
+    "main.75c7891f.css.map": "/Password_Game/static/css/main.75c7891f.css.map",
+    "main.d5ee8d87.js.map": "/Password_Game/static/js/main.d5ee8d87.js.map"
   },
   "entrypoints": [
-    "static/css/main.ef349ee6.css",
-    "static/js/main.791764f0.js"
+    "static/css/main.75c7891f.css",
+    "static/js/main.d5ee8d87.js"
   ]
 }
