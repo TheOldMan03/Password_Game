@@ -59,3 +59,9 @@
     border-bottom:1px solid green; 
 
 }
+
+@media only screen and (max-width:640px){
+    .rule{
+        min-width:450px;
+   } 
+}

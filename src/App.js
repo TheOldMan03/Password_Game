@@ -27,7 +27,7 @@ function App() {
   
   const [displayFirstRule,setDFR]=useState(false);
   const [falseCount,setFalseCount]=useState(0);
-  // {id:21,rule:"Rule 21",desc:"The length of your password must be a prime number",execute:pwdCheck.primenumcheck,curr:false,isNext:false,truth:false,WC:true},
+  
 
   const [data,setData]=useState([
     {id:20,rule:"Rule 20",desc:"Your password must include the length of your password",execute:pwdCheck.pwdlength,curr:false,isNext:false,truth:false,WC:true},

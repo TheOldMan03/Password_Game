@@ -41,7 +41,6 @@ function Colorconditon({rulename,ruledesc,trueValue}) {
 
       let rgbString=red+green+blue
       sethexcolor(rgbString)
-      console.log(rgbString)
       setCallFunc(false)
 
       val=rgbString
