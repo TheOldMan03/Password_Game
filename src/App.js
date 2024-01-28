@@ -127,7 +127,7 @@ function App() {
   useEffect(ChangeRule,[password,nextCount,fireStatus,pS,falseCount,wormStatus]);
   
   function ResizeArea(e){
-    e.target.style.height="64px"
+    e.target.style.height="50px"
     e.target.style.height=(e.target.scrollHeight)+"px"
   }
 
@@ -171,6 +171,7 @@ function App() {
         <div className="input">
           <div> 
             <span>Please Choose a password</span>
+            <span id="wcount">{wordCount}</span>
           </div>
           
           <div id="text">
@@ -182,8 +183,6 @@ function App() {
               spellCheck="false"
             >
             </textarea>
-
-            <span id="wcount">{wordCount}</span>
           </div>
           
 

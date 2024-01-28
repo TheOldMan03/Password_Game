@@ -63,5 +63,33 @@
 @media only screen and (max-width:640px){
     .rule{
         min-width:450px;
+        margin-left: 25px;
    } 
+}
+
+@media screen and (max-width:520px){
+    .rule{
+        min-width: 300px;
+        margin-left:20px;
+    }
+
+    #lowerhalf{
+        font-size: 0.8rem;
+    }
+
+    #upperhalf{
+        font-size:1rem;
+    }
+}
+
+@media screen and (max-width:424px){
+    .rule{
+        min-width:256px;
+    }
+}
+
+@media screen and (max-width:320px){
+    .pwdinput{
+        font-size: 1rem;
+    }
 }

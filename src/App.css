@@ -1,16 +1,14 @@
 .App{
-  min-width: 100%;
+  width: 100%;
   min-height:100vh;
 
   background-color: rgb(255,250,233);
-
 }
 
 .main{
   display: flex;
   flex-direction: column;
   align-items: center;
-
 }
 
 .text{
@@ -33,7 +31,8 @@ h2{
 }
 
 #wcount{
-  margin-left:15px;
+  margin-left:300px;
+  font-size: 0.9rem;
 }
 
 span{
@@ -69,11 +68,41 @@ span{
 
   .pwdinput{
     min-width: 450px;
-    flex-wrap: wrap-reverse;
+    margin-left: 25px;
   }
 
+  span{
+    font-size:0.8rem;
+    margin-left:25px;
+  }
+}
 
-  /* .rule{
-    max-width:465px;
-  } */
+@media only screen and (max-width:525px){
+  .text{
+    font-size: 1.8rem;
+  }
+
+  #wcount{
+    margin-left:130px;
+  }
+
+  .pwdinput{
+    min-width: 318px;
+    margin-left:6px;
+    font-size:1.5rem;
+  }
+}
+
+@media only screen and (max-width:424px){
+  .pwdinput{
+    min-width:250px;
+  }
+
+  #wcount{
+    margin-left:110px;
+  }
+
+  span{
+    margin-left:11px;
+  }
 }
