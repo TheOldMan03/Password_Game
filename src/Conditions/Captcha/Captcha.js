@@ -4,6 +4,9 @@ import "./Captcha.css"
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faRefresh} from '@fortawesome/free-solid-svg-icons'
+import { useSelector } from 'react-redux'
+import { changeCaptcha } from '../../redux/CaptchaStates/CaptchaCode'
+import store from '../../redux/store'
 
 const GenerateCaptcha=()=>{
   let x="abcdefghijklmnopqrstuvwxyz1234567890"
@@ -13,21 +16,18 @@ const GenerateCaptcha=()=>{
     y+=x[Math.floor(Math.random()*36)]
   }
 
-  return y
+  const dispatch=store.dispatch
+  dispatch(changeCaptcha(y));
 }
-
-let value=""
 
 const Captcha = ({rulename,ruledesc,trueValue}) => {
 
   const [callFunc,setCallFunc]=useState(true)
-  const [captchaString,setCaptchaString]=useState("")
+  const captchaString=useSelector(state=>state.CaptchaGenerator.value)
 
   const fun=()=>{
     if(callFunc){
-      let x=GenerateCaptcha()
-      setCaptchaString(x)
-      value=x
+      GenerateCaptcha()
       setCallFunc(false)
     }
   }
@@ -59,11 +59,6 @@ const Captcha = ({rulename,ruledesc,trueValue}) => {
 
   )
 }
-
-export const getCaptcha=()=>{
-    return value
-}
-
 
 export default Captcha
 

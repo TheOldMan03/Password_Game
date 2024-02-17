@@ -12,44 +12,30 @@ export default function HelloPaul(){
   const dispatch=store.dispatch
 
   
-    if(pS===0){
-        if(pwd.includes("🥚")){
-            if(!canPaulbekilled){
-              
-              dispatch(killable())
-              //this means that Paul is susceptible to dying 
-              //if he is ever removed from the pwd then the game is over
-            }
+  if(pS===0){
+      if(pwd.includes("🐔")){
+          if(!canPaulbekilled){
+            
+            dispatch(killable())
+            //this means that Paul is susceptible to dying 
+            //if he is ever removed from the pwd then the game is over
+          }
 
-            return true
-        }
+          return true
+      }
 
-        else if(!pwd.includes("🥚") && canPaulbekilled){
-          dispatch(paulDeath())
-          dispatch(paulhasbeenslain())
-          return false
-          //paul is dead
-        }
-    }
-
-
-    else if(pS===1){ //intermediate stage
-      dispatch(setStage());
-    }
+      else if(!pwd.includes("🐔") && canPaulbekilled){
+        dispatch(paulDeath())
+        dispatch(paulhasbeenslain())
+        return false
+        //paul is dead
+      }
+  }
 
 
-    else{
-        if(pwd.includes("🐔")){
-            return true
-        }
-
-        else if(!pwd.includes("🐔") && canPaulbekilled){
-          dispatch(paulDeath())
-          dispatch(paulhasbeenslain())
-          return false
-        }
-    }
-
+  else if(pS===1){ //intermediate stage
+    dispatch(setStage());
+  }
 
   return false
 

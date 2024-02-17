@@ -3,7 +3,7 @@ import { useState,useEffect} from 'react';
 
 // import { CSSTransition,TransitionGroup } from 'react-transition-group';
 import * as pwdCheck from './PasswordCheck'
-import { HelloPaul,ParentFireFunction,WormCheck} from './SpecialConditions/index.js';
+import { HelloPaul,WormCheck} from './SpecialConditions/index.js';
 import { Captcha,Condition,Sponser,Translate,RiddleTimer,Colorcondition} from './Conditions/index.js';
 import Gameover from './GameoverScreens/Gameover.js';
 
@@ -34,11 +34,10 @@ function App() {
     {id:19,rule:"Rule 19",desc:"Your password must contain this color in hex",execute:pwdCheck.colorcode,curr:false,isNext:false,truth:false,WC:true},
     {id:18,rule:"Rule 18",desc:"Your password must contain either of the following:I am Loved,I am worthy,I am enough ",execute:pwdCheck.affirmations,curr:false,isNext:false,truth:false,WC:true},
     {id:17,rule:"Rule 17",desc:"Your password must contain the answer to this riddle",execute:pwdCheck.Riddlemethis,curr:false,isNext:false,truth:false,WC:true},
-    {id:16,rule:"Rule 16",desc:"Paul's hatched..feed him only when there are no 🐛s in the password...and don't feed more than 5",execute:WormCheck,curr:false,isNext:false,truth:false,WC:true},
-    {id:15,rule:"Rule 15",desc:"A fire broke out and its spreading randomly...",execute:ParentFireFunction,curr:false,isNext:false,truth:false,WC:true},
+    {id:16,rule:"Rule 16",desc:"John's feeding time!Feed him only when there are no 🐛s in the password...and don't feed more than 5",execute:WormCheck,curr:false,isNext:false,truth:false,WC:true},
     {id:14,rule:"Rule 14",desc:"The password must contain the english Translation of the word in the box",execute:pwdCheck.LanguageBarrier,curr:false,isNext:false,truth:false,WC:true},
     {id:13,rule:"Rule 13",desc:"The elements in your password must have atomic numbers that add to 200",execute:pwdCheck.PeriodicSum,curr:false,isNext:false,truth:false,WC:true},
-    {id:12,rule:"Rule 12",desc:"This is Paul 🥚,could you keep him safe?",execute:HelloPaul,curr:false,isNext:false,truth:false,WC:true},
+    {id:12,rule:"Rule 12",desc:"This is John 🐔,could you keep him safe in your password?",execute:HelloPaul,curr:false,isNext:false,truth:false,WC:true},
     {id:11,rule:"Rule 11",desc:"Your password must include a leap year",execute:pwdCheck.LeapYearCheck,curr:false,isNext:false,truth:false,WC:true},
     {id:10,rule:"Rule 10",desc:"Your password must include a 2 letter symbol from the periodic table",execute:pwdCheck.Check2letterElem,curr:false,isNext:false,truth:false,WC:true},
     {id:9,rule:"Rule 9",desc:"Your password must include this CAPTCHA",execute:pwdCheck.CaptchaCheck,curr:false,isNext:false,truth:false,WC:true},
@@ -51,6 +50,8 @@ function App() {
     {id:2,rule:"Rule 2",desc:"Your password must contain a number",execute:pwdCheck.NumberCheck,curr:false,isNext:false,truth:false,WC:true},
     {id:1,rule:"Rule 1",desc:"Your password must be at least 5 characters",execute:pwdCheck.CountCheck,curr:false,isNext:false,truth:false,WC:true}
   ])
+
+  //Disabling rule 15 as it is a little unpredictable due to the fact it can give an early gameover even if the rule just appeared
 
  
   const [display,setDisplay]=useState([])
@@ -219,7 +220,6 @@ function App() {
 
         {RTGameover && (<Gameover desc={()=>"You died!"}/>)}
 
-        
 
       </div>
 
@@ -229,3 +229,4 @@ function App() {
 }
 
 export default App;
+// {id:15,rule:"Rule 15",desc:"A fire broke out and its spreading randomly...",execute:ParentFireFunction,curr:false,isNext:false,truth:false,WC:true},

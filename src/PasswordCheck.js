@@ -1,4 +1,3 @@
-import { getCaptcha } from "./Conditions/Captcha/Captcha.js";
 import { LN } from "./Conditions/Translate/Translate.js";
 import { randomizer_RT } from "./redux/riddleStates/randomizer.js";
 import { gethexColor } from "./Conditions/Colorbox/Colorcondition.js";
@@ -114,7 +113,7 @@ export const HasSponsors=()=>{
 export const CaptchaCheck=()=>{
 
     const pwd=store.getState().pwd.value
-    const captcha=getCaptcha();
+    const captcha=store.getState().CaptchaGenerator.value;
 
     if(captcha===""){
         return false

@@ -22,6 +22,7 @@ export default configureStore({
         pdStages:MS.pauldeathReducer,
         RTState:MS.rtreducer,
         RTRandom:MS.rtrandomizerreducer,
-        RTGameover:MS.rtgameover
+        RTGameover:MS.rtgameover,
+        CaptchaGenerator:MS.CaptchaReducer
     }
 })
