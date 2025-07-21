@@ -56,13 +56,7 @@ export const AddUptoFive=()=>{
         }
     }
 
-    if(sum===25){
-        return true;
-    }
-
-    else{
-        return false;
-    }
+    return sum===25?true:false;
 }
 
 export const MonthofYear=()=>{
@@ -169,10 +163,8 @@ export const LeapYearCheck=()=>{
 
             //after generating the number string
             const ActualNum=Number(numString)
-
-            if(ActualNum%4===0 && ActualNum%100===0 && ActualNum%400===0){
-                return true;
-            }
+            
+            if((ActualNum%100!==0 && ActualNum%4===0) || ActualNum%4===0) return true;
         }
     }
 
@@ -256,12 +248,7 @@ export const PeriodicSum=()=>{
     }
 
 
-    if(sum===200){
-        return true
-    }
-
-    return false
-
+    return sum===200?true:false;
 }
 
 export const LanguageBarrier=()=>{
@@ -274,11 +261,7 @@ export const LanguageBarrier=()=>{
     const Index=LN();
     const LC=pwd.toLowerCase();
 
-    if(LC.includes(EnglishWords[Index])){
-        return true;
-    }
-
-    return false;
+    return LC.includes(EnglishWords[Index])?true:false;
 }
 
 export const Riddlemethis=()=>{
@@ -323,21 +306,13 @@ export const colorcode=()=>{
     const pwd=store.getState().pwd.value
     const colorhexstring=gethexColor()
 
-    if(pwd.includes(colorhexstring)){
-        return true
-    }
-
-    return false
+    return pwd.includes(colorhexstring)?true:false;
 }
 
 export const pwdlength=()=>{
     const WC=store.getState().wc.value.toString()
     const pwd=store.getState().pwd.value
 
-    if(pwd.includes(WC)){
-        return true;
-    }
-
-    return false
+    return pwd.includes(WC)?true:false;
 }
 
