@@ -1,7 +1,7 @@
-import { LN } from "./Conditions/Translate/Translate.js";
-import { randomizer_RT } from "./redux/riddleStates/randomizer.js";
-import { gethexColor } from "./Conditions/Colorbox/Colorcondition.js";
-import { resetRTimer,setRTimer } from "./redux/riddleStates/rt_redux.js";
+import { LN } from "./Conditions/Translate/Translate";
+import { randomizer_RT } from "./redux/riddleStates/randomizer";
+import { gethexColor } from "./Conditions/Colorbox/Colorcondition";
+import { resetRTimer,setRTimer } from "./redux/riddleStates/rt_redux";
 import store from "./redux/store.js";
 
 

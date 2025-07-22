@@ -5,7 +5,7 @@ import { useState,useEffect} from 'react';
 import * as pwdCheck from './PasswordCheck'
 import { HelloPaul,WormCheck} from './SpecialConditions/index.js';
 import { Captcha,Condition,Sponser,Translate,RiddleTimer,Colorcondition} from './Conditions/index.js';
-import Gameover from './GameoverScreens/Gameover.js';
+import Gameover from './GameoverScreens/Gameover';
 
 import { setPwd } from './redux/MainStates/passwordstate.js';
 import { setWC } from './redux/MainStates/wordcountstate.js';
